@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <com.nex3z.togglebuttongroup.ToggleButtonGroup
+        android:id="@+id/toggle_button_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:backgroundColor="@color/colorAccent"
+        app:buttonSize="42dp"/>
+
+    <com.nex3z.togglebuttongroup.ToggleButtonGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:backgroundColor="@color/colorAccent"
+        app:textButton1="A"
+        app:textButton2="B"
+        app:buttonSize="42dp"/>
+
+
+</LinearLayout>
