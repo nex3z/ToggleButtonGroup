@@ -20,6 +20,14 @@
         app:buttonSize="42dp"/>
 
     <com.nex3z.togglebuttongroup.ToggleButtonGroup
+        android:id="@+id/toggle_button_group_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:backgroundColor="@color/colorAccent"
+        app:buttonSize="42dp"/>
+
+    <com.nex3z.togglebuttongroup.ToggleButtonGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"

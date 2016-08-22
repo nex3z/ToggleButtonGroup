@@ -8,37 +8,56 @@ import com.nex3z.togglebuttongroup.ToggleButtonGroup;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-
-    ToggleButtonGroup mTogglGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTogglGroup = (ToggleButtonGroup) findViewById(R.id.toggle_button_group);
         setupMultiSelectToggleGroup();
+        setupManualSelectToggleGroup();
     }
 
     private void setupMultiSelectToggleGroup() {
-        String[] weekdays = getResources().getStringArray(R.array.weekdays);
-        ArrayList<String> weekdaysList = new ArrayList<>(Arrays.asList(weekdays));
-        mTogglGroup.setLabels(weekdaysList);
-        mTogglGroup.setToggleButtonStateChangedListener(
+        final ToggleButtonGroup toggleGroup =
+                (ToggleButtonGroup) findViewById(R.id.toggle_button_group);
+
+        setupWeekdays(toggleGroup);
+        toggleGroup.setToggleButtonStateChangedListener(
                 new ToggleButtonGroup.ToggleButtonStateChangedListener() {
                     @Override
                     public void onToggleButtonStateChanged(int position, boolean isEnabled) {
                         Log.v(LOG_TAG, "onToggleButtonStateChanged(): position = " + position
                                 + ", isChecked = " + isEnabled);
-                        Set<Integer> checkedPositions = mTogglGroup.getCheckedPositions();
+                        Set<Integer> checkedPositions = toggleGroup.getCheckedPositions();
                         Log.v(LOG_TAG, "onToggleButtonStateChanged(): checkedPositions = "
                                 + checkedPositions);
                     }
         });
+    }
+
+    private void setupManualSelectToggleGroup() {
+        final ToggleButtonGroup toggleGroup =
+                (ToggleButtonGroup) findViewById(R.id.toggle_button_group_2);
+
+        setupWeekdays(toggleGroup);
+
+        Set<Integer> positions = new HashSet<>();
+        positions.add(1);
+        positions.add(3);
+        positions.add(5);
+
+        toggleGroup.setCheckedPositions(positions);
+    }
+
+    private void setupWeekdays(ToggleButtonGroup toggleGroup) {
+        String[] weekdays = getResources().getStringArray(R.array.weekdays);
+        ArrayList<String> weekdaysList = new ArrayList<>(Arrays.asList(weekdays));
+        toggleGroup.setLabels(weekdaysList);
     }
 }

@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -128,6 +127,19 @@ public class ToggleButtonGroup extends LinearLayout implements View.OnClickListe
             }
         }
         return positions;
+    }
+
+    public void setCheckedPositions(Set<Integer> positions) {
+        uncheckAll();
+        for (int i : positions) {
+            mButtons.get(i).setChecked(true);
+        }
+    }
+
+    public void uncheckAll() {
+        for (ToggleButton button : mButtons) {
+            button.setChecked(false);
+        }
     }
 
     public void setLabels(ArrayList<String> labels){
