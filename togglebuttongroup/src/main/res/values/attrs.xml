@@ -6,7 +6,6 @@
         <attr name="textButton1" format="string" />
         <attr name="textButton2" format="string" />
 
-        <attr name="backgroundColor" format="color"/>
         <attr name="textColor" format="color"/>
         <attr name="android:textSize"/>
     </declare-styleable>

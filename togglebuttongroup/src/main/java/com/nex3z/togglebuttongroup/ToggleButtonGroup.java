@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -30,13 +29,13 @@ public class ToggleButtonGroup extends LinearLayout implements View.OnClickListe
 
     private Context mContext;
     private float mButtonSize;
-    private int mBackgroundColor;
     private int mTextColor;
     private int mTextSize;
     private String mTextButton1;
     private String mTextButton2;
     private ArrayList<String> mLabels;
     private ArrayList<ToggleButton> mButtons;
+    private int mCheckedBackgroundResId = -1;
 
     private LayoutInflater mInflater;
     private LinearLayout mToggleButtonContainer;
@@ -66,15 +65,13 @@ public class ToggleButtonGroup extends LinearLayout implements View.OnClickListe
 
             mTextSize = a.getDimensionPixelSize(R.styleable.ToggleButtonOptions_android_textSize, (int) dp2px(context, DEFAULT_TEXT_SIZE));
             mButtonSize = a.getDimension(R.styleable.ToggleButtonOptions_buttonSize, dp2px(getContext(), DEFAULT_BUTTON_SIZE));
-            mBackgroundColor = a.getColor(R.styleable.ToggleButtonOptions_backgroundColor, DEFAULT_BACKGROUND_COLOR);
             mTextColor = a.getColor(R.styleable.ToggleButtonOptions_textColor, DEFAULT_TEXT_COLOR);
 
             mTextButton1 = a.getString(R.styleable.ToggleButtonOptions_textButton1);
             mTextButton2 = a.getString(R.styleable.ToggleButtonOptions_textButton2);
 
             Log.v(LOG_TAG, "ToggleButtonGroup(): mTextSize = " + mTextSize
-                    + ", mButtonSize = " + mButtonSize
-                    + ", mBackgroundColor = " + mBackgroundColor + ", mTextColor = " + mTextColor);
+                    + ", mButtonSize = " + mButtonSize + ", mTextColor = " + mTextColor);
 
             mLabels = new ArrayList<>();
             mButtons = new ArrayList<>();
@@ -168,6 +165,14 @@ public class ToggleButtonGroup extends LinearLayout implements View.OnClickListe
         invalidate();
     }
 
+    public void setCheckedBackground(int id) {
+        mCheckedBackgroundResId = id;
+
+        for (ToggleButton button : mButtons) {
+            button.getBackground().setImageResource(id);
+        }
+    }
+
     private void buildToggleButtons() {
         for(String label : mLabels)
             addToggleButton(label);
@@ -182,7 +187,9 @@ public class ToggleButtonGroup extends LinearLayout implements View.OnClickListe
         textView.setTextColor(mTextColor);
 
         ImageView imageView = toggleButton.getBackground();
-        DrawableCompat.setTint(imageView.getDrawable(), mBackgroundColor);
+        if (mCheckedBackgroundResId != -1) {
+            imageView.setImageResource(mCheckedBackgroundResId);
+        }
 
         View view = toggleButton.getView();
         view.setLayoutParams(new LayoutParams((int) mButtonSize, (int) mButtonSize));
