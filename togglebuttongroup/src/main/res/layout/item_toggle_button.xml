@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_circle_24dp"/>
+        android:src="@drawable/ic_circle_48dp"/>
 
     <TextView
         android:id="@+id/tv_text"

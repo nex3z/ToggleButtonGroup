@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         final ToggleButtonGroup toggleGroup =
                 (ToggleButtonGroup) findViewById(R.id.toggle_button_group_2);
 
-        toggleGroup.setCheckedBackground(R.drawable.ic_bookmark_24dp);
+        toggleGroup.setCheckedBackground(R.drawable.ic_bookmark_48dp);
 
         setupWeekdays(toggleGroup);
 
