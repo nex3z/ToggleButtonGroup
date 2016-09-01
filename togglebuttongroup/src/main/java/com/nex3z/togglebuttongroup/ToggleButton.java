@@ -1,57 +1,154 @@
 package com.nex3z.togglebuttongroup;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ToggleButton {
+    private static final String LOG_TAG = ToggleButton.class.getSimpleName();
 
-    private View mView;
-    private ImageView mIvBackground;
+    private static final int DEFAULT_ANIMATION_DURATION = 150;
+
+    private boolean mIsChecked;
+    private float mButtonSize;
+
+    private boolean mIsAnimationEnabled;
+    private int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
+    private Animation mExpand;
+    private Animation mShrink;
+
+    private View mRootView;
+    private ImageView mIvCheckedBg;
     private TextView mTvText;
-    private boolean mIsChecked = false;
 
     public ToggleButton(Context context) {
-        this(LayoutInflater.from(context).inflate(R.layout.item_toggle_button, null));
+        mRootView = LayoutInflater.from(context).inflate(R.layout.item_toggle_button, null);
+
+        mIvCheckedBg = (ImageView)mRootView.findViewById(R.id.iv_background);
+        mIvCheckedBg.setVisibility(View.GONE);
+
+        mTvText = (TextView)mRootView.findViewById(R.id.tv_text);
+
+        mExpand = new ScaleAnimation(0, 1, 0, 1,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        mExpand.setDuration(mAnimationDuration);
+
+        mShrink = new ScaleAnimation(1, 0, 1, 0,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        mShrink.setDuration(mAnimationDuration);
+        mShrink.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mIvCheckedBg.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
     }
 
-    public ToggleButton(View view) {
-        this.mView = view;
-        this.mIvBackground = (ImageView)view.findViewById(R.id.iv_background);
-        this.mTvText = (TextView)view.findViewById(R.id.tv_text);
+    public void setOnClickListener(View.OnClickListener listener) {
+        mRootView.setOnClickListener(listener);
+    }
+
+    public boolean changeCheckedState() {
+        mIsChecked = !mIsChecked;
+
+        if (mIsAnimationEnabled) {
+            if (mIsChecked) {
+                mIvCheckedBg.setVisibility(View.VISIBLE);
+                mIvCheckedBg.startAnimation(mExpand);
+            } else {
+                mIvCheckedBg.setVisibility(View.VISIBLE);
+                mIvCheckedBg.startAnimation(mShrink);
+            }
+        } else {
+            mIvCheckedBg.setVisibility(mIsChecked ? View.VISIBLE : View.GONE);
+        }
+        return mIsChecked;
     }
 
     public View getView() {
-        return mView;
-    }
-
-    public TextView getText() {
-        return mTvText;
-    }
-
-    public ImageView getBackground() {
-        return mIvBackground;
-    }
-
-    public void setChecked(boolean checked) {
-        if (checked) {
-            mIvBackground.setVisibility(View.VISIBLE);
-        } else {
-            mIvBackground.setVisibility(View.GONE);
-        }
-        mIsChecked = checked;
+        return mRootView;
     }
 
     public boolean isChecked() {
         return mIsChecked;
     }
 
-    public boolean changeCheckedState() {
-        mIsChecked = !mIsChecked;
-        setChecked(mIsChecked);
-        return mIsChecked;
+    public void setChecked(boolean checked) {
+        mIsChecked = checked;
+        mIvCheckedBg.setVisibility(mIsChecked ? View.VISIBLE : View.GONE);
+    }
+
+    public String getText() {
+        return mTvText.getText().toString();
+    }
+
+    public void setText(String text) {
+        mTvText.setText(text);
+    }
+
+    public void setTextSize(float size) {
+        mTvText.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+    }
+
+    public float getTextSize() {
+        return mTvText.getTextSize();
+    }
+
+    public void setTextColor(int color) {
+        mTvText.setTextColor(color);
+    }
+
+    public int getTextColor() {
+        return mTvText.getCurrentTextColor();
+    }
+
+    public void setButtonSize(float size) {
+        mButtonSize = size;
+        mRootView.setLayoutParams(
+                new LinearLayout.LayoutParams((int) mButtonSize, (int) mButtonSize));
+    }
+
+    public float getButtonSize() {
+        return mButtonSize;
+    }
+
+    public boolean isAnimationEnabled() {
+        return mIsAnimationEnabled;
+    }
+
+    public void setAnimationEnabled(boolean animationEnabled) {
+        mIsAnimationEnabled = animationEnabled;
+    }
+
+    public Drawable getCheckedBackgroundDrawable() {
+        return mIvCheckedBg.getDrawable();
+    }
+
+    public void setCheckedBackgroundDrawable(Drawable drawable) {
+        mIvCheckedBg.setImageDrawable(drawable);
+    }
+
+    public int getAnimationDuration() {
+        return mAnimationDuration;
+    }
+
+    public void setAnimationDuration(int animationDuration) {
+        mAnimationDuration = animationDuration;
+        mShrink.setDuration(mAnimationDuration);
+        mExpand.setDuration(mAnimationDuration);
     }
 
 }

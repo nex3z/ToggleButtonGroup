@@ -9,4 +9,11 @@
         <item>F</item>
         <item>S</item>
     </string-array>
+
+    <string-array name="choices">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+    </string-array>
 </resources>

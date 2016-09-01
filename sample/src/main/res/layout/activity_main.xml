@@ -11,27 +11,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <com.nex3z.togglebuttongroup.ToggleButtonGroup
-        android:id="@+id/toggle_button_group"
+    <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+        android:id="@+id/multi_selection_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        app:buttonSize="42dp"/>
+        app:buttonSize="42dp"
+        app:enableAnimation="true"/>
 
-    <com.nex3z.togglebuttongroup.ToggleButtonGroup
-        android:id="@+id/toggle_button_group_2"
+    <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+        android:id="@+id/single_selection_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        app:buttonSize="42dp"/>
-
-    <com.nex3z.togglebuttongroup.ToggleButtonGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        app:textButton1="A"
-        app:textButton2="B"
-        app:buttonSize="42dp"/>
-
+        app:buttonSize="42dp"
+        app:enableAnimation="true"/>
 
 </LinearLayout>
