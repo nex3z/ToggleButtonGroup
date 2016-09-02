@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
         setupMultiSelectToggleGroup();
         setupSingleSelectToggleGroup();
-        //setupManualSelectToggleGroup();
     }
 
     private void setupMultiSelectToggleGroup() {
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         multiSelect.setOnToggleStateChangeListener(new ToggleButtonGroup.OnCheckedStateChangeListener() {
             @Override
             public void onToggleStateChange(int position, boolean isChecked) {
-
                 Set<Integer> checkedPositions =  multiSelect.getCheckedPositions();
                 Log.v(LOG_TAG, "onToggleStateChange(): positoin = " + position
                         + ", isChecked = " + isChecked

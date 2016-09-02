@@ -24,7 +24,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
+        app:buttonSize="42dp"/>
+
+    <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
         app:buttonSize="42dp"
-        app:enableAnimation="true"/>
+        app:textButton1="Y"
+        app:textButton2="N"
+        app:checkedBackground="@drawable/ic_bookmark_48dp"/>
 
 </LinearLayout>

@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public abstract class ToggleButtonGroup extends LinearLayout implements View.OnClickListener {
@@ -73,11 +74,16 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
             mTextButton2 = a.getString(R.styleable.ToggleButtonOptions_textButton2);
 
             mButtons = new ArrayList<>();
+
+            List<String> attrLabels = new ArrayList<>();
             if (mTextButton1 != null && !mTextButton1.isEmpty()) {
-                addButton(mTextButton1);
+                attrLabels.add(mTextButton1);
             }
             if (mTextButton2 != null && !mTextButton2.isEmpty()) {
-                addButton(mTextButton2);
+                attrLabels.add(mTextButton2);
+            }
+            if (!attrLabels.isEmpty()) {
+                setButtons(attrLabels);
             }
 
         } finally {
@@ -95,7 +101,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         mListener = listener;
     }
 
-    public void setButtons(ArrayList<String> text) {
+    public void setButtons(List<String> text) {
         clearButtons();
 
         for (String str : text) {
