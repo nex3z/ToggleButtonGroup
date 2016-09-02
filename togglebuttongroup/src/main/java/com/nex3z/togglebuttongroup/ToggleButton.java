@@ -14,13 +14,13 @@ import android.widget.TextView;
 public class ToggleButton {
     private static final String LOG_TAG = ToggleButton.class.getSimpleName();
 
-    private static final int DEFAULT_ANIMATION_DURATION = 150;
+    private static final long DEFAULT_ANIMATION_DURATION = 150;
 
     private boolean mIsChecked;
     private float mButtonSize;
 
     private boolean mIsAnimationEnabled;
-    private int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
+    private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
     private Animation mExpand;
     private Animation mShrink;
 
@@ -99,8 +99,12 @@ public class ToggleButton {
         mTvText.setText(text);
     }
 
-    public void setTextSize(float size) {
-        mTvText.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+    public void setTextSizePx(float pixels) {
+        mTvText.setTextSize(TypedValue.COMPLEX_UNIT_PX, pixels);
+    }
+
+    public void setTextSizeSp(float sp) {
+        mTvText.setTextSize(TypedValue.COMPLEX_UNIT_SP, sp);
     }
 
     public float getTextSize() {
@@ -141,11 +145,11 @@ public class ToggleButton {
         mIvCheckedBg.setImageDrawable(drawable);
     }
 
-    public int getAnimationDuration() {
+    public long getAnimationDuration() {
         return mAnimationDuration;
     }
 
-    public void setAnimationDuration(int animationDuration) {
+    public void setAnimationDuration(long animationDuration) {
         mAnimationDuration = animationDuration;
         mShrink.setDuration(mAnimationDuration);
         mExpand.setDuration(mAnimationDuration);

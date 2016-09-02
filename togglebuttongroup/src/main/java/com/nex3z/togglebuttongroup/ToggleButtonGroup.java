@@ -2,12 +2,11 @@ package com.nex3z.togglebuttongroup;
 
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -23,6 +22,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private static final float DEFAULT_TEXT_SIZE = 50;
     private static final float DEFAULT_BUTTON_SIZE = 120;
     private static final int DEFAULT_TEXT_COLOR = Color.BLACK;
+    private static final long DEFAULT_ANIMATION_DURATION = 150;
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -31,8 +31,9 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private Drawable mCheckedBackground;
     private float mButtonSize;
     private int mTextColor;
-    private int mTextSize;
+    private float mTextSize;
     private boolean mIsAnimationEnabled;
+    private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
     private String mTextButton1;
     private String mTextButton2;
     protected ArrayList<ToggleButton> mButtons;
@@ -65,8 +66,8 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
 
             mCheckedBackground = a.getDrawable(R.styleable.ToggleButtonOptions_checkedBackground);
 
-            mTextSize = a.getDimensionPixelSize(R.styleable.ToggleButtonOptions_android_textSize, (int) dp2px(context, DEFAULT_TEXT_SIZE));
-            mButtonSize = a.getDimension(R.styleable.ToggleButtonOptions_buttonSize, dp2px(getContext(), DEFAULT_BUTTON_SIZE));
+            mTextSize = a.getDimensionPixelSize(R.styleable.ToggleButtonOptions_android_textSize, (int)dpToPx(DEFAULT_TEXT_SIZE));
+            mButtonSize = a.getDimension(R.styleable.ToggleButtonOptions_buttonSize, dpToPx(DEFAULT_BUTTON_SIZE));
             mTextColor = a.getColor(R.styleable.ToggleButtonOptions_textColor, DEFAULT_TEXT_COLOR);
             mIsAnimationEnabled = a.getBoolean(R.styleable.ToggleButtonOptions_enableAnimation, false);
 
@@ -130,14 +131,73 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         return positions;
     }
 
+    public float getButtonSize() {
+        return mButtonSize;
+    }
+
+    public void setButtonSize(float pixels) {
+        mButtonSize = pixels;
+        for (ToggleButton button : mButtons) {
+            button.setButtonSize(mButtonSize);
+        }
+    }
+
+    public int getTextColor() {
+        return mTextColor;
+    }
+
+    public void setTextColor(int textColor) {
+        mTextColor = textColor;
+        for (ToggleButton button : mButtons) {
+            button.setTextColor(mTextColor);
+        }
+    }
+
+    public float getTextSize() {
+        return mTextSize;
+    }
+
+    public void setTextSize(float size) {
+        mTextSize = dpToPx(size);
+        for (ToggleButton button : mButtons) {
+            button.setTextSizePx(mTextSize);
+        }
+    }
+
+    public boolean isAnimationEnabled() {
+        return mIsAnimationEnabled;
+    }
+
+    public void setAnimationEnabled(boolean isEnabled) {
+        mIsAnimationEnabled = isEnabled;
+        for (ToggleButton button : mButtons) {
+            button.setAnimationEnabled(isEnabled);
+        }
+    }
+
+    public long getAnimationDuration() {
+        return mAnimationDuration;
+    }
+
+    public void setAnimationDuration(long durationMillis) {
+        if (durationMillis < 0) {
+            throw new IllegalArgumentException("The duration must be greater than 0");
+        }
+        mAnimationDuration = durationMillis;
+        for (ToggleButton button : mButtons) {
+            button.setAnimationDuration(durationMillis);
+        }
+    }
+
     private void addButton(String text) {
         ToggleButton button = new ToggleButton(mContext);
 
         button.setButtonSize(mButtonSize);
         button.setText(text);
-        button.setTextSize(mTextSize);
+        button.setTextSizePx(mTextSize);
         button.setTextColor(mTextColor);
         button.setAnimationEnabled(mIsAnimationEnabled);
+        button.setAnimationDuration(mAnimationDuration);
 
         if (mCheckedBackground != null) {
             button.setCheckedBackgroundDrawable(mCheckedBackground);
@@ -149,9 +209,8 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         mContainer.addView(button.getView());
     }
 
-    private float dp2px(Context context, float dp){
-        Resources resources = context.getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        return dp * (metrics.densityDpi / 160f);
+    private float dpToPx(float dp){
+        return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
 }
