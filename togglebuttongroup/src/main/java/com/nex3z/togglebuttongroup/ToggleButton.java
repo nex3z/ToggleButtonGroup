@@ -86,8 +86,8 @@ public class ToggleButton {
         return mIsChecked;
     }
 
-    public void setChecked(boolean checked) {
-        mIsChecked = checked;
+    public void setChecked(boolean isChecked) {
+        mIsChecked = isChecked;
         mIvCheckedBg.setVisibility(mIsChecked ? View.VISIBLE : View.GONE);
     }
 

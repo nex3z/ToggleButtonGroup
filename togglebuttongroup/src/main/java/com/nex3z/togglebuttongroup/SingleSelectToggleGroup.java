@@ -32,4 +32,10 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
             mButtons.get(0).setChecked(true);
         }
     }
+
+    @Override
+    public void setCheckedAt(int position, boolean isChecked) {
+        unCheckAll();
+        super.setCheckedAt(position, isChecked);
+    }
 }

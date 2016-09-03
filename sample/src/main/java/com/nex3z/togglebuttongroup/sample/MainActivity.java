@@ -27,11 +27,11 @@ public class MainActivity extends AppCompatActivity {
     private void setupMultiSelectToggleGroup() {
         final MultiSelectToggleGroup multiSelect =
                 (MultiSelectToggleGroup) findViewById(R.id.multi_selection_group);
-        multiSelect.setOnToggleStateChangeListener(new ToggleButtonGroup.OnCheckedStateChangeListener() {
+        multiSelect.setOnCheckedStateChangeListener(new ToggleButtonGroup.OnCheckedStateChangeListener() {
             @Override
             public void onToggleStateChange(int position, boolean isChecked) {
                 Set<Integer> checkedPositions =  multiSelect.getCheckedPositions();
-                Log.v(LOG_TAG, "onToggleStateChange(): positoin = " + position
+                Log.v(LOG_TAG, "setupMultiSelectToggleGroup(): position = " + position
                         + ", isChecked = " + isChecked
                         + ", checkedPositions = " + checkedPositions);
             }
@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
     private void setupSingleSelectToggleGroup() {
         final SingleSelectToggleGroup singleSelect =
                 (SingleSelectToggleGroup) findViewById(R.id.single_selection_group);
-        singleSelect.setOnToggleStateChangeListener(new ToggleButtonGroup.OnCheckedStateChangeListener() {
+        singleSelect.setOnCheckedStateChangeListener(new ToggleButtonGroup.OnCheckedStateChangeListener() {
             @Override
             public void onToggleStateChange(int position, boolean isChecked) {
-                Log.v(LOG_TAG, "onToggleStateChange(): positoin = " + position
+                Log.v(LOG_TAG, "setupSingleSelectToggleGroup(): position = " + position
                         + ", isChecked = " + isChecked);
             }
         });

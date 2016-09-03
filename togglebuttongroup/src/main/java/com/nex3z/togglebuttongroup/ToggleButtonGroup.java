@@ -98,10 +98,20 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         onToggleButtonClicked(position);
     }
 
-    public void setOnToggleStateChangeListener(OnCheckedStateChangeListener listener) {
+    /**
+     * Registers a callback to be invoked when any button's checked state is changed.
+     *
+     * @param listener The callback that will run
+     */
+    public void setOnCheckedStateChangeListener(OnCheckedStateChangeListener listener) {
         mListener = listener;
     }
 
+    /**
+     * Sets buttons to the group with the given list of text.
+     *
+     * @param text The list of text that will be displayed on the buttons
+     */
     public void setButtons(List<String> text) {
         clearButtons();
 
@@ -110,17 +120,28 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         }
     }
 
+    /**
+     * Clears all buttons in the group.
+     */
     public void clearButtons() {
         mContainer.removeAllViews();
         mButtons.clear();
     }
 
+    /**
+     * Unchecks all buttons in the group.
+     */
     public void unCheckAll() {
         for (ToggleButton button : mButtons) {
             button.setChecked(false);
         }
     }
 
+    /**
+     * Returns the positions of all checked buttons.
+     *
+     * @return The positions of all checked buttons.
+     */
     public Set<Integer> getCheckedPositions() {
         Set<Integer> positions = new HashSet<>();
         for (int i = 0; i < mButtons.size(); i++) {
@@ -131,10 +152,33 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         return positions;
     }
 
+    /**
+     * Changes the checked state of the button at specified position.
+     *
+     * @param position The position of the button
+     * @param isChecked true to check the button, false to uncheck it
+     */
+    public void setCheckedAt(int position, boolean isChecked) {
+        ToggleButton button = mButtons.get(position);
+        if (button != null) {
+            button.setChecked(isChecked);
+        }
+    }
+
+    /**
+     * Returns the size of each button.
+     *
+     * @return The size of button in pixels
+     */
     public float getButtonSize() {
         return mButtonSize;
     }
 
+    /**
+     * Sets the button size to the given pixels.
+     *
+     * @param pixels The size of button in pixels
+     */
     public void setButtonSize(float pixels) {
         mButtonSize = pixels;
         for (ToggleButton button : mButtons) {
@@ -142,10 +186,20 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         }
     }
 
+    /**
+     * Gets the text color.
+     *
+     * @return The text color
+     */
     public int getTextColor() {
         return mTextColor;
     }
 
+    /**
+     * Sets the text color.
+     *
+     * @param textColor The text color
+     */
     public void setTextColor(int textColor) {
         mTextColor = textColor;
         for (ToggleButton button : mButtons) {
@@ -153,10 +207,19 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         }
     }
 
+    /**
+     * Returns the text size of the button in pixels.
+     * @return The text size in pixels.
+     */
     public float getTextSize() {
         return mTextSize;
     }
 
+    /**
+     * Sets the default text size to the given value, interpreted as "scaled pixel" units.
+     *
+     * @param size The scaled pixel size.
+     */
     public void setTextSize(float size) {
         mTextSize = dpToPx(size);
         for (ToggleButton button : mButtons) {
@@ -164,10 +227,21 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         }
     }
 
+    /**
+     * Returns whether the animation for toggling button is enabled.
+     *
+     * @return Whether the animation for toggling button is enabled
+     */
     public boolean isAnimationEnabled() {
         return mIsAnimationEnabled;
     }
 
+    /**
+     * Sets whether the animation for toggling button is enabled. The default is false, meaning that
+     * the animation is disabled.
+     *
+     * @param isEnabled Whether the animation for toggling button is enabled
+     */
     public void setAnimationEnabled(boolean isEnabled) {
         mIsAnimationEnabled = isEnabled;
         for (ToggleButton button : mButtons) {
@@ -175,10 +249,20 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         }
     }
 
+    /**
+     * Returns the duration of the animation for toggling button.
+     *
+     * @return The duration of the animation in milliseconds.
+     */
     public long getAnimationDuration() {
         return mAnimationDuration;
     }
 
+    /**
+     * Sets the duration of the animation for toggling button. The default is 150 milliseconds.
+     *
+     * @param durationMillis The duration of the animation in milliseconds
+     */
     public void setAnimationDuration(long durationMillis) {
         if (durationMillis < 0) {
             throw new IllegalArgumentException("The duration must be greater than 0");
