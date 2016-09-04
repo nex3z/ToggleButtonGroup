@@ -23,6 +23,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private static final float DEFAULT_BUTTON_SIZE = 120;
     private static final int DEFAULT_TEXT_COLOR = Color.BLACK;
     private static final long DEFAULT_ANIMATION_DURATION = 150;
+    private static final long DEFAULT_SPACING = 0;
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -32,6 +33,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private float mButtonSize;
     private int mTextColor;
     private float mTextSize;
+    private float mSpacing;
     private boolean mIsAnimationEnabled;
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
     private String mTextButton1;
@@ -69,6 +71,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
             mTextSize = a.getDimensionPixelSize(R.styleable.ToggleButtonOptions_android_textSize, (int)dpToPx(DEFAULT_TEXT_SIZE));
             mButtonSize = a.getDimension(R.styleable.ToggleButtonOptions_buttonSize, dpToPx(DEFAULT_BUTTON_SIZE));
             mTextColor = a.getColor(R.styleable.ToggleButtonOptions_textColor, DEFAULT_TEXT_COLOR);
+            mSpacing = a.getDimension(R.styleable.ToggleButtonOptions_spacing, dpToPx(DEFAULT_SPACING));
             mIsAnimationEnabled = a.getBoolean(R.styleable.ToggleButtonOptions_enableAnimation, false);
 
             mTextButton1 = a.getString(R.styleable.ToggleButtonOptions_textButton1);
@@ -181,9 +184,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
      */
     public void setButtonSize(float pixels) {
         mButtonSize = pixels;
-        for (ToggleButton button : mButtons) {
-            button.setButtonSize(mButtonSize);
-        }
+        updateButtonsLayout();
     }
 
     /**
@@ -225,6 +226,25 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         for (ToggleButton button : mButtons) {
             button.setTextSizePx(mTextSize);
         }
+    }
+
+    /**
+     * Gets the spacing between neighboring buttons in pixels.
+     *
+     * @return The spacing between neighboring buttons in pixels
+     */
+    public float getSpacing() {
+        return mSpacing;
+    }
+
+    /**
+     * Sets the spacing between neighboring buttons in pixels.
+     *
+     * @param spacing The spacing between neighboring buttons in pixels
+     */
+    public void setSpacing(float spacing) {
+        mSpacing = spacing;
+        updateButtonsLayout();
     }
 
     /**
@@ -276,7 +296,6 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private void addButton(String text) {
         ToggleButton button = new ToggleButton(mContext);
 
-        button.setButtonSize(mButtonSize);
         button.setText(text);
         button.setTextSizePx(mTextSize);
         button.setTextColor(mTextColor);
@@ -290,7 +309,32 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         button.setOnClickListener(this);
 
         mButtons.add(button);
-        mContainer.addView(button.getView());
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                (int) mButtonSize, (int) mButtonSize);
+        params.setMargins(0, 0, (int) mSpacing, 0);
+
+        mContainer.addView(button.getView(), params);
+    }
+
+    private void updateButtonsLayout() {
+        int count = mContainer.getChildCount();
+        if (count > 0) {
+            for (int i = 0; i < count - 1; i++) {
+                View view = mContainer.getChildAt(i);
+
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        (int) mButtonSize, (int) mButtonSize);
+                params.setMargins(0, 0, (int) mSpacing, 0);
+
+                mContainer.updateViewLayout(view, params);
+            }
+
+            View view = mContainer.getChildAt(count - 1);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    (int) mButtonSize, (int) mButtonSize);
+            mContainer.updateViewLayout(view, params);
+        }
     }
 
     private float dpToPx(float dp){

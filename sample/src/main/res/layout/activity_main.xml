@@ -15,25 +15,26 @@
         android:id="@+id/multi_selection_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        app:buttonSize="42dp"
+        android:textSize="16sp"
+        app:buttonSize="40dp"
         app:enableAnimation="true"/>
 
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
         android:id="@+id/single_selection_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        app:buttonSize="42dp"
+        android:textSize="16sp"
+        app:buttonSize="40dp"
         app:enableAnimation="true"/>
 
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        app:buttonSize="42dp"
+        android:textSize="16sp"
+        app:buttonSize="40dp"
         app:textButton1="Y"
         app:textButton2="N"
+        app:spacing="40dp"
         app:checkedBackground="@drawable/ic_check_24dp"/>
 
 </LinearLayout>

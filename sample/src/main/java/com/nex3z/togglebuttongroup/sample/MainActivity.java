@@ -10,6 +10,7 @@ import com.nex3z.togglebuttongroup.ToggleButtonGroup;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         String[] weekdays = getResources().getStringArray(R.array.weekdays);
-        ArrayList<String> weekdaysList = new ArrayList<>(Arrays.asList(weekdays));
+        List<String> weekdaysList = new ArrayList<>(Arrays.asList(weekdays));
         multiSelect.setButtons(weekdaysList);
     }
 
@@ -53,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String[] weekdays = getResources().getStringArray(R.array.choices);
-        ArrayList<String> weekdaysList = new ArrayList<>(Arrays.asList(weekdays));
-        singleSelect.setButtons(weekdaysList);
+        String[] choices = getResources().getStringArray(R.array.choices);
+        List<String> choicesList = new ArrayList<>(Arrays.asList(choices));
+        singleSelect.setButtons(choicesList);
     }
 
 }

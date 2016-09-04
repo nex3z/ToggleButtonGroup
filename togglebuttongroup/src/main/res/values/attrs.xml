@@ -4,6 +4,7 @@
         <attr name="buttonSize" format="dimension"/>
         <attr name="textColor" format="color"/>
         <attr name="android:textSize"/>
+        <attr name="spacing" format="dimension"/>
         <attr name="checkedBackground" format="integer" />
         <attr name="enableAnimation" format="boolean" />
         <attr name="animationDuration" format="integer" />
