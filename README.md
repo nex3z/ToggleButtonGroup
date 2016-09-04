@@ -20,7 +20,7 @@ Define the `MultiSelectToggleGroup` as follows:
     app:enableAnimation="true"/>
 ```
 
-The use `setButtons()` to add buttons to the group:
+Then use `setButtons()` to add buttons to the group:
 
 ```java
 MultiSelectToggleGroup multiSelect = (MultiSelectToggleGroup) findViewById(R.id.multi_selection_group);
@@ -46,7 +46,7 @@ Define the `SingleSelectToggleGroup` as follows:
     app:enableAnimation="true"/>
 ```
 
-The use `setButtons()` to add buttons to the group:
+Then use `setButtons()` to add buttons to the group:
 
 ```java
 SingleSelectToggleGroup singleSelect = (SingleSelectToggleGroup) findViewById(R.id.single_selection_group);
