@@ -32,7 +32,7 @@ public class ToggleButton {
         mRootView = LayoutInflater.from(context).inflate(R.layout.item_toggle_button, null);
 
         mIvCheckedBg = (ImageView)mRootView.findViewById(R.id.iv_background);
-        mIvCheckedBg.setVisibility(View.GONE);
+        mIvCheckedBg.setVisibility(View.INVISIBLE);
 
         mTvText = (TextView)mRootView.findViewById(R.id.tv_text);
 
@@ -49,7 +49,7 @@ public class ToggleButton {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                mIvCheckedBg.setVisibility(View.GONE);
+                mIvCheckedBg.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -73,7 +73,7 @@ public class ToggleButton {
                 mIvCheckedBg.startAnimation(mShrink);
             }
         } else {
-            mIvCheckedBg.setVisibility(mIsChecked ? View.VISIBLE : View.GONE);
+            mIvCheckedBg.setVisibility(mIsChecked ? View.VISIBLE : View.INVISIBLE);
         }
         return mIsChecked;
     }
@@ -88,7 +88,7 @@ public class ToggleButton {
 
     public void setChecked(boolean isChecked) {
         mIsChecked = isChecked;
-        mIvCheckedBg.setVisibility(mIsChecked ? View.VISIBLE : View.GONE);
+        mIvCheckedBg.setVisibility(mIsChecked ? View.VISIBLE : View.INVISIBLE);
     }
 
     public String getText() {

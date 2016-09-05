@@ -1,6 +1,5 @@
 package com.nex3z.togglebuttongroup;
 
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -9,6 +8,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -20,17 +20,19 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private static final String LOG_TAG = ToggleButtonGroup.class.getSimpleName();
 
     private static final float DEFAULT_TEXT_SIZE = 50;
-    private static final float DEFAULT_BUTTON_SIZE = 120;
     private static final int DEFAULT_TEXT_COLOR = Color.BLACK;
     private static final long DEFAULT_ANIMATION_DURATION = 150;
-    private static final long DEFAULT_SPACING = 0;
+    private static final float DEFAULT_SPACING = 0;
+    private static final float DEFAULT_BUTTON_HEIGHT = -2;
+    private static final float DEFAULT_BUTTON_WIDTH = -2;
 
     private Context mContext;
     private LayoutInflater mInflater;
     private LinearLayout mContainer;
 
     private Drawable mCheckedBackground;
-    private float mButtonSize;
+    private float mButtonHeight;
+    private float mButtonWidth;
     private int mTextColor;
     private float mTextSize;
     private float mSpacing;
@@ -68,8 +70,10 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
 
             mCheckedBackground = a.getDrawable(R.styleable.ToggleButtonOptions_checkedBackground);
 
+            mButtonHeight = a.getDimension(R.styleable.ToggleButtonOptions_buttonHeight, dpToPx(DEFAULT_BUTTON_HEIGHT));
+            mButtonWidth = a.getDimension(R.styleable.ToggleButtonOptions_buttonWidth, dpToPx(DEFAULT_BUTTON_WIDTH));
+
             mTextSize = a.getDimensionPixelSize(R.styleable.ToggleButtonOptions_android_textSize, (int)dpToPx(DEFAULT_TEXT_SIZE));
-            mButtonSize = a.getDimension(R.styleable.ToggleButtonOptions_buttonSize, dpToPx(DEFAULT_BUTTON_SIZE));
             mTextColor = a.getColor(R.styleable.ToggleButtonOptions_textColor, DEFAULT_TEXT_COLOR);
             mSpacing = a.getDimension(R.styleable.ToggleButtonOptions_spacing, dpToPx(DEFAULT_SPACING));
             mIsAnimationEnabled = a.getBoolean(R.styleable.ToggleButtonOptions_enableAnimation, false);
@@ -118,8 +122,12 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     public void setButtons(List<String> text) {
         clearButtons();
 
-        for (String str : text) {
-            addButton(str);
+        int count = text != null ? text.size() : 0;
+        if (count != 0) {
+            for (int i = 0; i < count - 1; i++) {
+                addButton(text.get(i), true);
+            }
+            addButton(text.get(count - 1), false);
         }
     }
 
@@ -166,25 +174,6 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         if (button != null) {
             button.setChecked(isChecked);
         }
-    }
-
-    /**
-     * Returns the size of each button.
-     *
-     * @return The size of button in pixels
-     */
-    public float getButtonSize() {
-        return mButtonSize;
-    }
-
-    /**
-     * Sets the button size to the given pixels.
-     *
-     * @param pixels The size of button in pixels
-     */
-    public void setButtonSize(float pixels) {
-        mButtonSize = pixels;
-        updateButtonsLayout();
     }
 
     /**
@@ -244,7 +233,11 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
      */
     public void setSpacing(float spacing) {
         mSpacing = spacing;
-        updateButtonsLayout();
+        for (int i = 0; i < mContainer.getChildCount(); i++) {
+            View view = mContainer.getChildAt(i);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+            params.setMargins(0, 0, (int) mSpacing, 0);
+        }
     }
 
     /**
@@ -293,7 +286,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         }
     }
 
-    private void addButton(String text) {
+    private void addButton(String text, boolean needSpacing) {
         ToggleButton button = new ToggleButton(mContext);
 
         button.setText(text);
@@ -310,35 +303,37 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
 
         mButtons.add(button);
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                (int) mButtonSize, (int) mButtonSize);
-        params.setMargins(0, 0, (int) mSpacing, 0);
+        LinearLayout.LayoutParams params = buildLayoutParams(needSpacing);
 
         mContainer.addView(button.getView(), params);
     }
 
-    private void updateButtonsLayout() {
-        int count = mContainer.getChildCount();
-        if (count > 0) {
-            for (int i = 0; i < count - 1; i++) {
-                View view = mContainer.getChildAt(i);
+    private LinearLayout.LayoutParams buildLayoutParams(boolean needSpacing) {
+        LinearLayout.LayoutParams params;
 
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        (int) mButtonSize, (int) mButtonSize);
-                params.setMargins(0, 0, (int) mSpacing, 0);
-
-                mContainer.updateViewLayout(view, params);
-            }
-
-            View view = mContainer.getChildAt(count - 1);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    (int) mButtonSize, (int) mButtonSize);
-            mContainer.updateViewLayout(view, params);
+        if (mButtonHeight < 0 && mButtonWidth < 0) {
+            params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        } else if (mButtonHeight < 0) {
+            params = new LinearLayout.LayoutParams(
+                    (int)mButtonWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
+        } else if (mButtonWidth < 0) {
+            params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, (int) mButtonHeight);
+        } else {
+            params = new LinearLayout.LayoutParams((int) mButtonWidth, (int) mButtonHeight);
         }
+
+        if (needSpacing) {
+            params.setMargins(0, 0, (int) mSpacing, 0);
+        }
+
+        return params;
     }
 
     private float dpToPx(float dp){
         return TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
+
 }

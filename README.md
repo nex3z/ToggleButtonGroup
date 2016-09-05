@@ -16,7 +16,8 @@ Define the `MultiSelectToggleGroup` as follows:
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="16sp"
-    app:buttonSize="40dp"
+    app:buttonWidth="40dp"
+    app:buttonHeight="40dp"
     app:enableAnimation="true"/>
 ```
 
@@ -42,7 +43,8 @@ Define the `SingleSelectToggleGroup` as follows:
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="16sp"
-    app:buttonSize="40dp"
+    app:buttonWidth="40dp"
+    app:buttonHeight="40dp"
     app:enableAnimation="true"/>
 ```
 

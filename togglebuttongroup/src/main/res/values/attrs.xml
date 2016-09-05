@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ToggleButtonOptions">
-        <attr name="buttonSize" format="dimension"/>
+        <attr name="buttonWidth" format="dimension"/>
+        <attr name="buttonHeight" format="dimension"/>
         <attr name="textColor" format="color"/>
         <attr name="android:textSize"/>
         <attr name="spacing" format="dimension"/>
