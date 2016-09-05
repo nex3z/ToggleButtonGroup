@@ -6,7 +6,7 @@ A group of toggle buttons, supports multiple / single selection.
 
 You can create a group of multiple selection toggle buttons with `MultiSelectToggleGroup`.
 
-![multi](images/multi.gif)
+<img src="images/multi.gif" height="75" />
 
 Define the `MultiSelectToggleGroup` as follows:
 
@@ -35,7 +35,7 @@ multiSelect.setButtons(weekdays);
 
 You can create a group of single selection toggle buttons with `SingleSelectToggleGroup`.
 
-![single](images/single.gif)
+<img src="images/single.gif" height="75" />
 
 Define the `SingleSelectToggleGroup` as follows:
 
