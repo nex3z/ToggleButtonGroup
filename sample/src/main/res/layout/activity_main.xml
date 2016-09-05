@@ -24,24 +24,24 @@
 
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
         android:id="@+id/single_selection_group"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         app:buttonWidth="40dp"
         app:buttonHeight="40dp"
+        app:spacing="16dp"
         app:uncheckedTextColor="@android:color/black"
         app:checkedTextColor="@android:color/white"
         app:enableAnimation="true"/>
 
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         app:buttonWidth="40dp"
         app:buttonHeight="40dp"
         app:textButton1="Y"
         app:textButton2="N"
-        app:spacing="40dp"
         app:checkedBackground="@drawable/ic_check_24dp"/>
 
 </LinearLayout>

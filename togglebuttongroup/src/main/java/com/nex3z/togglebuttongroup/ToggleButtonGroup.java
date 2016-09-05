@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -19,6 +19,7 @@ import java.util.Set;
 public abstract class ToggleButtonGroup extends LinearLayout implements View.OnClickListener {
     private static final String LOG_TAG = ToggleButtonGroup.class.getSimpleName();
 
+    private static final int DEFAULT_CHECKED_DRAWABLE_ID = R.drawable.ic_circle_48dp;
     private static final float DEFAULT_TEXT_SIZE = 50;
     private static final long DEFAULT_ANIMATION_DURATION = 150;
     private static final float DEFAULT_SPACING = 0;
@@ -38,6 +39,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private int mUncheckedTextColor;
     private float mTextSize;
     private float mSpacing;
+    private boolean mIsSpacingSet;
     private boolean mIsAnimationEnabled;
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
     private String mTextButton1;
@@ -71,14 +73,21 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
             mContainer = (LinearLayout) findViewById(R.id.toggle_button_container);
 
             mCheckedBackground = a.getDrawable(R.styleable.ToggleButtonOptions_checkedBackground);
+            if (mCheckedBackground == null) {
+                mCheckedBackground = ContextCompat.getDrawable(context, DEFAULT_CHECKED_DRAWABLE_ID);
+            }
 
             mButtonHeight = a.getDimension(R.styleable.ToggleButtonOptions_buttonHeight, dpToPx(DEFAULT_BUTTON_HEIGHT));
             mButtonWidth = a.getDimension(R.styleable.ToggleButtonOptions_buttonWidth, dpToPx(DEFAULT_BUTTON_WIDTH));
 
             mTextSize = a.getDimensionPixelSize(R.styleable.ToggleButtonOptions_android_textSize, (int)dpToPx(DEFAULT_TEXT_SIZE));
+
             mCheckedTextColor = a.getColor(R.styleable.ToggleButtonOptions_checkedTextColor, DEFAULT_CHECKED_TEXT_COLOR);
             mUncheckedTextColor = a.getColor(R.styleable.ToggleButtonOptions_uncheckedTextColor, DEFAULT_UNCHECKED_TEXT_COLOR);
+
+            mIsSpacingSet = a.hasValue(R.styleable.ToggleButtonOptions_spacing);
             mSpacing = a.getDimension(R.styleable.ToggleButtonOptions_spacing, dpToPx(DEFAULT_SPACING));
+
             mIsAnimationEnabled = a.getBoolean(R.styleable.ToggleButtonOptions_enableAnimation, false);
 
             mTextButton1 = a.getString(R.styleable.ToggleButtonOptions_textButton1);
@@ -106,6 +115,24 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     public void onClick(View view) {
         int position = mContainer.indexOfChild(view);
         onToggleButtonClicked(position);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        if ((MeasureSpec.getMode(widthMeasureSpec) != MeasureSpec.AT_MOST) && (!mIsSpacingSet)) {
+            int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
+            int buttonWidth = mButtons.get(0).getView().getLayoutParams().width;
+            int count = mContainer.getChildCount();
+            float spacing = (parentWidth - (count * buttonWidth)) / (count - 1);
+
+            for (int i = 0; i < mContainer.getChildCount() - 1; i++) {
+                View view = mContainer.getChildAt(i);
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+                params.setMargins(0, 0, (int) spacing, 0);
+            }
+        }
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     /**
@@ -322,9 +349,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         button.setAnimationEnabled(mIsAnimationEnabled);
         button.setAnimationDuration(mAnimationDuration);
 
-        if (mCheckedBackground != null) {
-            button.setCheckedBackgroundDrawable(mCheckedBackground);
-        }
+        button.setCheckedBackgroundDrawable(mCheckedBackground);
 
         button.setOnClickListener(this);
 
@@ -338,23 +363,13 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private LinearLayout.LayoutParams buildLayoutParams(boolean needSpacing) {
         LinearLayout.LayoutParams params;
 
-        if (mButtonHeight < 0 && mButtonWidth < 0) {
-            params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        } else if (mButtonHeight < 0) {
-            params = new LinearLayout.LayoutParams(
-                    (int)mButtonWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
-        } else if (mButtonWidth < 0) {
-            params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, (int) mButtonHeight);
-        } else {
-            params = new LinearLayout.LayoutParams((int) mButtonWidth, (int) mButtonHeight);
-        }
+        mButtonHeight = mButtonHeight < 0 ? mCheckedBackground.getIntrinsicHeight() : mButtonHeight;
+        mButtonWidth = mButtonWidth < 0 ? mCheckedBackground.getIntrinsicWidth() : mButtonWidth;
+        params = new LinearLayout.LayoutParams((int) mButtonWidth, (int) mButtonHeight);
 
         if (needSpacing) {
             params.setMargins(0, 0, (int) mSpacing, 0);
         }
-
         return params;
     }
 

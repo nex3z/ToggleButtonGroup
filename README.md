@@ -13,7 +13,7 @@ Define the `MultiSelectToggleGroup` as follows:
 ```xml
 <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
     android:id="@+id/multi_selection_group"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textSize="16sp"
     app:buttonWidth="40dp"
@@ -42,7 +42,7 @@ Define the `SingleSelectToggleGroup` as follows:
 ```xml
 <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
     android:id="@+id/single_selection_group"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textSize="16sp"
     app:buttonWidth="40dp"
