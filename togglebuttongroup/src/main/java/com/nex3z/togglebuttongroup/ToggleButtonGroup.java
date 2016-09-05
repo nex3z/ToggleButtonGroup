@@ -257,7 +257,9 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
      */
     public void setSpacing(float spacing) {
         mSpacing = spacing;
-        for (int i = 0; i < mContainer.getChildCount(); i++) {
+
+        // Do not add spacing after the last button.
+        for (int i = 0; i < mContainer.getChildCount() - 1; i++) {
             View view = mContainer.getChildAt(i);
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
             params.setMargins(0, 0, (int) mSpacing, 0);
