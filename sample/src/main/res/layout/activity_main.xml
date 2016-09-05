@@ -18,6 +18,8 @@
         android:textSize="16sp"
         app:buttonWidth="40dp"
         app:buttonHeight="40dp"
+        app:uncheckedTextColor="@android:color/black"
+        app:checkedTextColor="@android:color/white"
         app:enableAnimation="true"/>
 
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
@@ -27,7 +29,8 @@
         android:textSize="16sp"
         app:buttonWidth="40dp"
         app:buttonHeight="40dp"
-        app:enableAnimation="true"/>
+        app:uncheckedTextColor="@android:color/black"
+        app:checkedTextColor="@android:color/white"/>
 
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
         android:layout_width="match_parent"

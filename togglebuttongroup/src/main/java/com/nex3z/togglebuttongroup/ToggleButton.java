@@ -1,6 +1,7 @@
 package com.nex3z.togglebuttongroup;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -15,9 +16,13 @@ public class ToggleButton {
     private static final String LOG_TAG = ToggleButton.class.getSimpleName();
 
     private static final long DEFAULT_ANIMATION_DURATION = 150;
+    private static final int DEFAULT_CHECKED_TEXT_COLOR = Color.BLACK;
+    private static final int DEFAULT_UNCHECKED_TEXT_COLOR = Color.BLACK;
 
     private boolean mIsChecked;
     private float mButtonSize;
+    private int mCheckedTextColor = DEFAULT_CHECKED_TEXT_COLOR;
+    private int mUncheckedTextColor = DEFAULT_UNCHECKED_TEXT_COLOR;
 
     private boolean mIsAnimationEnabled;
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
@@ -39,6 +44,18 @@ public class ToggleButton {
         mExpand = new ScaleAnimation(0, 1, 0, 1,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         mExpand.setDuration(mAnimationDuration);
+        mExpand.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                updateTextColor();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
 
         mShrink = new ScaleAnimation(1, 0, 1, 0,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -50,6 +67,7 @@ public class ToggleButton {
             @Override
             public void onAnimationEnd(Animation animation) {
                 mIvCheckedBg.setVisibility(View.INVISIBLE);
+                updateTextColor();
             }
 
             @Override
@@ -74,6 +92,7 @@ public class ToggleButton {
             }
         } else {
             mIvCheckedBg.setVisibility(mIsChecked ? View.VISIBLE : View.INVISIBLE);
+            updateTextColor();
         }
         return mIsChecked;
     }
@@ -89,6 +108,7 @@ public class ToggleButton {
     public void setChecked(boolean isChecked) {
         mIsChecked = isChecked;
         mIvCheckedBg.setVisibility(mIsChecked ? View.VISIBLE : View.INVISIBLE);
+        updateTextColor();
     }
 
     public String getText() {
@@ -117,6 +137,24 @@ public class ToggleButton {
 
     public int getTextColor() {
         return mTvText.getCurrentTextColor();
+    }
+
+    public int getCheckedTextColor() {
+        return mCheckedTextColor;
+    }
+
+    public void setCheckedTextColor(int checkedTextColor) {
+        mCheckedTextColor = checkedTextColor;
+        updateTextColor();
+    }
+
+    public int getUncheckedTextColor() {
+        return mUncheckedTextColor;
+    }
+
+    public void setUncheckedTextColor(int uncheckedTextColor) {
+        mUncheckedTextColor = uncheckedTextColor;
+        updateTextColor();
     }
 
     public void setButtonSize(float size) {
@@ -153,6 +191,14 @@ public class ToggleButton {
         mAnimationDuration = animationDuration;
         mShrink.setDuration(mAnimationDuration);
         mExpand.setDuration(mAnimationDuration);
+    }
+
+    private void updateTextColor() {
+        if (mIsChecked) {
+            mTvText.setTextColor(mCheckedTextColor);
+        } else {
+            mTvText.setTextColor(mUncheckedTextColor);
+        }
     }
 
 }

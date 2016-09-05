@@ -3,7 +3,8 @@
     <declare-styleable name="ToggleButtonOptions">
         <attr name="buttonWidth" format="dimension"/>
         <attr name="buttonHeight" format="dimension"/>
-        <attr name="textColor" format="color"/>
+        <attr name="checkedTextColor" format="color"/>
+        <attr name="uncheckedTextColor" format="color"/>
         <attr name="android:textSize"/>
         <attr name="spacing" format="dimension"/>
         <attr name="checkedBackground" format="integer" />

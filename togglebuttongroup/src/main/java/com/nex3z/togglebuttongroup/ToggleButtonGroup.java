@@ -20,11 +20,12 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private static final String LOG_TAG = ToggleButtonGroup.class.getSimpleName();
 
     private static final float DEFAULT_TEXT_SIZE = 50;
-    private static final int DEFAULT_TEXT_COLOR = Color.BLACK;
     private static final long DEFAULT_ANIMATION_DURATION = 150;
     private static final float DEFAULT_SPACING = 0;
     private static final float DEFAULT_BUTTON_HEIGHT = -2;
     private static final float DEFAULT_BUTTON_WIDTH = -2;
+    private static final int DEFAULT_CHECKED_TEXT_COLOR = Color.BLACK;
+    private static final int DEFAULT_UNCHECKED_TEXT_COLOR = Color.BLACK;
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -33,7 +34,8 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private Drawable mCheckedBackground;
     private float mButtonHeight;
     private float mButtonWidth;
-    private int mTextColor;
+    private int mCheckedTextColor;
+    private int mUncheckedTextColor;
     private float mTextSize;
     private float mSpacing;
     private boolean mIsAnimationEnabled;
@@ -74,7 +76,8 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
             mButtonWidth = a.getDimension(R.styleable.ToggleButtonOptions_buttonWidth, dpToPx(DEFAULT_BUTTON_WIDTH));
 
             mTextSize = a.getDimensionPixelSize(R.styleable.ToggleButtonOptions_android_textSize, (int)dpToPx(DEFAULT_TEXT_SIZE));
-            mTextColor = a.getColor(R.styleable.ToggleButtonOptions_textColor, DEFAULT_TEXT_COLOR);
+            mCheckedTextColor = a.getColor(R.styleable.ToggleButtonOptions_checkedTextColor, DEFAULT_CHECKED_TEXT_COLOR);
+            mUncheckedTextColor = a.getColor(R.styleable.ToggleButtonOptions_uncheckedTextColor, DEFAULT_UNCHECKED_TEXT_COLOR);
             mSpacing = a.getDimension(R.styleable.ToggleButtonOptions_spacing, dpToPx(DEFAULT_SPACING));
             mIsAnimationEnabled = a.getBoolean(R.styleable.ToggleButtonOptions_enableAnimation, false);
 
@@ -177,23 +180,44 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     }
 
     /**
-     * Gets the text color.
+     * Gets the text color for the button when checked.
      *
-     * @return The text color
+     * @return The text color for checked state
      */
-    public int getTextColor() {
-        return mTextColor;
+    public int getCheckedTextColor() {
+        return mCheckedTextColor;
     }
 
     /**
-     * Sets the text color.
+     * Sets the text color for the button when checked.
      *
-     * @param textColor The text color
+     * @param checkedTextColor The text color for checked state
      */
-    public void setTextColor(int textColor) {
-        mTextColor = textColor;
+    public void setCheckedTextColor(int checkedTextColor) {
+        mCheckedTextColor = checkedTextColor;
         for (ToggleButton button : mButtons) {
-            button.setTextColor(mTextColor);
+            button.setCheckedTextColor(checkedTextColor);
+        }
+    }
+
+    /**
+     * Gets the text color for the button when unchecked.
+     *
+     * @return The text color for unchecked state
+     */
+    public int getUncheckedTextColor() {
+        return mUncheckedTextColor;
+    }
+
+    /**
+     * Sets the text color for the button when unchecked.
+     *
+     * @param uncheckedTextColor The text color for unchecked state
+     */
+    public void setUncheckedTextColor(int uncheckedTextColor) {
+        mUncheckedTextColor = uncheckedTextColor;
+        for (ToggleButton button : mButtons) {
+            button.setUncheckedTextColor(uncheckedTextColor);
         }
     }
 
@@ -291,7 +315,8 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
 
         button.setText(text);
         button.setTextSizePx(mTextSize);
-        button.setTextColor(mTextColor);
+        button.setCheckedTextColor(mCheckedTextColor);
+        button.setUncheckedTextColor(mUncheckedTextColor);
         button.setAnimationEnabled(mIsAnimationEnabled);
         button.setAnimationDuration(mAnimationDuration);
 
