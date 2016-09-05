@@ -18,6 +18,8 @@ Define the `MultiSelectToggleGroup` as follows:
     android:textSize="16sp"
     app:buttonWidth="40dp"
     app:buttonHeight="40dp"
+    app:uncheckedTextColor="@android:color/black"
+    app:checkedTextColor="@android:color/white"
     app:enableAnimation="true"/>
 ```
 
@@ -45,6 +47,8 @@ Define the `SingleSelectToggleGroup` as follows:
     android:textSize="16sp"
     app:buttonWidth="40dp"
     app:buttonHeight="40dp"
+    app:uncheckedTextColor="@android:color/black"
+    app:checkedTextColor="@android:color/white"
     app:enableAnimation="true"/>
 ```
 
