@@ -2,7 +2,15 @@
 
 A group of toggle buttons, supports multiple / single selection. 
 
-# MultiSelectToggleGroup
+## Gradle
+
+```
+dependencies {
+    compile 'com.nex3z:toggle-button-group:0.1.0'
+}
+```
+
+## MultiSelectToggleGroup
 
 You can create a group of multiple selection toggle buttons with `MultiSelectToggleGroup`.
 
@@ -31,7 +39,7 @@ List<String> weekdays = Arrays.asList("S", "M", "T", "W", "T", "F", "S");
 multiSelect.setButtons(weekdays);
 ```
 
-# SingleSelectToggleGroup
+## SingleSelectToggleGroup
 
 You can create a group of single selection toggle buttons with `SingleSelectToggleGroup`.
 
