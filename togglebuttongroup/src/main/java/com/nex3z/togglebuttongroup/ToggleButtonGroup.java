@@ -20,7 +20,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private static final String LOG_TAG = ToggleButtonGroup.class.getSimpleName();
 
     private static final int DEFAULT_CHECKED_DRAWABLE_ID = R.drawable.ic_circle_48dp;
-    private static final float DEFAULT_TEXT_SIZE = 50;
+    private static final float DEFAULT_TEXT_SIZE = 16;
     private static final long DEFAULT_ANIMATION_DURATION = 150;
     private static final float DEFAULT_SPACING = 0;
     private static final float DEFAULT_BUTTON_HEIGHT = -2;
