@@ -20,7 +20,7 @@
         app:buttonHeight="40dp"
         app:uncheckedTextColor="@android:color/black"
         app:checkedTextColor="@android:color/white"
-        app:enableAnimation="true"/>
+        app:animationEnabled="true"/>
 
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
         android:id="@+id/single_selection_group"
@@ -32,7 +32,7 @@
         app:spacing="16dp"
         app:uncheckedTextColor="@android:color/black"
         app:checkedTextColor="@android:color/white"
-        app:enableAnimation="true"/>
+        app:animationEnabled="true"/>
 
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
         android:layout_width="wrap_content"

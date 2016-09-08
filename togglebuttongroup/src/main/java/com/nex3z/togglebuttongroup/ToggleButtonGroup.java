@@ -88,7 +88,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
             mIsSpacingSet = a.hasValue(R.styleable.ToggleButtonOptions_spacing);
             mSpacing = a.getDimension(R.styleable.ToggleButtonOptions_spacing, dpToPx(DEFAULT_SPACING));
 
-            mIsAnimationEnabled = a.getBoolean(R.styleable.ToggleButtonOptions_enableAnimation, false);
+            mIsAnimationEnabled = a.getBoolean(R.styleable.ToggleButtonOptions_animationEnabled, false);
 
             mTextButton1 = a.getString(R.styleable.ToggleButtonOptions_textButton1);
             mTextButton2 = a.getString(R.styleable.ToggleButtonOptions_textButton2);
@@ -325,7 +325,8 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     }
 
     /**
-     * Sets the duration of the animation for toggling button. The default is 150 milliseconds.
+     * Sets the duration of the animation for toggling button in milliseconds. The default is 150
+     * milliseconds.
      *
      * @param durationMillis The duration of the animation in milliseconds
      */
