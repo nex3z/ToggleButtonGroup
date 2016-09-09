@@ -49,7 +49,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     protected OnCheckedStateChangeListener mListener;
 
     public interface OnCheckedStateChangeListener {
-        void onToggleStateChange(int position, boolean isChecked);
+        void onCheckedStateChange(int position, boolean isChecked);
     }
 
     protected abstract void onToggleButtonClicked(int position);

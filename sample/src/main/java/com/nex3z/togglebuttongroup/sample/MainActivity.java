@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 (MultiSelectToggleGroup) findViewById(R.id.multi_selection_group);
         multiSelect.setOnCheckedStateChangeListener(new ToggleButtonGroup.OnCheckedStateChangeListener() {
             @Override
-            public void onToggleStateChange(int position, boolean isChecked) {
+            public void onCheckedStateChange(int position, boolean isChecked) {
                 Set<Integer> checkedPositions =  multiSelect.getCheckedPositions();
                 Log.v(LOG_TAG, "setupMultiSelectToggleGroup(): position = " + position
                         + ", isChecked = " + isChecked
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 (SingleSelectToggleGroup) findViewById(R.id.single_selection_group);
         singleSelect.setOnCheckedStateChangeListener(new ToggleButtonGroup.OnCheckedStateChangeListener() {
             @Override
-            public void onToggleStateChange(int position, boolean isChecked) {
+            public void onCheckedStateChange(int position, boolean isChecked) {
                 Log.v(LOG_TAG, "setupSingleSelectToggleGroup(): position = " + position
                         + ", isChecked = " + isChecked);
             }

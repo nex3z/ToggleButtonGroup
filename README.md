@@ -8,7 +8,7 @@ A group of toggle buttons, supports multiple / single selection.
 
 ```
 dependencies {
-    compile 'com.nex3z:toggle-button-group:0.1.0'
+    compile 'com.nex3z:toggle-button-group:0.1.1'
 }
 ```
 
@@ -72,20 +72,22 @@ singleSelect.setButtons(choices);
 
 ## Listener
 
-Use `setOnCheckedStateChangeListener(OnCheckedStateChangeListener listener)` to add a listener to the toggle button group. `onToggleStateChange(int position, boolean isChecked)` will be called when the checked state of any button is changed.
+Use `setOnCheckedStateChangeListener(OnCheckedStateChangeListener listener)` to add a listener to the toggle button group. `onCheckedStateChange(int position, boolean isChecked)` will be called when the checked state of any button is changed.
 
 ```java
 multiSelect.setOnCheckedStateChangeListener(new ToggleButtonGroup.OnCheckedStateChangeListener() {
     @Override
-    public void onToggleStateChange(int position, boolean isChecked) {
-        //...
+    public void onCheckedStateChange(int position, boolean isChecked) {
+        Set<Integer> checkedPositions =  multiSelect.getCheckedPositions();
     }
 });
 ```
 
+For `MultiSelectToggleGroup`, use `getCheckedPositions()` to get all checked positions.
+
 ## Customization
 
-The toogle button group can be customized with the following attributes.
+The toggle button group can be customized with the following attributes.
 
 | Attribute                          | Format    | Description                                                                                                   |
 |------------------------------------|-----------|-----------------------------------------------------------------------------------------------------------------------------|

@@ -21,7 +21,7 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
         unCheckAll();
         mButtons.get(position).changeCheckedState();
         if (mListener != null) {
-            mListener.onToggleStateChange(position, true);
+            mListener.onCheckedStateChange(position, true);
         }
     }
 
