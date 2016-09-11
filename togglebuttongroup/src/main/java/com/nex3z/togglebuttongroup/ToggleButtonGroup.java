@@ -185,7 +185,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     /**
      * Unchecks all buttons in the group.
      */
-    public void unCheckAll() {
+    public void uncheckAll() {
         for (ToggleButton button : mButtons) {
             button.setChecked(false);
         }

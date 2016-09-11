@@ -18,7 +18,7 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
 
     @Override
     protected void onToggleButtonClicked(int position) {
-        unCheckAll();
+        uncheckAll();
         mButtons.get(position).changeCheckedState();
         if (mListener != null) {
             mListener.onCheckedStateChange(position, true);
@@ -35,7 +35,7 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
 
     @Override
     public void setCheckedAt(int position, boolean isChecked) {
-        unCheckAll();
+        uncheckAll();
         super.setCheckedAt(position, isChecked);
     }
 }
