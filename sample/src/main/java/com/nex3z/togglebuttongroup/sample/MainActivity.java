@@ -37,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
                         + ", checkedPositions = " + checkedPositions);
             }
         });
-
-        String[] weekdays = getResources().getStringArray(R.array.weekdays);
-        List<String> weekdaysList = new ArrayList<>(Arrays.asList(weekdays));
-        multiSelect.setButtons(weekdaysList);
     }
 
     private void setupSingleSelectToggleGroup() {

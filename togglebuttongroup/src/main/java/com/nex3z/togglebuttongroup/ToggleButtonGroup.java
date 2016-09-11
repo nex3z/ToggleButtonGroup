@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
     private String mTextButton1;
     private String mTextButton2;
+    private CharSequence[] mText;
     protected ArrayList<ToggleButton> mButtons;
 
     protected OnCheckedStateChangeListener mListener;
@@ -93,14 +95,25 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
             mTextButton1 = a.getString(R.styleable.ToggleButtonOptions_textButton1);
             mTextButton2 = a.getString(R.styleable.ToggleButtonOptions_textButton2);
 
+            mText =  a.getTextArray(R.styleable.ToggleButtonOptions_textButtons);
+
             mButtons = new ArrayList<>();
 
             List<String> attrLabels = new ArrayList<>();
-            if (mTextButton1 != null && !mTextButton1.isEmpty()) {
-                attrLabels.add(mTextButton1);
-            }
-            if (mTextButton2 != null && !mTextButton2.isEmpty()) {
-                attrLabels.add(mTextButton2);
+            if (mText != null) {
+                if (mText.length == 0) {
+                    Log.e(LOG_TAG, "The array read from textButtons is empty.");
+                }
+                for (CharSequence cs : mText) {
+                    attrLabels.add(cs.toString());
+                }
+            } else {
+                if (mTextButton1 != null && !mTextButton1.isEmpty()) {
+                    attrLabels.add(mTextButton1);
+                }
+                if (mTextButton2 != null && !mTextButton2.isEmpty()) {
+                    attrLabels.add(mTextButton2);
+                }
             }
             if (!attrLabels.isEmpty()) {
                 setButtons(attrLabels);
