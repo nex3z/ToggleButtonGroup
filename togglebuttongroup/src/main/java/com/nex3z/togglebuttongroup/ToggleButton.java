@@ -24,7 +24,6 @@ public class ToggleButton {
     private int mCheckedTextColor = DEFAULT_CHECKED_TEXT_COLOR;
     private int mUncheckedTextColor = DEFAULT_UNCHECKED_TEXT_COLOR;
 
-    private boolean mIsAnimationEnabled;
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
     private Animation mExpand;
     private Animation mShrink;
@@ -79,24 +78,6 @@ public class ToggleButton {
         mRootView.setOnClickListener(listener);
     }
 
-    public boolean changeCheckedState() {
-        mIsChecked = !mIsChecked;
-
-        if (mIsAnimationEnabled) {
-            if (mIsChecked) {
-                mIvCheckedBg.setVisibility(View.VISIBLE);
-                mIvCheckedBg.startAnimation(mExpand);
-            } else {
-                mIvCheckedBg.setVisibility(View.VISIBLE);
-                mIvCheckedBg.startAnimation(mShrink);
-            }
-        } else {
-            mIvCheckedBg.setVisibility(mIsChecked ? View.VISIBLE : View.INVISIBLE);
-            updateTextColor();
-        }
-        return mIsChecked;
-    }
-
     public View getView() {
         return mRootView;
     }
@@ -109,6 +90,21 @@ public class ToggleButton {
         mIsChecked = isChecked;
         mIvCheckedBg.setVisibility(mIsChecked ? View.VISIBLE : View.INVISIBLE);
         updateTextColor();
+    }
+
+    public void setChecked(boolean isChecked, boolean animate) {
+        if (!animate) {
+            setChecked(isChecked);
+        } else {
+            mIsChecked = isChecked;
+            if (mIsChecked) {
+                mIvCheckedBg.setVisibility(View.VISIBLE);
+                mIvCheckedBg.startAnimation(mExpand);
+            } else {
+                mIvCheckedBg.setVisibility(View.VISIBLE);
+                mIvCheckedBg.startAnimation(mShrink);
+            }
+        }
     }
 
     public String getText() {
@@ -165,14 +161,6 @@ public class ToggleButton {
 
     public float getButtonSize() {
         return mButtonSize;
-    }
-
-    public boolean isAnimationEnabled() {
-        return mIsAnimationEnabled;
-    }
-
-    public void setAnimationEnabled(boolean animationEnabled) {
-        mIsAnimationEnabled = animationEnabled;
     }
 
     public Drawable getCheckedBackgroundDrawable() {

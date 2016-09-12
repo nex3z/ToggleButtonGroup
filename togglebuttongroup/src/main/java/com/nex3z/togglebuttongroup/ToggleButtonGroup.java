@@ -209,13 +209,29 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     /**
      * Changes the checked state of the button at specified position.
      *
-     * @param position The position of the button
+     * @param position the position of the button
      * @param isChecked true to check the button, false to uncheck it
      */
     public void setCheckedAt(int position, boolean isChecked) {
         ToggleButton button = mButtons.get(position);
         if (button != null) {
             button.setChecked(isChecked);
+        }
+    }
+
+    /**
+     * Changes the checked state of the button at specified position, optionally animating the
+     * check and uncheck operation.
+     *
+     * @param position the position of the button
+     * @param isChecked true to check the button, false to uncheck it
+     * @param animate true to animate between the checked and unchecked state or false to not
+     *                animate
+     */
+    public void setCheckedAt(int position, boolean isChecked, boolean animate) {
+        ToggleButton button = mButtons.get(position);
+        if (button != null) {
+            button.setChecked(isChecked, animate);
         }
     }
 
@@ -323,9 +339,6 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
      */
     public void setAnimationEnabled(boolean isEnabled) {
         mIsAnimationEnabled = isEnabled;
-        for (ToggleButton button : mButtons) {
-            button.setAnimationEnabled(isEnabled);
-        }
     }
 
     /**
@@ -360,7 +373,6 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         button.setTextSizePx(mTextSize);
         button.setCheckedTextColor(mCheckedTextColor);
         button.setUncheckedTextColor(mUncheckedTextColor);
-        button.setAnimationEnabled(mIsAnimationEnabled);
         button.setAnimationDuration(mAnimationDuration);
 
         button.setCheckedBackgroundDrawable(mCheckedBackground);
