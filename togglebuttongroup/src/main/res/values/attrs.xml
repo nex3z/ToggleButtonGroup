@@ -10,6 +10,7 @@
         <attr name="checkedBackground" format="integer" />
         <attr name="animationEnabled" format="boolean" />
         <attr name="animationDuration" format="integer" />
+        <attr name="android:saveEnabled" />
 
         <attr name="textButton1" format="string" />
         <attr name="textButton2" format="string" />

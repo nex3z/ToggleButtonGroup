@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -28,6 +30,10 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private static final float DEFAULT_BUTTON_WIDTH = -2;
     private static final int DEFAULT_CHECKED_TEXT_COLOR = Color.BLACK;
     private static final int DEFAULT_UNCHECKED_TEXT_COLOR = Color.BLACK;
+    private static final boolean DEFAULT_SAVE_ENABLED = false;
+
+    private static final String KEY_SUPER_STATE = "super_state";
+    private static final String KEY_CHECKED_POSITIONS = "checked_positions";
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -43,15 +49,41 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private boolean mIsSpacingSet;
     private boolean mIsAnimationEnabled;
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
+    private boolean mSaveEnabled;
     private String mTextButton1;
     private String mTextButton2;
     private CharSequence[] mText;
+
     protected ArrayList<ToggleButton> mButtons;
 
-    protected OnCheckedStateChangeListener mListener;
+    protected OnCheckedChangeListener mOnCheckedChangeListener;
+    protected OnCheckedPositionChangeListener mOnCheckedPositionChangeListener;
 
-    public interface OnCheckedStateChangeListener {
-        void onCheckedStateChange(int position, boolean isChecked);
+    /**
+     * Interface definition for a callback to be invoked when any button's checked state is
+     * changed.
+     */
+    public interface OnCheckedChangeListener {
+        /**
+         * Called when a toggle button's checked state is changed.
+         *
+         * @param position The position of the button whose state has changed
+         * @param isChecked The new checked state of buttonView
+         */
+        void onCheckedChange(int position, boolean isChecked);
+    }
+
+    /**
+     * Interface definition for a callback to be invoked when the positions of checked buttons
+     * are changed.
+     */
+    public interface OnCheckedPositionChangeListener {
+        /**
+         * Called when the positions of checked buttons are changed.
+         *
+         * @param checkedPositions The positions of all checked buttons
+         */
+        void onCheckedPositionChange(Set<Integer> checkedPositions);
     }
 
     protected abstract void onToggleButtonClicked(int position);
@@ -91,6 +123,8 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
             mSpacing = a.getDimension(R.styleable.ToggleButtonOptions_spacing, dpToPx(DEFAULT_SPACING));
 
             mIsAnimationEnabled = a.getBoolean(R.styleable.ToggleButtonOptions_animationEnabled, false);
+
+            mSaveEnabled = a.getBoolean(R.styleable.ToggleButtonOptions_android_saveEnabled, DEFAULT_SAVE_ENABLED);
 
             mTextButton1 = a.getString(R.styleable.ToggleButtonOptions_textButton1);
             mTextButton2 = a.getString(R.styleable.ToggleButtonOptions_textButton2);
@@ -132,7 +166,8 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if ((MeasureSpec.getMode(widthMeasureSpec) != MeasureSpec.AT_MOST) && (!mIsSpacingSet)) {
+        if ((MeasureSpec.getMode(widthMeasureSpec) != MeasureSpec.AT_MOST) && (!mIsSpacingSet)
+                && mButtons.size() > 0) {
             int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
             int buttonWidth = mButtons.get(0).getView().getLayoutParams().width;
             int count = mContainer.getChildCount();
@@ -148,13 +183,57 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (mSaveEnabled && state instanceof Bundle) {
+            Bundle bundle = (Bundle) state;
+            List<Integer> checkedPositions = bundle.getIntegerArrayList(KEY_CHECKED_POSITIONS);
+
+            if (checkedPositions != null) {
+                uncheckAll();
+                for (int position : checkedPositions) {
+                    setCheckedAt(position, true);
+                }
+                if (mOnCheckedPositionChangeListener != null) {
+                    mOnCheckedPositionChangeListener.onCheckedPositionChange(
+                            new HashSet<>(checkedPositions));
+                }
+            }
+
+            state = bundle.getParcelable(KEY_SUPER_STATE);
+        }
+        super.onRestoreInstanceState(state);
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        if (mSaveEnabled) {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(KEY_SUPER_STATE, super.onSaveInstanceState());
+            ArrayList<Integer> checkedPositions = new ArrayList<>(getCheckedPositions());
+            bundle.putIntegerArrayList(KEY_CHECKED_POSITIONS, checkedPositions);
+            return bundle;
+        } else {
+            return super.onSaveInstanceState();
+        }
+    }
+
     /**
      * Registers a callback to be invoked when any button's checked state is changed.
      *
      * @param listener The callback that will run
      */
-    public void setOnCheckedStateChangeListener(OnCheckedStateChangeListener listener) {
-        mListener = listener;
+    public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
+        mOnCheckedChangeListener = listener;
+    }
+
+    /**
+     * Registers a callback to be invoked when the positions of checked buttons are changed.
+     *
+     * @param listener The callback that will run
+     */
+    public void setOnCheckedPositionChangeListener(OnCheckedPositionChangeListener listener) {
+        mOnCheckedPositionChangeListener = listener;
     }
 
     /**
@@ -364,6 +443,15 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         for (ToggleButton button : mButtons) {
             button.setAnimationDuration(durationMillis);
         }
+    }
+
+    /**
+     * Controls whether the saving of this view's state is enabled.
+     *
+     * @param enabled Set to true to allow state saving, or false (the default) to disable it
+     */
+    public void setSaveEnabled(boolean enabled) {
+        mSaveEnabled = enabled;
     }
 
     private void addButton(String text, boolean needSpacing) {

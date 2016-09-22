@@ -22,8 +22,11 @@ public class MultiSelectToggleGroup extends ToggleButtonGroup {
         boolean isChecked = button.isChecked();
         isChecked = !isChecked;
         button.setChecked(isChecked, isAnimationEnabled());
-        if (mListener != null) {
-            mListener.onCheckedStateChange(position, isChecked);
+        if (mOnCheckedChangeListener != null) {
+            mOnCheckedChangeListener.onCheckedChange(position, isChecked);
+        }
+        if (mOnCheckedPositionChangeListener != null) {
+            mOnCheckedPositionChangeListener.onCheckedPositionChange(getCheckedPositions());
         }
     }
 
