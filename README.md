@@ -8,7 +8,7 @@ A group of toggle buttons, supports multiple / single selection.
 
 ```
 dependencies {
-    compile 'com.nex3z:toggle-button-group:0.1.2'
+    compile 'com.nex3z:toggle-button-group:0.1.3'
 }
 ```
 
@@ -79,20 +79,32 @@ List<String> choices = Arrays.asList("A", "B", "C", "D");
 singleSelect.setButtons(choices);
 ```
 
+For both `MultiSelectToggleGroup` and `SingleSelectToggleGroup`, `getCheckedPositions()` will get the checked buttons' positions.
+
 ## Listener
 
-Use `setOnCheckedStateChangeListener(OnCheckedStateChangeListener listener)` to add a listener to the toggle button group. `onCheckedStateChange(int position, boolean isChecked)` will be called when the checked state of any button is changed.
+Use `OnCheckedChangeListener` to listen to any button's checked state.
 
 ```java
-multiSelect.setOnCheckedStateChangeListener(new ToggleButtonGroup.OnCheckedStateChangeListener() {
+singleSelect.setOnCheckedChangeListener(new ToggleButtonGroup.OnCheckedChangeListener() {
     @Override
-    public void onCheckedStateChange(int position, boolean isChecked) {
-        Set<Integer> checkedPositions =  multiSelect.getCheckedPositions();
+    public void onCheckedChange(int position, boolean isChecked) {
+        // ...
     }
 });
 ```
 
-For `MultiSelectToggleGroup`, use `getCheckedPositions()` to get all checked positions.
+You can also use `OnCheckedPositionChangeListener` to retrieve all checked buttons' positions when there is any change, which is more handy for `MultiSelectToggleGroup`.
+
+```java
+multiSelect.setOnCheckedPositionChangeListener(new ToggleButtonGroup.OnCheckedPositionChangeListener() {
+    @Override
+    public void onCheckedPositionChange(Set<Integer> checkedPositions) {
+        //...
+    }
+});
+
+```
 
 ## Customization
 
@@ -100,7 +112,8 @@ The toggle button group can be customized with the following attributes.
 
 | Attribute                          | Format    | Description                                                                                                                                 |
 |------------------------------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| android:textSize                   | dimension | Size of the text.    
+| android:textSize                   | dimension | Size of the text.                                                                                                                           |
+| android:saveEnabled                | boolean   | Controls whether the saving of this view's state is enabled. The default is false, which disables state saving while recreating.            |
 | app:buttonWidth                    | dimension | Width of the button.                                                                                                                        |
 | app:buttonHeight                   | dimension | Height of the button.                                                                                                                       |
 | app:checkedBackground              | integer   | Sets a drawable (resource id) as the background image, which is shown when the button is checked and hidden when unchecked.                 |
@@ -111,7 +124,6 @@ The toggle button group can be customized with the following attributes.
 | app:animationDuration              | integer   | Sets the duration of the animation for toggling button in milliseconds. The default is 150 milliseconds.                                    |
 | app:textButton1<br>app:textButton2 | string    | Add a button with the specified text. If you want to add more than 2 buttons, use `textButtons` attribute or `setButtons()` method instead. |
 | app:textButtons                    | reference | The string array to find the value for buttons' text                                                                                        |
-
 
 ## Licence
 
