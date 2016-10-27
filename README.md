@@ -81,7 +81,9 @@ singleSelect.setButtons(choices);
 
 For both `MultiSelectToggleGroup` and `SingleSelectToggleGroup`, `getCheckedPositions()` will get the checked buttons' positions.
 
-## Listener
+## Listeners
+
+### OnCheckedChangeListener
 
 Use `OnCheckedChangeListener` to listen to any button's checked state.
 
@@ -93,6 +95,8 @@ singleSelect.setOnCheckedChangeListener(new ToggleButtonGroup.OnCheckedChangeLis
     }
 });
 ```
+
+### OnCheckedPositionChangeListener
 
 You can also use `OnCheckedPositionChangeListener` to retrieve all checked buttons' positions when there is any change, which is more handy for `MultiSelectToggleGroup`.
 
