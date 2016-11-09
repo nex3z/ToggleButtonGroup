@@ -3,14 +3,20 @@ package com.nex3z.togglebuttongroup;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.StringDef;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.lang.annotation.Retention;
+
+import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class ToggleButton {
     private static final String LOG_TAG = ToggleButton.class.getSimpleName();
@@ -19,14 +25,22 @@ public class ToggleButton {
     private static final int DEFAULT_CHECKED_TEXT_COLOR = Color.BLACK;
     private static final int DEFAULT_UNCHECKED_TEXT_COLOR = Color.BLACK;
 
+    @Retention(SOURCE)
+    @StringDef({ANIMATION_SCALE, ANIMATION_FADE, ANIMATION_NONE})
+    public @interface AnimationType {}
+    public static final String ANIMATION_SCALE = "animation_scale";
+    public static final String ANIMATION_FADE = "animation_fade";
+    public static final String ANIMATION_NONE = "animation_none";
+
     private boolean mIsChecked;
     private float mButtonSize;
     private int mCheckedTextColor = DEFAULT_CHECKED_TEXT_COLOR;
     private int mUncheckedTextColor = DEFAULT_UNCHECKED_TEXT_COLOR;
 
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
-    private Animation mExpand;
-    private Animation mShrink;
+    private @AnimationType String mAnimationType = ANIMATION_FADE;
+    private Animation mCheckAnimation;
+    private Animation mUncheckAnimation;
 
     private View mRootView;
     private ImageView mIvCheckedBg;
@@ -40,10 +54,18 @@ public class ToggleButton {
 
         mTvText = (TextView)mRootView.findViewById(R.id.tv_text);
 
-        mExpand = new ScaleAnimation(0, 1, 0, 1,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        mExpand.setDuration(mAnimationDuration);
-        mExpand.setAnimationListener(new Animation.AnimationListener() {
+        if (mAnimationType.equals(ANIMATION_SCALE)) {
+            mCheckAnimation = new AlphaAnimation(0, 1);
+            mUncheckAnimation = new AlphaAnimation(1, 0);
+        } else {
+            mCheckAnimation = new ScaleAnimation(0, 1, 0, 1,
+                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            mUncheckAnimation = new ScaleAnimation(1, 0, 1, 0,
+                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        }
+
+        mCheckAnimation.setDuration(mAnimationDuration);
+        mCheckAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {}
 
@@ -56,10 +78,8 @@ public class ToggleButton {
             public void onAnimationRepeat(Animation animation) {}
         });
 
-        mShrink = new ScaleAnimation(1, 0, 1, 0,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        mShrink.setDuration(mAnimationDuration);
-        mShrink.setAnimationListener(new Animation.AnimationListener() {
+        mUncheckAnimation.setDuration(mAnimationDuration);
+        mUncheckAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {}
 
@@ -99,10 +119,10 @@ public class ToggleButton {
             mIsChecked = isChecked;
             if (mIsChecked) {
                 mIvCheckedBg.setVisibility(View.VISIBLE);
-                mIvCheckedBg.startAnimation(mExpand);
+                mIvCheckedBg.startAnimation(mCheckAnimation);
             } else {
                 mIvCheckedBg.setVisibility(View.VISIBLE);
-                mIvCheckedBg.startAnimation(mShrink);
+                mIvCheckedBg.startAnimation(mUncheckAnimation);
             }
         }
     }
@@ -177,8 +197,16 @@ public class ToggleButton {
 
     public void setAnimationDuration(long animationDuration) {
         mAnimationDuration = animationDuration;
-        mShrink.setDuration(mAnimationDuration);
-        mExpand.setDuration(mAnimationDuration);
+        mUncheckAnimation.setDuration(mAnimationDuration);
+        mCheckAnimation.setDuration(mAnimationDuration);
+    }
+
+    public @AnimationType String getAnimationType() {
+        return mAnimationType;
+    }
+
+    public void setAnimationType(@AnimationType String animationType) {
+        this.mAnimationType = animationType;
     }
 
     private void updateTextColor() {
