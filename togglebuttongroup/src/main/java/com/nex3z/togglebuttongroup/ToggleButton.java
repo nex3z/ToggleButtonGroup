@@ -26,11 +26,11 @@ public class ToggleButton {
     private static final int DEFAULT_UNCHECKED_TEXT_COLOR = Color.BLACK;
 
     @Retention(SOURCE)
-    @StringDef({ANIMATION_SCALE, ANIMATION_FADE, ANIMATION_NONE})
+    @StringDef({ANIMATION_SCALE, ANIMATION_ALPHA, ANIMATION_NONE})
     public @interface AnimationType {}
-    public static final String ANIMATION_SCALE = "animation_scale";
-    public static final String ANIMATION_FADE = "animation_fade";
-    public static final String ANIMATION_NONE = "animation_none";
+    public static final String ANIMATION_SCALE = "scale";
+    public static final String ANIMATION_ALPHA = "fade";
+    public static final String ANIMATION_NONE = "none";
 
     private boolean mIsChecked;
     private float mButtonSize;
@@ -38,7 +38,7 @@ public class ToggleButton {
     private int mUncheckedTextColor = DEFAULT_UNCHECKED_TEXT_COLOR;
 
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
-    private @AnimationType String mAnimationType = ANIMATION_FADE;
+    private @AnimationType String mAnimationType = ANIMATION_ALPHA;
     private Animation mCheckAnimation;
     private Animation mUncheckAnimation;
 
@@ -54,7 +54,7 @@ public class ToggleButton {
 
         mTvText = (TextView)mRootView.findViewById(R.id.tv_text);
 
-        if (mAnimationType.equals(ANIMATION_SCALE)) {
+        if (mAnimationType.equals(ANIMATION_ALPHA)) {
             mCheckAnimation = new AlphaAnimation(0, 1);
             mUncheckAnimation = new AlphaAnimation(1, 0);
         } else {

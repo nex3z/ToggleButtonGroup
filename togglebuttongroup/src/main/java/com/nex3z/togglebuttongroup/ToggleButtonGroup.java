@@ -24,7 +24,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
 
     private static final int DEFAULT_CHECKED_DRAWABLE_ID = R.drawable.ic_circle_48dp;
     private static final float DEFAULT_TEXT_SIZE = 16;
-    private static final long DEFAULT_ANIMATION_DURATION = 150;
+    private static final int DEFAULT_ANIMATION_DURATION = 150;
     private static final float DEFAULT_SPACING = 0;
     private static final float DEFAULT_BUTTON_HEIGHT = -2;
     private static final float DEFAULT_BUTTON_WIDTH = -2;
@@ -47,7 +47,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private float mTextSize;
     private float mSpacing;
     private boolean mIsSpacingSet;
-    private boolean mIsAnimationEnabled;
+    private String mAnimationType;
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
     private boolean mSaveEnabled;
     private String mTextButton1;
@@ -122,7 +122,8 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
             mIsSpacingSet = a.hasValue(R.styleable.ToggleButtonOptions_spacing);
             mSpacing = a.getDimension(R.styleable.ToggleButtonOptions_spacing, dpToPx(DEFAULT_SPACING));
 
-            mIsAnimationEnabled = a.getBoolean(R.styleable.ToggleButtonOptions_animationEnabled, false);
+            mAnimationType = a.getString(R.styleable.ToggleButtonOptions_animationType);
+            mAnimationDuration = a.getInt(R.styleable.ToggleButtonOptions_animationDuration, DEFAULT_ANIMATION_DURATION);
 
             mSaveEnabled = a.getBoolean(R.styleable.ToggleButtonOptions_android_saveEnabled, DEFAULT_SAVE_ENABLED);
 
@@ -407,17 +408,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
      * @return Whether the animation for toggling button is enabled
      */
     public boolean isAnimationEnabled() {
-        return mIsAnimationEnabled;
-    }
-
-    /**
-     * Sets whether the animation for toggling button is enabled. The default is false, meaning that
-     * the animation is disabled.
-     *
-     * @param isEnabled Whether the animation for toggling button is enabled
-     */
-    public void setAnimationEnabled(boolean isEnabled) {
-        mIsAnimationEnabled = isEnabled;
+        return mAnimationType != null && !mAnimationType.equals(ToggleButton.ANIMATION_NONE);
     }
 
     /**
@@ -461,6 +452,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         button.setTextSizePx(mTextSize);
         button.setCheckedTextColor(mCheckedTextColor);
         button.setUncheckedTextColor(mUncheckedTextColor);
+        button.setAnimationType(mAnimationType);
         button.setAnimationDuration(mAnimationDuration);
 
         button.setCheckedBackgroundDrawable(mCheckedBackground);

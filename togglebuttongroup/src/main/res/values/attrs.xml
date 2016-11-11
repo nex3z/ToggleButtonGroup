@@ -8,7 +8,7 @@
         <attr name="android:textSize"/>
         <attr name="spacing" format="dimension"/>
         <attr name="checkedBackground" format="integer" />
-        <attr name="animationEnabled" format="boolean" />
+        <attr name="animationType" format="string" />
         <attr name="animationDuration" format="integer" />
         <attr name="android:saveEnabled" />
 
