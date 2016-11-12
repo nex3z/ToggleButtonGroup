@@ -40,6 +40,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private LinearLayout mContainer;
 
     private Drawable mCheckedBackground;
+    private Drawable mButtonBackground;
     private float mButtonHeight;
     private float mButtonWidth;
     private int mCheckedTextColor;
@@ -47,7 +48,7 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
     private float mTextSize;
     private float mSpacing;
     private boolean mIsSpacingSet;
-    private String mAnimationType;
+    private @ToggleButton.AnimationType String mAnimationType;
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
     private boolean mSaveEnabled;
     private String mTextButton1;
@@ -110,6 +111,8 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
             if (mCheckedBackground == null) {
                 mCheckedBackground = ContextCompat.getDrawable(context, DEFAULT_CHECKED_DRAWABLE_ID);
             }
+
+            mButtonBackground = a.getDrawable(R.styleable.ToggleButtonOptions_buttonBackground);
 
             mButtonHeight = a.getDimension(R.styleable.ToggleButtonOptions_buttonHeight, dpToPx(DEFAULT_BUTTON_HEIGHT));
             mButtonWidth = a.getDimension(R.styleable.ToggleButtonOptions_buttonWidth, dpToPx(DEFAULT_BUTTON_WIDTH));
@@ -456,6 +459,9 @@ public abstract class ToggleButtonGroup extends LinearLayout implements View.OnC
         button.setAnimationDuration(mAnimationDuration);
 
         button.setCheckedBackgroundDrawable(mCheckedBackground);
+        if (mButtonBackground != null) {
+            button.setBackground(mButtonBackground);
+        }
 
         button.setOnClickListener(this);
 

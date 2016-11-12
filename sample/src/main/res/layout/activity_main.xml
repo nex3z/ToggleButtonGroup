@@ -27,6 +27,7 @@
         android:id="@+id/single_selection_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:textSize="16sp"
         app:buttonWidth="40dp"
         app:buttonHeight="40dp"
@@ -38,6 +39,7 @@
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:textSize="16sp"
         app:buttonWidth="80dp"
         app:buttonHeight="40dp"
@@ -45,6 +47,7 @@
         app:textButton2="No"
         app:spacing="20dp"
         app:checkedBackground="@drawable/round_rect_checked_bg"
+        app:buttonBackground="@drawable/round_rect_unchecked_bg"
         app:checkedTextColor="@android:color/white"
         app:animationType="fade"/>
 

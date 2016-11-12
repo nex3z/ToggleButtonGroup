@@ -7,6 +7,7 @@
         <attr name="uncheckedTextColor" format="color"/>
         <attr name="android:textSize"/>
         <attr name="spacing" format="dimension"/>
+        <attr name="buttonBackground" format="integer" />
         <attr name="checkedBackground" format="integer" />
         <attr name="animationType" format="string" />
         <attr name="animationDuration" format="integer" />

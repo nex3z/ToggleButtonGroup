@@ -201,6 +201,10 @@ public class ToggleButton {
         mCheckAnimation.setDuration(mAnimationDuration);
     }
 
+    public void setBackground(Drawable drawable) {
+        mRootView.setBackgroundDrawable(drawable);
+    }
+
     public @AnimationType String getAnimationType() {
         return mAnimationType;
     }
