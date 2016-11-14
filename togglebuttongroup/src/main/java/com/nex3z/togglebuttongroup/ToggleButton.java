@@ -54,44 +54,7 @@ public class ToggleButton {
 
         mTvText = (TextView)mRootView.findViewById(R.id.tv_text);
 
-        if (mAnimationType.equals(ANIMATION_ALPHA)) {
-            mCheckAnimation = new AlphaAnimation(0, 1);
-            mUncheckAnimation = new AlphaAnimation(1, 0);
-        } else {
-            mCheckAnimation = new ScaleAnimation(0, 1, 0, 1,
-                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            mUncheckAnimation = new ScaleAnimation(1, 0, 1, 0,
-                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        }
-
-        mCheckAnimation.setDuration(mAnimationDuration);
-        mCheckAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {}
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                updateTextColor();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {}
-        });
-
-        mUncheckAnimation.setDuration(mAnimationDuration);
-        mUncheckAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {}
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                mIvCheckedBg.setVisibility(View.INVISIBLE);
-                updateTextColor();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {}
-        });
+        updateAnimationType(mAnimationType);
     }
 
     public void setOnClickListener(View.OnClickListener listener) {
@@ -210,7 +173,8 @@ public class ToggleButton {
     }
 
     public void setAnimationType(@AnimationType String animationType) {
-        this.mAnimationType = animationType;
+        mAnimationType = animationType;
+        updateAnimationType(mAnimationType);
     }
 
     private void updateTextColor() {
@@ -219,6 +183,47 @@ public class ToggleButton {
         } else {
             mTvText.setTextColor(mUncheckedTextColor);
         }
+    }
+
+    private void updateAnimationType(@AnimationType String animationType) {
+        if (animationType.equals(ANIMATION_ALPHA)) {
+            mCheckAnimation = new AlphaAnimation(0, 1);
+            mUncheckAnimation = new AlphaAnimation(1, 0);
+        } else {
+            mCheckAnimation = new ScaleAnimation(0, 1, 0, 1,
+                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            mUncheckAnimation = new ScaleAnimation(1, 0, 1, 0,
+                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        }
+
+        mCheckAnimation.setDuration(mAnimationDuration);
+        mCheckAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                updateTextColor();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+
+        mUncheckAnimation.setDuration(mAnimationDuration);
+        mUncheckAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mIvCheckedBg.setVisibility(View.INVISIBLE);
+                updateTextColor();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
     }
 
 }
