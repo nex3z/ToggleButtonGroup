@@ -1,5 +1,7 @@
 package com.nex3z.togglebuttongroup;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -41,6 +43,7 @@ public class ToggleButton {
     private @AnimationType String mAnimationType = ANIMATION_ALPHA;
     private Animation mCheckAnimation;
     private Animation mUncheckAnimation;
+    private ValueAnimator mTextColorAnimator;
 
     private View mRootView;
     private ImageView mIvCheckedBg;
@@ -53,6 +56,17 @@ public class ToggleButton {
         mIvCheckedBg.setVisibility(View.INVISIBLE);
 
         mTvText = (TextView)mRootView.findViewById(R.id.tv_text);
+
+        mTextColorAnimator = new ValueAnimator();
+        mTextColorAnimator.setEvaluator(new ArgbEvaluator());
+        mTextColorAnimator.setIntValues(mUncheckedTextColor, mCheckedTextColor);
+        mTextColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mTvText.setTextColor((Integer)valueAnimator.getAnimatedValue());
+            }
+        });
+        mTextColorAnimator.setDuration(mAnimationDuration);
 
         updateAnimationType(mAnimationType);
     }
@@ -83,9 +97,11 @@ public class ToggleButton {
             if (mIsChecked) {
                 mIvCheckedBg.setVisibility(View.VISIBLE);
                 mIvCheckedBg.startAnimation(mCheckAnimation);
+                mTextColorAnimator.start();
             } else {
                 mIvCheckedBg.setVisibility(View.VISIBLE);
                 mIvCheckedBg.startAnimation(mUncheckAnimation);
+                mTextColorAnimator.reverse();
             }
         }
     }
@@ -124,6 +140,7 @@ public class ToggleButton {
 
     public void setCheckedTextColor(int checkedTextColor) {
         mCheckedTextColor = checkedTextColor;
+        mTextColorAnimator.setIntValues(mUncheckedTextColor, mCheckedTextColor);
         updateTextColor();
     }
 
@@ -133,6 +150,7 @@ public class ToggleButton {
 
     public void setUncheckedTextColor(int uncheckedTextColor) {
         mUncheckedTextColor = uncheckedTextColor;
+        mTextColorAnimator.setIntValues(mUncheckedTextColor, mCheckedTextColor);
         updateTextColor();
     }
 
@@ -162,6 +180,7 @@ public class ToggleButton {
         mAnimationDuration = animationDuration;
         mUncheckAnimation.setDuration(mAnimationDuration);
         mCheckAnimation.setDuration(mAnimationDuration);
+        mTextColorAnimator.setDuration(mAnimationDuration);
     }
 
     public void setBackground(Drawable drawable) {
