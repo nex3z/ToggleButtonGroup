@@ -57,9 +57,8 @@ public class ToggleButton {
 
         mTvText = (TextView)mRootView.findViewById(R.id.tv_text);
 
-        mTextColorAnimator = new ValueAnimator();
-        mTextColorAnimator.setEvaluator(new ArgbEvaluator());
-        mTextColorAnimator.setIntValues(mUncheckedTextColor, mCheckedTextColor);
+        mTextColorAnimator = ValueAnimator.ofObject(
+                new ArgbEvaluator(), mUncheckedTextColor, mCheckedTextColor);
         mTextColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
