@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ToggleButtonGroup</string>
+    <string name="desc_toggle_button">Toggle button</string>
+
 </resources>

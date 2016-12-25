@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ToggleButtonOptions">
+    <attr name="checkedTextColor" format="color"/>
+    <attr name="uncheckedTextColor" format="color"/>
+    <attr name="buttonBackground" format="reference"/>
+    <attr name="checkedBackground" format="reference"/>
+    <attr name="animationType" format="enum">
+        <enum name="none" value="0"/>
+        <enum name="scale" value="1"/>
+        <enum name="alpha" value="2"/>
+    </attr>
+    <attr name="animationDuration" format="integer"/>
+
+    <declare-styleable name="ToggleButtonGroup">
+        <attr name="android:textSize"/>
+        <attr name="android:saveEnabled"/>
+        <attr name="checkedTextColor"/>
+        <attr name="uncheckedTextColor"/>
+        <attr name="checkedBackground"/>
+        <attr name="buttonBackground"/>
+        <attr name="animationType"/>
+        <attr name="animationDuration"/>
         <attr name="buttonWidth" format="dimension"/>
         <attr name="buttonHeight" format="dimension"/>
-        <attr name="checkedTextColor" format="color"/>
-        <attr name="uncheckedTextColor" format="color"/>
-        <attr name="android:textSize"/>
-        <attr name="spacing" format="dimension"/>
-        <attr name="buttonBackground" format="integer" />
-        <attr name="checkedBackground" format="integer" />
-        <attr name="animationType" format="string" />
-        <attr name="animationDuration" format="integer" />
-        <attr name="android:saveEnabled" />
-
         <attr name="textButton1" format="string" />
         <attr name="textButton2" format="string" />
         <attr name="textButtons" format="reference"/>
+        <attr name="buttonSpacing" format="enum|dimension">
+            <enum name="auto" value="-65536"/>
+        </attr>
+        <attr name="rowSpacing" format="enum|dimension">
+            <enum name="auto" value="-65536"/>
+        </attr>
+        <attr name="wrap" format="boolean"/>
+
     </declare-styleable>
+
+    <declare-styleable name="ToggleButton">
+        <attr name="android:text"/>
+        <attr name="android:textSize"/>
+        <attr name="checkedTextColor"/>
+        <attr name="uncheckedTextColor"/>
+        <attr name="checkedBackground"/>
+        <attr name="buttonBackground"/>
+        <attr name="animationType"/>
+        <attr name="animationDuration"/>
+    </declare-styleable>
+
 </resources>

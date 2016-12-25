@@ -16,4 +16,15 @@
         <item>C</item>
         <item>D</item>
     </string-array>
+
+    <string-array name="weekdays2">
+        <item>SUN</item>
+        <item>MON</item>
+        <item>TUE</item>
+        <item>WED</item>
+        <item>THU</item>
+        <item>FRI</item>
+        <item>SAT</item>
+    </string-array>
+
 </resources>
