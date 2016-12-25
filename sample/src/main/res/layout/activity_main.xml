@@ -16,39 +16,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        app:buttonWidth="40dp"
-        app:buttonHeight="40dp"
         app:textButtons="@array/weekdays"
         app:uncheckedTextColor="@android:color/black"
         app:checkedTextColor="@android:color/white"
-        app:animationType="scale"/>
+        app:wrap="false"
+        app:buttonSpacing="auto"
+        app:animationType="scale"
+        android:saveEnabled="true"/>
 
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
         android:id="@+id/single_selection_group"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:textSize="16sp"
-        app:buttonWidth="40dp"
-        app:buttonHeight="40dp"
-        app:spacing="16dp"
+        android:saveEnabled="true"
         app:uncheckedTextColor="@android:color/black"
         app:checkedTextColor="@android:color/white"
-        app:animationType="scale"/>
+        app:wrap="false"
+        app:buttonSpacing="auto"
+        app:animationType="scale" />
 
-    <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
-        android:layout_width="wrap_content"
+    <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+        android:id="@+id/multi_selection_tag_group"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:textSize="16sp"
-        app:buttonWidth="80dp"
         app:buttonHeight="40dp"
-        app:textButton1="Yes"
-        app:textButton2="No"
-        app:spacing="20dp"
+        app:buttonWidth="80dp"
+        app:textButtons="@array/weekdays2"
         app:checkedBackground="@drawable/round_rect_checked_bg"
         app:buttonBackground="@drawable/round_rect_unchecked_bg"
+        app:uncheckedTextColor="@android:color/black"
         app:checkedTextColor="@android:color/white"
-        app:animationType="fade"/>
+        app:wrap="true"
+        app:buttonSpacing="auto"
+        app:rowSpacing="8dp"
+        app:animationType="alpha" />
+
 
 </LinearLayout>

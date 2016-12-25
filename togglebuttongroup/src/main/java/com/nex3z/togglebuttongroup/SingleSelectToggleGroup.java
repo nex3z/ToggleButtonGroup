@@ -17,7 +17,7 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
     }
 
     @Override
-    protected void onToggleButtonClicked(int position) {
+    protected void onButtonClick(int position) {
         uncheckAll();
         mButtons.get(position).setChecked(true, isAnimationEnabled());
         if (mOnCheckedChangeListener != null) {
