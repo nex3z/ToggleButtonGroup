@@ -28,6 +28,10 @@
         <attr name="buttonSpacing" format="enum|dimension">
             <enum name="auto" value="-65536"/>
         </attr>
+        <attr name="buttonSpacingForLastRow" format="enum|dimension">
+            <enum name="auto" value="-65536"/>
+            <enum name="align" value="-65537"/>
+        </attr>
         <attr name="rowSpacing" format="enum|dimension">
             <enum name="auto" value="-65536"/>
         </attr>

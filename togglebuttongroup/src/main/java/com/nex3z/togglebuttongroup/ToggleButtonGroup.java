@@ -24,7 +24,8 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     private static final int DEFAULT_ANIMATION_DURATION = 150;
     private static final int DEFAULT_CHECKED_TEXT_COLOR = Color.BLACK;
     private static final int DEFAULT_UNCHECKED_TEXT_COLOR = Color.BLACK;
-    private static final float DEFAULT_BUTTON_SPACING = 0;
+    private static final int DEFAULT_BUTTON_SPACING = 0;
+    private static final int DEFAULT_BUTTON_SPACING_FOR_LAST_ROW = 0;
     private static final float DEFAULT_ROW_SPACING = 0;
     private static final boolean DEFAULT_WRAP = false;
     private static final boolean DEFAULT_SAVE_ENABLED = false;
@@ -34,6 +35,8 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     private static final String KEY_CHECKED_POSITIONS = "checked_positions";
 
     public static final int SPACING_AUTO = -65536;
+    public static final int SPACING_ALIGN = -65537;
+    public static final int SPACING_UNDEFINED = -65538;
 
     private float mTextSize = dpToPx(DEFAULT_TEXT_SIZE);
     private int mCheckedTextColor = DEFAULT_CHECKED_TEXT_COLOR;
@@ -42,7 +45,8 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     private Drawable mButtonBackground;
     @ToggleButton.AnimationType private int mAnimationType = ToggleButton.ANIMATION_NONE;
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
-    private float mButtonSpacing = DEFAULT_BUTTON_SPACING;
+    private int mButtonSpacing = DEFAULT_BUTTON_SPACING;
+    private int mButtonSpacingForLastRow = DEFAULT_BUTTON_SPACING_FOR_LAST_ROW;
     private float mRowSpacing = DEFAULT_ROW_SPACING;
     private float mAdjustedRowSpacing = DEFAULT_ROW_SPACING;
     private boolean mWrap = DEFAULT_WRAP;
@@ -82,9 +86,14 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             mAnimationType = a.getInt(R.styleable.ToggleButtonGroup_animationType, 0);
             mAnimationDuration = a.getInt(R.styleable.ToggleButtonGroup_animationDuration, DEFAULT_ANIMATION_DURATION);
             try {
-                mButtonSpacing = a.getInt(R.styleable.ToggleButtonGroup_buttonSpacing, 0);
+                mButtonSpacing = a.getInt(R.styleable.ToggleButtonGroup_buttonSpacing, DEFAULT_BUTTON_SPACING);
             } catch (NumberFormatException e) {
-                mButtonSpacing = a.getDimension(R.styleable.ToggleButtonGroup_buttonSpacing, dpToPx(DEFAULT_BUTTON_SPACING));
+                mButtonSpacing = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonSpacing, (int)dpToPx(DEFAULT_BUTTON_SPACING));
+            }
+            try {
+                mButtonSpacingForLastRow = a.getInt(R.styleable.ToggleButtonGroup_buttonSpacingForLastRow, SPACING_UNDEFINED);
+            } catch (NumberFormatException e) {
+                mButtonSpacingForLastRow = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonSpacingForLastRow, (int)dpToPx(DEFAULT_BUTTON_SPACING));
             }
             try {
                 mRowSpacing = a.getInt(R.styleable.ToggleButtonGroup_rowSpacing, 0);
@@ -151,7 +160,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
 
             if (mWrap && rowWidth + childWidth > rowSize) { // Need wrap to next row
                 // Save parameters for current row
-                mButtonSpacingForRow.add(getSpacingForRow(rowSize, rowWidth, childNumInRow));
+                mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacing, rowSize, rowWidth, childNumInRow));
                 mButtonNumForRow.add(childNumInRow);
                 mHeightForRow.add(maxChildHeightInRow);
                 measuredHeight += maxChildHeightInRow;
@@ -168,8 +177,23 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             }
         }
 
+        Log.v(LOG_TAG, "onLayout(): mButtonSpacingForLastRow = " + mButtonSpacingForLastRow);
         // Measure remaining buttons in the last row
-        mButtonSpacingForRow.add(getSpacingForRow(rowSize, rowWidth, childNumInRow));
+        if (mButtonSpacingForLastRow == SPACING_ALIGN) {
+            // For SPACING_ALIGN, use the same spacing from the row above if there is more than one
+            // row.
+            if (mButtonSpacingForRow.size() >= 1) {
+                mButtonSpacingForRow.add(mButtonSpacingForRow.get(mButtonSpacingForRow.size() - 1));
+            } else {
+                mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacing, rowSize, rowWidth, childNumInRow));
+            }
+        } else if (mButtonSpacingForLastRow != SPACING_UNDEFINED) {
+            Log.v(LOG_TAG, "onLayout(): 2");
+            mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacingForLastRow, rowSize, rowWidth, childNumInRow));
+        } else {
+            mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacing, rowSize, rowWidth, childNumInRow));
+        }
+
         mButtonNumForRow.add(childNumInRow);
         mHeightForRow.add(maxChildHeightInRow);
         measuredHeight += maxChildHeightInRow;
@@ -463,7 +487,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
      *
      * @param buttonSpacing The horizontal spacing between buttons in pixels.
      */
-    public void setButtonSpacing(float buttonSpacing) {
+    public void setButtonSpacing(int buttonSpacing) {
         mButtonSpacing = buttonSpacing;
         invalidate();
     }
@@ -632,16 +656,16 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
         return a < b ? a : b;
     }
 
-    private float getSpacingForRow(int rowSize, int usedSize, int buttonNum) {
+    private float getSpacingForRow(int spacingAttribute, int rowSize, int usedSize, int buttonNum) {
         float spacing;
-        if (mButtonSpacing == SPACING_AUTO) {
+        if (spacingAttribute == SPACING_AUTO) {
             if (buttonNum > 1) {
                 spacing = (rowSize - usedSize) / (buttonNum - 1);
             } else {
                 spacing = 0;
             }
         } else {
-            spacing = mButtonSpacing;
+            spacing = spacingAttribute;
         }
         return spacing;
     }
