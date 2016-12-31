@@ -16,6 +16,7 @@ import java.util.List;
 
 public class SingleSelectSampleActivity extends AppCompatActivity {
     private static final String LOG_TAG = SingleSelectSampleActivity.class.getSimpleName();
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +38,21 @@ public class SingleSelectSampleActivity extends AppCompatActivity {
             public void onCheckedChange(int position, boolean isChecked) {
                 Log.v(LOG_TAG, "onCheckedChange(): position = " + position
                         + ", isChecked = " + isChecked);
-                Toast.makeText(SingleSelectSampleActivity.this,
-                        "Checked position: " + position,
-                        Toast.LENGTH_SHORT
-                ).show();
+                showToast("Checked position: " + position);
             }
         });
 
         String[] choices = getResources().getStringArray(R.array.choices);
         List<String> choicesList = new ArrayList<>(Arrays.asList(choices));
         singleSelect.setButtons(choicesList);
+    }
+
+    private void showToast(String message) {
+        if (mToast != null) {
+            mToast.cancel();
+        }
+        mToast = Toast.makeText(SingleSelectSampleActivity.this, message, Toast.LENGTH_SHORT);
+        mToast.show();
     }
 
     @Override

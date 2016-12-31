@@ -14,6 +14,7 @@ import java.util.Set;
 
 public class MultiSelectSampleActivity extends AppCompatActivity {
     private static final String LOG_TAG = MultiSelectSampleActivity.class.getSimpleName();
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +36,17 @@ public class MultiSelectSampleActivity extends AppCompatActivity {
                     public void onCheckedPositionChange(Set<Integer> checkedPositions) {
                         Log.v(LOG_TAG, "onCheckedPositionChange(): checkedPositions = "
                                 + checkedPositions);
-                        Toast.makeText(MultiSelectSampleActivity.this,
-                                "Checked positions: " + checkedPositions.toString(),
-                                Toast.LENGTH_SHORT
-                        ).show();
+                        showToast("Checked positions: " + checkedPositions.toString());
                     }
                 });
+    }
+
+    private void showToast(String message) {
+        if (mToast != null) {
+            mToast.cancel();
+        }
+        mToast = Toast.makeText(MultiSelectSampleActivity.this, message, Toast.LENGTH_SHORT);
+        mToast.show();
     }
 
     @Override
