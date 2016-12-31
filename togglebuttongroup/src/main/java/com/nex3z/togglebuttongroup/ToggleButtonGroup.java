@@ -102,8 +102,16 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             }
             mFlow = a.getBoolean(R.styleable.ToggleButtonGroup_flow, DEFAULT_FLOW);
             mSaveEnabled = a.getBoolean(R.styleable.ToggleButtonGroup_android_saveEnabled, DEFAULT_SAVE_ENABLED);
-            mButtonWidth = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonWidth, DEFAULT_DEFAULT_BUTTON_WIDTH);
-            mButtonHeight = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonHeight, DEFAULT_DEFAULT_BUTTON_HEIGHT);
+            try {
+                mButtonWidth = a.getInt(R.styleable.ToggleButtonGroup_buttonWidth, DEFAULT_DEFAULT_BUTTON_WIDTH);
+            } catch (NumberFormatException e) {
+                mButtonWidth = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonWidth, DEFAULT_DEFAULT_BUTTON_WIDTH);
+            }
+            try {
+                mButtonHeight = a.getInt(R.styleable.ToggleButtonGroup_buttonHeight, DEFAULT_DEFAULT_BUTTON_HEIGHT);
+            } catch (NumberFormatException e) {
+                mButtonHeight = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonHeight, DEFAULT_DEFAULT_BUTTON_HEIGHT);
+            }
             textButtons = a.getTextArray(R.styleable.ToggleButtonGroup_textButtons);
             textButton1 = a.getText(R.styleable.ToggleButtonGroup_textButton1);
             textButton2 = a.getString(R.styleable.ToggleButtonGroup_textButton2);
@@ -177,7 +185,6 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             }
         }
 
-        Log.v(LOG_TAG, "onLayout(): mButtonSpacingForLastRow = " + mButtonSpacingForLastRow);
         // Measure remaining buttons in the last row
         if (mButtonSpacingForLastRow == SPACING_ALIGN) {
             // For SPACING_ALIGN, use the same spacing from the row above if there is more than one

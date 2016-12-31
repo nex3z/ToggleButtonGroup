@@ -206,10 +206,8 @@ public class ToggleButton extends FrameLayout {
     }
 
     public void setButtonSize(int width, int height) {
-        mContainer.setLayoutParams(
-                new FrameLayout.LayoutParams(width, height));
-        mIvBg.setLayoutParams(
-                new FrameLayout.LayoutParams(width, height));
+        mContainer.setLayoutParams(new FrameLayout.LayoutParams(width, height));
+        setLayoutParams(new FrameLayout.LayoutParams(width, height));
         invalidate();
     }
 
