@@ -29,10 +29,11 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     private static final float DEFAULT_ROW_SPACING = 0;
     private static final boolean DEFAULT_FLOW = false;
     private static final boolean DEFAULT_SAVE_ENABLED = false;
-    private static final int DEFAULT_DEFAULT_BUTTON_WIDTH= LayoutParams.WRAP_CONTENT;
-    private static final int DEFAULT_DEFAULT_BUTTON_HEIGHT= LayoutParams.WRAP_CONTENT;
+    private static final int DEFAULT_BUTTON_WIDTH = LayoutParams.WRAP_CONTENT;
+    private static final int DEFAULT_BUTTON_HEIGHT = LayoutParams.WRAP_CONTENT;
     private static final String KEY_SUPER_STATE = "super_state";
     private static final String KEY_CHECKED_POSITIONS = "checked_positions";
+    private static final int DEFAULT_BUTTON_TEXT_PADDING = 0;
 
     public static final int SPACING_AUTO = -65536;
     public static final int SPACING_ALIGN = -65537;
@@ -51,8 +52,12 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     private float mAdjustedRowSpacing = DEFAULT_ROW_SPACING;
     private boolean mFlow = DEFAULT_FLOW;
     private boolean mSaveEnabled = DEFAULT_SAVE_ENABLED;
-    private int mButtonWidth = DEFAULT_DEFAULT_BUTTON_WIDTH;
-    private int mButtonHeight = DEFAULT_DEFAULT_BUTTON_HEIGHT;
+    private int mButtonWidth = DEFAULT_BUTTON_WIDTH;
+    private int mButtonHeight = DEFAULT_BUTTON_HEIGHT;
+    private int mButtonTextPaddingTop = DEFAULT_BUTTON_TEXT_PADDING;
+    private int mButtonTextPaddingBottom = DEFAULT_BUTTON_TEXT_PADDING;
+    private int mButtonTextPaddingLeft = DEFAULT_BUTTON_TEXT_PADDING;
+    private int mButtonTextPaddingRight = DEFAULT_BUTTON_TEXT_PADDING;
 
     protected List<ToggleButton> mButtons = new ArrayList<>();
     private List<Float> mButtonSpacingForRow = new ArrayList<>();
@@ -103,15 +108,19 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             mFlow = a.getBoolean(R.styleable.ToggleButtonGroup_flow, DEFAULT_FLOW);
             mSaveEnabled = a.getBoolean(R.styleable.ToggleButtonGroup_android_saveEnabled, DEFAULT_SAVE_ENABLED);
             try {
-                mButtonWidth = a.getInt(R.styleable.ToggleButtonGroup_buttonWidth, DEFAULT_DEFAULT_BUTTON_WIDTH);
+                mButtonWidth = a.getInt(R.styleable.ToggleButtonGroup_buttonWidth, DEFAULT_BUTTON_WIDTH);
             } catch (NumberFormatException e) {
-                mButtonWidth = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonWidth, DEFAULT_DEFAULT_BUTTON_WIDTH);
+                mButtonWidth = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonWidth, DEFAULT_BUTTON_WIDTH);
             }
             try {
-                mButtonHeight = a.getInt(R.styleable.ToggleButtonGroup_buttonHeight, DEFAULT_DEFAULT_BUTTON_HEIGHT);
+                mButtonHeight = a.getInt(R.styleable.ToggleButtonGroup_buttonHeight, DEFAULT_BUTTON_HEIGHT);
             } catch (NumberFormatException e) {
-                mButtonHeight = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonHeight, DEFAULT_DEFAULT_BUTTON_HEIGHT);
+                mButtonHeight = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonHeight, DEFAULT_BUTTON_HEIGHT);
             }
+            mButtonTextPaddingTop = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonTextPaddingTop, DEFAULT_BUTTON_TEXT_PADDING);
+            mButtonTextPaddingBottom = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonTextPaddingBottom, DEFAULT_BUTTON_TEXT_PADDING);
+            mButtonTextPaddingLeft = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonTextPaddingLeft, DEFAULT_BUTTON_TEXT_PADDING);
+            mButtonTextPaddingRight = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonTextPaddingRight, DEFAULT_BUTTON_TEXT_PADDING);
             textButtons = a.getTextArray(R.styleable.ToggleButtonGroup_textButtons);
             textButton1 = a.getText(R.styleable.ToggleButtonGroup_textButton1);
             textButton2 = a.getString(R.styleable.ToggleButtonGroup_textButton2);
@@ -636,6 +645,8 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
         button.setText(label);
         button.setTextSize(mTextSize);
         button.setButtonSize(mButtonWidth, mButtonHeight);
+        button.setTextPadding(mButtonTextPaddingLeft, mButtonTextPaddingTop,
+                mButtonTextPaddingRight, mButtonTextPaddingBottom);
         button.setCheckedTextColor(mCheckedTextColor);
         button.setUncheckedTextColor(mUncheckedTextColor);
         if (mCheckedBackground != null) {

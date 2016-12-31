@@ -139,12 +139,16 @@ public class ToggleButton extends FrameLayout {
         mTvText.setTextSize(TypedValue.COMPLEX_UNIT_PX, px);
     }
 
+    public float getTextSize() {
+        return mTvText.getTextSize();
+    }
+
     public void setText(CharSequence text) {
         mTvText.setText(text);
     }
 
-    public float getTextSize() {
-        return mTvText.getTextSize();
+    public void setTextPadding(int left, int top, int right, int bottom) {
+        mTvText.setPadding(left, top, right, bottom);
     }
 
     public void setTextColor(int color) {

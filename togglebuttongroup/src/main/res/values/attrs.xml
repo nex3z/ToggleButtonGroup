@@ -44,7 +44,10 @@
             <enum name="auto" value="-65536"/>
         </attr>
         <attr name="flow" format="boolean"/>
-
+        <attr name="buttonTextPaddingTop" format="dimension"/>
+        <attr name="buttonTextPaddingBottom" format="dimension"/>
+        <attr name="buttonTextPaddingLeft" format="dimension"/>
+        <attr name="buttonTextPaddingRight" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="ToggleButton">
