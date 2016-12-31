@@ -47,10 +47,9 @@ public class ToggleButton extends FrameLayout {
     private Animation mCheckAnimation;
     private Animation mUncheckAnimation;
     private ValueAnimator mTextColorAnimator;
-    private Drawable mCheckedBackground;
-    private Drawable mButtonBackground;
+    private int mCheckedBackgroundResource;
+    private int mButtonBackgroundResource;
 
-    private FrameLayout mContainer;
     private ImageView mIvBg;
     private TextView mTvText;
 
@@ -64,7 +63,6 @@ public class ToggleButton extends FrameLayout {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rootView = inflater.inflate(R.layout.toggle_button, this, true);
-        mContainer = (FrameLayout) rootView.findViewById(R.id.fl_container);
         mIvBg = (ImageView) rootView.findViewById(R.id.iv_background);
         mTvText = (TextView) rootView.findViewById(R.id.tv_text);
 
@@ -81,13 +79,13 @@ public class ToggleButton extends FrameLayout {
             mUncheckedTextColor = a.getColor(R.styleable.ToggleButton_uncheckedTextColor, DEFAULT_UNCHECKED_TEXT_COLOR);
 
             Drawable buttonBackground = a.getDrawable(R.styleable.ToggleButton_buttonBackground);
-            setButtonBackground(buttonBackground);
+            this.setBackgroundDrawable(buttonBackground);
 
             Drawable checkedBackground = a.getDrawable(R.styleable.ToggleButton_checkedBackground);
             if (checkedBackground == null) {
                 checkedBackground = ContextCompat.getDrawable(context, R.drawable.ic_circle_48dp);
             }
-            setCheckedBackground(checkedBackground);
+            mIvBg.setImageDrawable(checkedBackground);
 
             // noinspection ResourceType
             mAnimationType = a.getInt(R.styleable.ToggleButton_animationType, 0);
@@ -167,27 +165,22 @@ public class ToggleButton extends FrameLayout {
         updateTextColor();
     }
 
-    public void setCheckedBackground(Drawable drawable) {
-        mCheckedBackground = drawable;
-        mIvBg.setImageDrawable(drawable);
+    public void setCheckedBackgroundResource(int resId) {
+        mCheckedBackgroundResource = resId;
+        mIvBg.setImageResource(resId);
     }
 
-    public Drawable getCheckedBackground() {
-        return mCheckedBackground;
+    public int getCheckedBackgroundResource() {
+        return mCheckedBackgroundResource;
     }
 
-    @SuppressWarnings("deprecation")
-    public void setButtonBackground(Drawable drawable) {
-        mButtonBackground = drawable;
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            mContainer.setBackgroundDrawable(drawable);
-        } else {
-            mContainer.setBackground(drawable);
-        }
+    public void setButtonBackgroundResource(int id) {
+        mButtonBackgroundResource = id;
+        this.setBackgroundResource(id);
     }
 
-    public Drawable getButtonBackground() {
-        return mButtonBackground;
+    public int getButtonBackgroundResource() {
+        return mButtonBackgroundResource;
     }
 
     public void setAnimationType(@AnimationType int animationType) {
@@ -210,7 +203,7 @@ public class ToggleButton extends FrameLayout {
     }
 
     public void setButtonSize(int width, int height) {
-        mContainer.setLayoutParams(new FrameLayout.LayoutParams(width, height));
+        this.setLayoutParams(new FrameLayout.LayoutParams(width, height));
         setLayoutParams(new FrameLayout.LayoutParams(width, height));
         invalidate();
     }

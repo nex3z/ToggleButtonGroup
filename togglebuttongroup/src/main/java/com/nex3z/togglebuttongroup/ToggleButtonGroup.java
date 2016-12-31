@@ -3,7 +3,6 @@ package com.nex3z.togglebuttongroup;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -42,8 +41,9 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     private float mTextSize = dpToPx(DEFAULT_TEXT_SIZE);
     private int mCheckedTextColor = DEFAULT_CHECKED_TEXT_COLOR;
     private int mUncheckedTextColor = DEFAULT_UNCHECKED_TEXT_COLOR;
-    private Drawable mCheckedBackground;
-    private Drawable mButtonBackground;
+    private int mCheckedBackgroundResource;
+    private int mButtonBackgroundResource;
+
     @ToggleButton.AnimationType private int mAnimationType = ToggleButton.ANIMATION_NONE;
     private long mAnimationDuration = DEFAULT_ANIMATION_DURATION;
     private int mButtonSpacing = DEFAULT_BUTTON_SPACING;
@@ -85,8 +85,8 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             mTextSize = a.getDimension(R.styleable.ToggleButtonGroup_android_textSize, dpToPx(DEFAULT_TEXT_SIZE));
             mCheckedTextColor = a.getColor(R.styleable.ToggleButtonGroup_checkedTextColor, DEFAULT_CHECKED_TEXT_COLOR);
             mUncheckedTextColor = a.getColor(R.styleable.ToggleButtonGroup_uncheckedTextColor, DEFAULT_UNCHECKED_TEXT_COLOR);
-            mCheckedBackground = a.getDrawable(R.styleable.ToggleButtonGroup_checkedBackground);
-            mButtonBackground = a.getDrawable(R.styleable.ToggleButtonGroup_buttonBackground);
+            mCheckedBackgroundResource = a.getResourceId(R.styleable.ToggleButtonGroup_checkedBackground, 0);
+            mButtonBackgroundResource = a.getResourceId(R.styleable.ToggleButtonGroup_buttonBackground, 0);
             // noinspection ResourceType
             mAnimationType = a.getInt(R.styleable.ToggleButtonGroup_animationType, 0);
             mAnimationDuration = a.getInt(R.styleable.ToggleButtonGroup_animationDuration, DEFAULT_ANIMATION_DURATION);
@@ -204,7 +204,6 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
                 mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacing, rowSize, rowWidth, childNumInRow));
             }
         } else if (mButtonSpacingForLastRow != SPACING_UNDEFINED) {
-            Log.v(LOG_TAG, "onLayout(): 2");
             mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacingForLastRow, rowSize, rowWidth, childNumInRow));
         } else {
             mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacing, rowSize, rowWidth, childNumInRow));
@@ -399,44 +398,44 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     }
 
     /**
-     * Gets the drawable for checked state.
+     * Gets the drawable resource ID for checked state.
      *
-     * @return The drawable for checked state.
+     * @return The drawable resource ID for checked state.
      */
-    public Drawable getCheckedBackground() {
-        return mCheckedBackground;
+    public int getCheckedBackgroundResource() {
+        return mCheckedBackgroundResource;
     }
 
     /**
-     * Sets the drawable for checked state.
+     * Sets the drawable resource ID for checked state.
      *
-     * @param checkedBackground The drawable for checked state.
+     * @param resId The drawable resource ID for checked state.
      */
-    public void setCheckedBackground(Drawable checkedBackground) {
-        mCheckedBackground = checkedBackground;
+    public void setCheckedBackgroundResource(int resId) {
+        mCheckedBackgroundResource = resId;
         for (ToggleButton button : mButtons) {
-            button.setCheckedBackground(checkedBackground);
+            button.setCheckedBackgroundResource(mCheckedBackgroundResource);
         }
     }
 
     /**
-     * Gets the drawable for button background.
+     * Gets the drawable resource ID for button background.
      *
-     * @return The drawable for button background.
+     * @return The drawable resource ID for button background.
      */
-    public Drawable getButtonBackground() {
-        return mButtonBackground;
+    public int getButtonBackgroundResource() {
+        return mButtonBackgroundResource;
     }
 
     /**
-     * Sets the drawable for button background.
+     * Sets the drawable resource ID for button background.
      *
-     * @param buttonBackground The drawable for button background.
+     * @param resId The drawable resource ID for button background.
      */
-    public void setButtonBackground(Drawable buttonBackground) {
-        mButtonBackground = buttonBackground;
+    public void setButtonBackgroundResource(int resId) {
+        mButtonBackgroundResource = resId;
         for (ToggleButton button : mButtons) {
-            button.setButtonBackground(buttonBackground);
+            button.setButtonBackgroundResource(mButtonBackgroundResource);
         }
     }
 
@@ -649,10 +648,10 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
                 mButtonTextPaddingRight, mButtonTextPaddingBottom);
         button.setCheckedTextColor(mCheckedTextColor);
         button.setUncheckedTextColor(mUncheckedTextColor);
-        if (mCheckedBackground != null) {
-            button.setCheckedBackground(mCheckedBackground);
+        if (mCheckedBackgroundResource != 0) {
+            button.setCheckedBackgroundResource(mCheckedBackgroundResource);
         }
-        button.setButtonBackground(mButtonBackground);
+        button.setButtonBackgroundResource(mButtonBackgroundResource);
         button.setAnimationType(mAnimationType);
         button.setAnimationDuration(mAnimationDuration);
         button.setOnClickListener(this);

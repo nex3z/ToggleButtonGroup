@@ -16,7 +16,6 @@
         android:id="@+id/single_selection_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:textSize="16sp"
         android:saveEnabled="true"
         app:uncheckedTextColor="@android:color/black"
