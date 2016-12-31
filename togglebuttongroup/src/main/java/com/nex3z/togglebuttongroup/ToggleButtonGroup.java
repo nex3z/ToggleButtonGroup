@@ -27,7 +27,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     private static final int DEFAULT_BUTTON_SPACING = 0;
     private static final int DEFAULT_BUTTON_SPACING_FOR_LAST_ROW = 0;
     private static final float DEFAULT_ROW_SPACING = 0;
-    private static final boolean DEFAULT_WRAP = false;
+    private static final boolean DEFAULT_FLOW = false;
     private static final boolean DEFAULT_SAVE_ENABLED = false;
     private static final int DEFAULT_DEFAULT_BUTTON_WIDTH= LayoutParams.WRAP_CONTENT;
     private static final int DEFAULT_DEFAULT_BUTTON_HEIGHT= LayoutParams.WRAP_CONTENT;
@@ -49,7 +49,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     private int mButtonSpacingForLastRow = DEFAULT_BUTTON_SPACING_FOR_LAST_ROW;
     private float mRowSpacing = DEFAULT_ROW_SPACING;
     private float mAdjustedRowSpacing = DEFAULT_ROW_SPACING;
-    private boolean mWrap = DEFAULT_WRAP;
+    private boolean mFlow = DEFAULT_FLOW;
     private boolean mSaveEnabled = DEFAULT_SAVE_ENABLED;
     private int mButtonWidth = DEFAULT_DEFAULT_BUTTON_WIDTH;
     private int mButtonHeight = DEFAULT_DEFAULT_BUTTON_HEIGHT;
@@ -100,7 +100,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             }  catch (NumberFormatException e) {
                 mRowSpacing = a.getDimension(R.styleable.ToggleButtonGroup_rowSpacing, dpToPx(DEFAULT_ROW_SPACING));
             }
-            mWrap = a.getBoolean(R.styleable.ToggleButtonGroup_wrap, DEFAULT_WRAP);
+            mFlow = a.getBoolean(R.styleable.ToggleButtonGroup_flow, DEFAULT_FLOW);
             mSaveEnabled = a.getBoolean(R.styleable.ToggleButtonGroup_android_saveEnabled, DEFAULT_SAVE_ENABLED);
             mButtonWidth = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonWidth, DEFAULT_DEFAULT_BUTTON_WIDTH);
             mButtonHeight = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonHeight, DEFAULT_DEFAULT_BUTTON_HEIGHT);
@@ -158,7 +158,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             int childWidth = child.getMeasuredWidth();
             int childHeight = child.getMeasuredHeight();
 
-            if (mWrap && rowWidth + childWidth > rowSize) { // Need wrap to next row
+            if (mFlow && rowWidth + childWidth > rowSize) { // Need flow to next row
                 // Save parameters for current row
                 mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacing, rowSize, rowWidth, childNumInRow));
                 mButtonNumForRow.add(childNumInRow);
@@ -511,21 +511,21 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     }
 
     /**
-     * Returns whether to wrap buttons to next row when there is no enough space.
+     * Returns whether to allow buttons flow to next row when there is no enough space.
      *
-     * @return Whether to wrap buttons to next row when there is no enough space.
+     * @return Whether to flow buttons to next row when there is no enough space.
      */
-    public boolean isWrap() {
-        return mWrap;
+    public boolean isFlow() {
+        return mFlow;
     }
 
     /**
-     * Sets whether to wrap buttons to next row when there is no enough space.
+     * Sets whether to allow buttons flow to next row when there is no enough space.
      *
-     * @param wrap true to allow wrapping. false to restrict all buttons in one row.
+     * @param flow true to allow flow. false to restrict all buttons in one row.
      */
-    public void setWrap(boolean wrap) {
-        mWrap = wrap;
+    public void setFlow(boolean flow) {
+        mFlow = flow;
     }
 
     /**

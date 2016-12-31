@@ -20,7 +20,7 @@
         app:textButtons="@array/weekdays"
         app:uncheckedTextColor="@android:color/black"
         app:checkedTextColor="@android:color/white"
-        app:wrap="false"
+        app:flow="false"
         app:buttonSpacing="auto"
         app:animationType="scale"
         android:saveEnabled="true"/>

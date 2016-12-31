@@ -25,7 +25,7 @@
         app:buttonBackground="@drawable/round_rect_unchecked_bg"
         app:uncheckedTextColor="@android:color/black"
         app:checkedTextColor="@android:color/white"
-        app:wrap="true"
+        app:flow="true"
         app:buttonSpacing="auto"
         app:buttonSpacingForLastRow="align"
         app:rowSpacing="8dp"
