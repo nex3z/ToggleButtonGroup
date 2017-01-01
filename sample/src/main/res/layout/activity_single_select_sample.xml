@@ -21,7 +21,6 @@
         app:uncheckedTextColor="@android:color/black"
         app:checkedTextColor="@android:color/white"
         app:flow="false"
-        app:buttonSpacing="auto"
         app:animationType="scale" />
 
 </FrameLayout>
