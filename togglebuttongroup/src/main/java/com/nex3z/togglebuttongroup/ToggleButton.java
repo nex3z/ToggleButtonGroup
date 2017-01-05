@@ -190,6 +190,7 @@ public class ToggleButton extends FrameLayout {
 
     public void setAnimationDuration(long duration) {
         mAnimationDuration = duration;
+        mTextColorAnimator.setDuration(duration);
         if (mCheckAnimation != null && mUncheckAnimation != null) {
             mCheckAnimation.setDuration(duration);
             mUncheckAnimation.setDuration(duration);
