@@ -316,13 +316,6 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
         onButtonClick(position);
     }
 
-
-    public void setButtonSize(int width, int height) {
-        for (ToggleButton button : mButtons) {
-            button.setButtonSize(width, height);
-        }
-    }
-
     /**
      * Returns the text size of the button in pixels.
      * @return The text size in pixels.
@@ -498,6 +491,8 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
 
     /**
      * Gets the type of animation which is played when checking and unchecking buttons.
+     * ANIMATION_NONE for disabling animation, ANIMATION_SCALE / ANIMATION_ALPHA for scale / alpha
+     * animation.
      *
      * @return The type of animation for checking and unchecking buttons.
      */
@@ -546,6 +541,21 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     }
 
     /**
+     * Sets the button size in pixels. May be a layout constant such as WRAP_CONTENT or
+     * MATCH_PARENT.
+     *
+     * @param width The button width in pixels or a layout constant.
+     * @param height The button height in pixels or a layout constant.
+     */
+    public void setButtonSize(int width, int height) {
+        mButtonWidth = width;
+        mButtonHeight = height;
+        for (ToggleButton button : mButtons) {
+            button.setButtonSize(mButtonWidth, mButtonHeight);
+        }
+    }
+
+    /**
      * Returns the horizontal spacing between buttons in pixels.
      *
      * @return The horizontal spacing between buttons in pixels.
@@ -555,13 +565,36 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     }
 
     /**
-     * Sets the horizontal spacing between buttons in pixels.
+     * Sets the horizontal spacing between buttons in pixels. Use SPACING_AUTO to evenly place
+     * the buttons in each row.
      *
      * @param buttonSpacing The horizontal spacing between buttons in pixels.
      */
     public void setButtonSpacing(int buttonSpacing) {
         mButtonSpacing = buttonSpacing;
-        invalidate();
+        requestLayout();
+    }
+
+    /**
+     * Returns the horizontal spacing between buttons in pixels for the last row.
+     *
+     * @return The horizontal spacing between buttons in pixels for the last row.
+     */
+    public int getButtonSpacingForLastRow() {
+        return mButtonSpacingForLastRow;
+    }
+
+    /**
+     * Returns the horizontal spacing between buttons in pixels for the last row. Use SPACING_AUTO
+     * to evenly place the buttons in each row. Use SPACING_ALIGN to use the same spacing from the
+     * row above.
+     *
+     * @param buttonSpacingForLastRow The horizontal spacing between buttons in pixels for the last
+     *                                row.
+     */
+    public void setButtonSpacingForLastRow(int buttonSpacingForLastRow) {
+        mButtonSpacingForLastRow = buttonSpacingForLastRow;
+        requestLayout();
     }
 
     /**
@@ -574,12 +607,14 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     }
 
     /**
-     * Sets the vertical spacing between button rows in pixels.
+     * Sets the vertical spacing between button rows in pixels. Use SPACING_AUTO to evenly place
+     * all rows in vertical.
      *
      * @param rowSpacing The vertical spacing between button rows in pixels.
      */
     public void setRowSpacing(float rowSpacing) {
         mRowSpacing = rowSpacing;
+        requestLayout();
     }
 
     /**
@@ -601,6 +636,20 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     }
 
     /**
+     * Sets padding for the text of each button.
+     *
+     * @param left The left padding in pixels.
+     * @param top The top padding in pixels.
+     * @param right The right padding in pixels.
+     * @param bottom The bottom padding in pixels.
+     */
+    public void setButtonTextPadding(int left, int top, int right, int bottom) {
+        for (ToggleButton button : mButtons) {
+            button.setTextPadding(left, top, right, bottom);
+        }
+    }
+
+    /**
      * Registers a callback to be invoked when any button's checked state is changed.
      *
      * @param listener The callback that will run
@@ -617,7 +666,6 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     public void setOnCheckedPositionChangeListener(OnCheckedPositionChangeListener listener) {
         mOnCheckedPositionChangeListener = listener;
     }
-
 
     /**
      * Changes the checked state of the button at specified position.
