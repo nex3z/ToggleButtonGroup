@@ -1,6 +1,7 @@
 package com.nex3z.togglebuttongroup;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     public static final int SPACING_UNDEFINED = -65538;
 
     private float mTextSize = dpToPx(DEFAULT_TEXT_SIZE);
+    private ColorStateList mTextColors;
     private int mCheckedTextColor = DEFAULT_CHECKED_TEXT_COLOR;
     private int mUncheckedTextColor = DEFAULT_UNCHECKED_TEXT_COLOR;
     private int mCheckedBackgroundResource;
@@ -83,8 +85,13 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
         CharSequence[] textButtons;
         try {
             mTextSize = a.getDimension(R.styleable.ToggleButtonGroup_android_textSize, dpToPx(DEFAULT_TEXT_SIZE));
-            mCheckedTextColor = a.getColor(R.styleable.ToggleButtonGroup_checkedTextColor, DEFAULT_CHECKED_TEXT_COLOR);
-            mUncheckedTextColor = a.getColor(R.styleable.ToggleButtonGroup_uncheckedTextColor, DEFAULT_UNCHECKED_TEXT_COLOR);
+            mTextColors = a.getColorStateList(R.styleable.ToggleButtonGroup_android_textColor);
+            if (mTextColors != null) {
+                mUncheckedTextColor = mTextColors.getDefaultColor();
+                mCheckedTextColor = mTextColors.getColorForState(new int[]{android.R.attr.state_checked}, mUncheckedTextColor);
+            }
+            mCheckedTextColor = a.getColor(R.styleable.ToggleButtonGroup_checkedTextColor, mCheckedTextColor);
+            mUncheckedTextColor = a.getColor(R.styleable.ToggleButtonGroup_uncheckedTextColor, mUncheckedTextColor);
             mCheckedBackgroundResource = a.getResourceId(R.styleable.ToggleButtonGroup_checkedBackground, 0);
             mButtonBackgroundResource = a.getResourceId(R.styleable.ToggleButtonGroup_buttonBackground, 0);
             // noinspection ResourceType
@@ -333,6 +340,56 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
         mTextSize = dpToPx(size);
         for (ToggleButton button : mButtons) {
             button.setTextSize(mTextSize);
+        }
+    }
+
+    /**
+     * Gets the text colors for the different states (normal, checked) of the button.
+     *
+     * @return The text colors.
+     */
+    public ColorStateList getTextColors() {
+        if (mTextColors != null) {
+            return mTextColors;
+        } else {
+            int[][] states = new int[][] {new int[] {android.R.attr.state_checked}, new int[]{}};
+            int[] colors = new int[] {mCheckedTextColor, mUncheckedTextColor};
+            return new ColorStateList(states, colors);
+        }
+    }
+
+    /**
+     * Sets the text color for the different states (normal, checked) of the button.
+     *
+     * @param textColors The text color to be set.
+     */
+    public void setTextColor(ColorStateList textColors) {
+        mTextColors = textColors;
+        if (mTextColors != null) {
+            mUncheckedTextColor = mTextColors.getDefaultColor();
+            mCheckedTextColor = mTextColors.getColorForState(
+                    new int[]{android.R.attr.state_checked}, mUncheckedTextColor);
+            for (ToggleButton button : mButtons) {
+                button.setCheckedTextColor(mCheckedTextColor);
+                button.setUncheckedTextColor(mUncheckedTextColor);
+            }
+        } else {
+            mUncheckedTextColor = DEFAULT_UNCHECKED_TEXT_COLOR;
+            mCheckedTextColor = DEFAULT_CHECKED_TEXT_COLOR;
+        }
+    }
+
+    /**
+     * Sets the text color for all the states (normal, checked) of the button.
+     *
+     * @param color The text color to be set.
+     */
+    public void setTextColor(int color) {
+        mUncheckedTextColor = color;
+        mCheckedTextColor = color;
+        for (ToggleButton button : mButtons) {
+            button.setCheckedTextColor(mCheckedTextColor);
+            button.setUncheckedTextColor(mUncheckedTextColor);
         }
     }
 

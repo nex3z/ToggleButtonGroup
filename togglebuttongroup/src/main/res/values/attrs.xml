@@ -13,6 +13,7 @@
 
     <declare-styleable name="ToggleButtonGroup">
         <attr name="android:textSize"/>
+        <attr name="android:textColor"/>
         <attr name="android:saveEnabled"/>
         <attr name="checkedTextColor"/>
         <attr name="uncheckedTextColor"/>
