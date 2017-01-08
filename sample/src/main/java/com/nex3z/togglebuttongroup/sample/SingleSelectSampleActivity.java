@@ -38,21 +38,12 @@ public class SingleSelectSampleActivity extends AppCompatActivity {
             public void onCheckedChange(int position, boolean isChecked) {
                 Log.v(LOG_TAG, "onCheckedChange(): position = " + position
                         + ", isChecked = " + isChecked);
-                showToast("Checked position: " + position);
             }
         });
 
         String[] choices = getResources().getStringArray(R.array.choices);
         List<String> choicesList = new ArrayList<>(Arrays.asList(choices));
         singleSelect.setButtons(choicesList);
-    }
-
-    private void showToast(String message) {
-        if (mToast != null) {
-            mToast.cancel();
-        }
-        mToast = Toast.makeText(SingleSelectSampleActivity.this, message, Toast.LENGTH_SHORT);
-        mToast.show();
     }
 
     @Override

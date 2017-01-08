@@ -36,17 +36,8 @@ public class MultiSelectSampleActivity extends AppCompatActivity {
                     public void onCheckedPositionChange(Set<Integer> checkedPositions) {
                         Log.v(LOG_TAG, "onCheckedPositionChange(): checkedPositions = "
                                 + checkedPositions);
-                        showToast("Checked positions: " + checkedPositions.toString());
                     }
                 });
-    }
-
-    private void showToast(String message) {
-        if (mToast != null) {
-            mToast.cancel();
-        }
-        mToast = Toast.makeText(MultiSelectSampleActivity.this, message, Toast.LENGTH_SHORT);
-        mToast.show();
     }
 
     @Override
