@@ -60,6 +60,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     private int mButtonTextPaddingBottom = DEFAULT_BUTTON_TEXT_PADDING;
     private int mButtonTextPaddingLeft = DEFAULT_BUTTON_TEXT_PADDING;
     private int mButtonTextPaddingRight = DEFAULT_BUTTON_TEXT_PADDING;
+    private CharSequence[] mTextButtons;
 
     protected List<ToggleButton> mButtons = new ArrayList<>();
     private List<Float> mButtonSpacingForRow = new ArrayList<>();
@@ -80,9 +81,6 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs, R.styleable.ToggleButtonGroup, 0, 0);
 
-        CharSequence textButton1;
-        CharSequence textButton2;
-        CharSequence[] textButtons;
         try {
             mTextSize = a.getDimension(R.styleable.ToggleButtonGroup_android_textSize, dpToPx(DEFAULT_TEXT_SIZE));
             mTextColors = a.getColorStateList(R.styleable.ToggleButtonGroup_android_textColor);
@@ -128,31 +126,21 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             mButtonTextPaddingBottom = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonTextPaddingBottom, DEFAULT_BUTTON_TEXT_PADDING);
             mButtonTextPaddingLeft = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonTextPaddingLeft, DEFAULT_BUTTON_TEXT_PADDING);
             mButtonTextPaddingRight = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonTextPaddingRight, DEFAULT_BUTTON_TEXT_PADDING);
-            textButtons = a.getTextArray(R.styleable.ToggleButtonGroup_textButtons);
-            textButton1 = a.getText(R.styleable.ToggleButtonGroup_textButton1);
-            textButton2 = a.getString(R.styleable.ToggleButtonGroup_textButton2);
+            mTextButtons = a.getTextArray(R.styleable.ToggleButtonGroup_textButtons);
         } finally {
             a.recycle();
         }
 
-        List<String> labels = new ArrayList<>();
-        if (textButtons != null) {
-            if (textButtons.length == 0) {
-                Log.e(LOG_TAG, "The array read from textButtons is empty.");
+        if (mTextButtons != null) {
+            if (mTextButtons.length == 0) {
+                Log.w(LOG_TAG, "The array read from textButtons is empty.");
+            } else {
+                List<String> texts = new ArrayList<>();
+                for (CharSequence cs : mTextButtons) {
+                    texts.add(cs.toString());
+                }
+                setButtons(texts);
             }
-            for (CharSequence cs : textButtons) {
-                labels.add(cs.toString());
-            }
-        } else {
-            if (textButton1 != null && textButton1.length() != 0) {
-                labels.add(textButton1.toString());
-            }
-            if (textButton2 != null && textButton2.length() != 0) {
-                labels.add(textButton2.toString());
-            }
-        }
-        if (!labels.isEmpty()) {
-            setButtons(labels);
         }
 
     }
@@ -541,6 +529,15 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     }
 
     /**
+     * Gets texts on the buttons.
+     *
+     * @return The texts on the buttons.
+     */
+    public CharSequence[] getTextButtons() {
+        return mTextButtons;
+    }
+
+    /**
      * Sets the button size in pixels. May be a layout constant such as WRAP_CONTENT or
      * MATCH_PARENT.
      *
@@ -585,7 +582,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     }
 
     /**
-     * Returns the horizontal spacing between buttons in pixels for the last row. Use SPACING_AUTO
+     * Sets the horizontal spacing between buttons in pixels for the last row. Use SPACING_AUTO
      * to evenly place the buttons in each row. Use SPACING_ALIGN to use the same spacing from the
      * row above.
      *
@@ -633,6 +630,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
      */
     public void setFlow(boolean flow) {
         mFlow = flow;
+        requestLayout();
     }
 
     /**
@@ -730,15 +728,23 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
         return positions;
     }
 
+    /**
+     * Remove all buttons in the group.
+     */
     public void clearButtons() {
         removeAllViews();
         mButtons.clear();
     }
 
-    public void setButtons(List<String> labels) {
+    /**
+     * Set buttons to the group with given texts.
+     *
+     * @param texts The texts on the buttons.
+     */
+    public void setButtons(List<String> texts) {
         clearButtons();
-        if (labels != null) {
-            for (String label : labels) {
+        if (texts != null) {
+            for (String label : texts) {
                 addButton(label);
             }
         }
