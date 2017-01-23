@@ -75,21 +75,21 @@ public class ToggleButton extends FrameLayout {
             CharSequence text = a.getText(R.styleable.ToggleButton_android_text);
             setText(text);
 
-            mCheckedTextColor = a.getColor(R.styleable.ToggleButton_checkedTextColor, DEFAULT_CHECKED_TEXT_COLOR);
-            mUncheckedTextColor = a.getColor(R.styleable.ToggleButton_uncheckedTextColor, DEFAULT_UNCHECKED_TEXT_COLOR);
+            mCheckedTextColor = a.getColor(R.styleable.ToggleButton_tbgCheckedTextColor, DEFAULT_CHECKED_TEXT_COLOR);
+            mUncheckedTextColor = a.getColor(R.styleable.ToggleButton_tbgUncheckedTextColor, DEFAULT_UNCHECKED_TEXT_COLOR);
 
-            Drawable buttonBackground = a.getDrawable(R.styleable.ToggleButton_buttonBackground);
+            Drawable buttonBackground = a.getDrawable(R.styleable.ToggleButton_tbgButtonBackground);
             this.setBackgroundDrawable(buttonBackground);
 
-            Drawable checkedBackground = a.getDrawable(R.styleable.ToggleButton_checkedBackground);
+            Drawable checkedBackground = a.getDrawable(R.styleable.ToggleButton_tbgCheckedBackground);
             if (checkedBackground == null) {
                 checkedBackground = ContextCompat.getDrawable(context, R.drawable.ic_circle_48dp);
             }
             mIvBg.setImageDrawable(checkedBackground);
 
             // noinspection ResourceType
-            mAnimationType = a.getInt(R.styleable.ToggleButton_animationType, 0);
-            mAnimationDuration = a.getInt(R.styleable.ToggleButton_animationDuration, DEFAULT_ANIMATION_DURATION);
+            mAnimationType = a.getInt(R.styleable.ToggleButton_tbgAnimationType, 0);
+            mAnimationDuration = a.getInt(R.styleable.ToggleButton_tbgAnimationDuration, DEFAULT_ANIMATION_DURATION);
         } finally {
             a.recycle();
         }

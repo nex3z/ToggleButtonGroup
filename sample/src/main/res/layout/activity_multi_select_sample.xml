@@ -19,9 +19,9 @@
         android:textSize="16sp"
         android:textColor="@color/selector_text"
         android:saveEnabled="true"
-        app:textButtons="@array/weekdays"
-        app:flow="false"
-        app:buttonSpacing="auto"
-        app:animationType="scale"/>
+        app:tbgTextButtons="@array/weekdays"
+        app:tbgFlow="false"
+        app:tbgButtonSpacing="auto"
+        app:tbgAnimationType="scale"/>
 
 </FrameLayout>

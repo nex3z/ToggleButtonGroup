@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="checkedTextColor" format="color"/>
-    <attr name="uncheckedTextColor" format="color"/>
-    <attr name="buttonBackground" format="reference"/>
-    <attr name="checkedBackground" format="reference"/>
-    <attr name="animationType" format="enum">
+    <attr name="tbgCheckedTextColor" format="color"/>
+    <attr name="tbgUncheckedTextColor" format="color"/>
+    <attr name="tbgButtonBackground" format="reference"/>
+    <attr name="tbgCheckedBackground" format="reference"/>
+    <attr name="tbgAnimationType" format="enum">
         <enum name="none" value="0"/>
         <enum name="scale" value="1"/>
         <enum name="alpha" value="2"/>
     </attr>
-    <attr name="animationDuration" format="integer"/>
+    <attr name="tbgAnimationDuration" format="integer"/>
 
     <declare-styleable name="ToggleButtonGroup">
         <attr name="android:textSize"/>
         <attr name="android:textColor"/>
         <attr name="android:saveEnabled"/>
-        <attr name="checkedTextColor"/>
-        <attr name="uncheckedTextColor"/>
-        <attr name="checkedBackground"/>
-        <attr name="buttonBackground"/>
-        <attr name="animationType"/>
-        <attr name="animationDuration"/>
-        <attr name="textButtons" format="reference"/>
-        <attr name="buttonWidth" format="enum|dimension">
+        <attr name="tbgCheckedTextColor"/>
+        <attr name="tbgUncheckedTextColor"/>
+        <attr name="tbgCheckedBackground"/>
+        <attr name="tbgButtonBackground"/>
+        <attr name="tbgAnimationType"/>
+        <attr name="tbgAnimationDuration"/>
+        <attr name="tbgTextButtons" format="reference"/>
+        <attr name="tbgButtonWidth" format="enum|dimension">
             <enum name="fill_parent" value="-1"/>
             <enum name="match_parent" value="-1"/>
             <enum name="wrap_content" value="-2"/>
         </attr>
-        <attr name="buttonHeight" format="enum|dimension">
+        <attr name="tbgButtonHeight" format="enum|dimension">
             <enum name="fill_parent" value="-1"/>
             <enum name="match_parent" value="-1"/>
             <enum name="wrap_content" value="-2"/>
         </attr>
-        <attr name="buttonSpacing" format="enum|dimension">
+        <attr name="tbgButtonSpacing" format="enum|dimension">
             <enum name="auto" value="-65536"/>
         </attr>
-        <attr name="buttonSpacingForLastRow" format="enum|dimension">
+        <attr name="tbgButtonSpacingForLastRow" format="enum|dimension">
             <enum name="auto" value="-65536"/>
             <enum name="align" value="-65537"/>
         </attr>
-        <attr name="rowSpacing" format="enum|dimension">
+        <attr name="tbgRowSpacing" format="enum|dimension">
             <enum name="auto" value="-65536"/>
         </attr>
-        <attr name="flow" format="boolean"/>
-        <attr name="buttonTextPaddingTop" format="dimension"/>
-        <attr name="buttonTextPaddingBottom" format="dimension"/>
-        <attr name="buttonTextPaddingLeft" format="dimension"/>
-        <attr name="buttonTextPaddingRight" format="dimension"/>
+        <attr name="tbgFlow" format="boolean"/>
+        <attr name="tbgButtonTextPaddingTop" format="dimension"/>
+        <attr name="tbgButtonTextPaddingBottom" format="dimension"/>
+        <attr name="tbgButtonTextPaddingLeft" format="dimension"/>
+        <attr name="tbgButtonTextPaddingRight" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="ToggleButton">
         <attr name="android:text"/>
         <attr name="android:textSize"/>
-        <attr name="checkedTextColor"/>
-        <attr name="uncheckedTextColor"/>
-        <attr name="checkedBackground"/>
-        <attr name="buttonBackground"/>
-        <attr name="animationType"/>
-        <attr name="animationDuration"/>
+        <attr name="tbgCheckedTextColor"/>
+        <attr name="tbgUncheckedTextColor"/>
+        <attr name="tbgCheckedBackground"/>
+        <attr name="tbgButtonBackground"/>
+        <attr name="tbgAnimationType"/>
+        <attr name="tbgAnimationDuration"/>
     </declare-styleable>
 
 </resources>

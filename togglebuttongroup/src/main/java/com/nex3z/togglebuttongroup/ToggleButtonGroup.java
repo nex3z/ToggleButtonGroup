@@ -88,45 +88,45 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
                 mUncheckedTextColor = mTextColors.getDefaultColor();
                 mCheckedTextColor = mTextColors.getColorForState(new int[]{android.R.attr.state_checked}, mUncheckedTextColor);
             }
-            mCheckedTextColor = a.getColor(R.styleable.ToggleButtonGroup_checkedTextColor, mCheckedTextColor);
-            mUncheckedTextColor = a.getColor(R.styleable.ToggleButtonGroup_uncheckedTextColor, mUncheckedTextColor);
-            mCheckedBackgroundResource = a.getResourceId(R.styleable.ToggleButtonGroup_checkedBackground, 0);
-            mButtonBackgroundResource = a.getResourceId(R.styleable.ToggleButtonGroup_buttonBackground, 0);
+            mCheckedTextColor = a.getColor(R.styleable.ToggleButtonGroup_tbgCheckedTextColor, mCheckedTextColor);
+            mUncheckedTextColor = a.getColor(R.styleable.ToggleButtonGroup_tbgUncheckedTextColor, mUncheckedTextColor);
+            mCheckedBackgroundResource = a.getResourceId(R.styleable.ToggleButtonGroup_tbgCheckedBackground, 0);
+            mButtonBackgroundResource = a.getResourceId(R.styleable.ToggleButtonGroup_tbgButtonBackground, 0);
             // noinspection ResourceType
-            mAnimationType = a.getInt(R.styleable.ToggleButtonGroup_animationType, 0);
-            mAnimationDuration = a.getInt(R.styleable.ToggleButtonGroup_animationDuration, DEFAULT_ANIMATION_DURATION);
+            mAnimationType = a.getInt(R.styleable.ToggleButtonGroup_tbgAnimationType, 0);
+            mAnimationDuration = a.getInt(R.styleable.ToggleButtonGroup_tbgAnimationDuration, DEFAULT_ANIMATION_DURATION);
             try {
-                mButtonSpacing = a.getInt(R.styleable.ToggleButtonGroup_buttonSpacing, DEFAULT_BUTTON_SPACING);
+                mButtonSpacing = a.getInt(R.styleable.ToggleButtonGroup_tbgButtonSpacing, DEFAULT_BUTTON_SPACING);
             } catch (NumberFormatException e) {
-                mButtonSpacing = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonSpacing, (int)dpToPx(DEFAULT_BUTTON_SPACING));
+                mButtonSpacing = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_tbgButtonSpacing, (int)dpToPx(DEFAULT_BUTTON_SPACING));
             }
             try {
-                mButtonSpacingForLastRow = a.getInt(R.styleable.ToggleButtonGroup_buttonSpacingForLastRow, SPACING_UNDEFINED);
+                mButtonSpacingForLastRow = a.getInt(R.styleable.ToggleButtonGroup_tbgButtonSpacingForLastRow, SPACING_UNDEFINED);
             } catch (NumberFormatException e) {
-                mButtonSpacingForLastRow = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonSpacingForLastRow, (int)dpToPx(DEFAULT_BUTTON_SPACING));
+                mButtonSpacingForLastRow = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_tbgButtonSpacingForLastRow, (int)dpToPx(DEFAULT_BUTTON_SPACING));
             }
             try {
-                mRowSpacing = a.getInt(R.styleable.ToggleButtonGroup_rowSpacing, 0);
+                mRowSpacing = a.getInt(R.styleable.ToggleButtonGroup_tbgRowSpacing, 0);
             }  catch (NumberFormatException e) {
-                mRowSpacing = a.getDimension(R.styleable.ToggleButtonGroup_rowSpacing, dpToPx(DEFAULT_ROW_SPACING));
+                mRowSpacing = a.getDimension(R.styleable.ToggleButtonGroup_tbgRowSpacing, dpToPx(DEFAULT_ROW_SPACING));
             }
-            mFlow = a.getBoolean(R.styleable.ToggleButtonGroup_flow, DEFAULT_FLOW);
+            mFlow = a.getBoolean(R.styleable.ToggleButtonGroup_tbgFlow, DEFAULT_FLOW);
             mSaveEnabled = a.getBoolean(R.styleable.ToggleButtonGroup_android_saveEnabled, DEFAULT_SAVE_ENABLED);
             try {
-                mButtonWidth = a.getInt(R.styleable.ToggleButtonGroup_buttonWidth, DEFAULT_BUTTON_WIDTH);
+                mButtonWidth = a.getInt(R.styleable.ToggleButtonGroup_tbgButtonWidth, DEFAULT_BUTTON_WIDTH);
             } catch (NumberFormatException e) {
-                mButtonWidth = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonWidth, DEFAULT_BUTTON_WIDTH);
+                mButtonWidth = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_tbgButtonWidth, DEFAULT_BUTTON_WIDTH);
             }
             try {
-                mButtonHeight = a.getInt(R.styleable.ToggleButtonGroup_buttonHeight, DEFAULT_BUTTON_HEIGHT);
+                mButtonHeight = a.getInt(R.styleable.ToggleButtonGroup_tbgButtonHeight, DEFAULT_BUTTON_HEIGHT);
             } catch (NumberFormatException e) {
-                mButtonHeight = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonHeight, DEFAULT_BUTTON_HEIGHT);
+                mButtonHeight = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_tbgButtonHeight, DEFAULT_BUTTON_HEIGHT);
             }
-            mButtonTextPaddingTop = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonTextPaddingTop, DEFAULT_BUTTON_TEXT_PADDING);
-            mButtonTextPaddingBottom = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonTextPaddingBottom, DEFAULT_BUTTON_TEXT_PADDING);
-            mButtonTextPaddingLeft = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonTextPaddingLeft, DEFAULT_BUTTON_TEXT_PADDING);
-            mButtonTextPaddingRight = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_buttonTextPaddingRight, DEFAULT_BUTTON_TEXT_PADDING);
-            mTextButtons = a.getTextArray(R.styleable.ToggleButtonGroup_textButtons);
+            mButtonTextPaddingTop = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_tbgButtonTextPaddingTop, DEFAULT_BUTTON_TEXT_PADDING);
+            mButtonTextPaddingBottom = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_tbgButtonTextPaddingBottom, DEFAULT_BUTTON_TEXT_PADDING);
+            mButtonTextPaddingLeft = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_tbgButtonTextPaddingLeft, DEFAULT_BUTTON_TEXT_PADDING);
+            mButtonTextPaddingRight = a.getDimensionPixelSize(R.styleable.ToggleButtonGroup_tbgButtonTextPaddingRight, DEFAULT_BUTTON_TEXT_PADDING);
+            mTextButtons = a.getTextArray(R.styleable.ToggleButtonGroup_tbgTextButtons);
         } finally {
             a.recycle();
         }
