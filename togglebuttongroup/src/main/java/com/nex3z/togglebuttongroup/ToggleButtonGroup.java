@@ -180,7 +180,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
 
                 // Place the button to next row
                 childNumInRow = 1;
-                rowWidth = childWidth;
+                rowWidth = childWidth + (int)tmpSpacing;
                 maxChildHeightInRow = childHeight;
             } else {
                 childNumInRow++;
