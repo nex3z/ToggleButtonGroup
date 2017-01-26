@@ -43,6 +43,7 @@
             <enum name="auto" value="-65536"/>
         </attr>
         <attr name="tbgFlow" format="boolean"/>
+        <attr name="tbgRtl" format="boolean"/>
         <attr name="tbgButtonTextPaddingTop" format="dimension"/>
         <attr name="tbgButtonTextPaddingBottom" format="dimension"/>
         <attr name="tbgButtonTextPaddingLeft" format="dimension"/>

@@ -28,6 +28,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     private static final int DEFAULT_BUTTON_SPACING_FOR_LAST_ROW = 0;
     private static final float DEFAULT_ROW_SPACING = 0;
     private static final boolean DEFAULT_FLOW = false;
+    private static final boolean DEFAULT_RTL = false;
     private static final boolean DEFAULT_SAVE_ENABLED = false;
     private static final int DEFAULT_BUTTON_WIDTH = LayoutParams.WRAP_CONTENT;
     private static final int DEFAULT_BUTTON_HEIGHT = LayoutParams.WRAP_CONTENT;
@@ -53,6 +54,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     private float mRowSpacing = DEFAULT_ROW_SPACING;
     private float mAdjustedRowSpacing = DEFAULT_ROW_SPACING;
     private boolean mFlow = DEFAULT_FLOW;
+    private boolean mRtl = DEFAULT_RTL;
     private boolean mSaveEnabled = DEFAULT_SAVE_ENABLED;
     private int mButtonWidth = DEFAULT_BUTTON_WIDTH;
     private int mButtonHeight = DEFAULT_BUTTON_HEIGHT;
@@ -111,6 +113,7 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
                 mRowSpacing = a.getDimension(R.styleable.ToggleButtonGroup_tbgRowSpacing, dpToPx(DEFAULT_ROW_SPACING));
             }
             mFlow = a.getBoolean(R.styleable.ToggleButtonGroup_tbgFlow, DEFAULT_FLOW);
+            mRtl = a.getBoolean(R.styleable.ToggleButtonGroup_tbgRtl, DEFAULT_RTL);
             mSaveEnabled = a.getBoolean(R.styleable.ToggleButtonGroup_android_saveEnabled, DEFAULT_SAVE_ENABLED);
             try {
                 mButtonWidth = a.getInt(R.styleable.ToggleButtonGroup_tbgButtonWidth, DEFAULT_BUTTON_WIDTH);
@@ -239,8 +242,9 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int paddingLeft = getPaddingLeft();
+        int paddingRight = getPaddingRight();
         int paddingTop = getPaddingTop();
-        int x = paddingLeft;
+        int x = mRtl ? (getWidth() - paddingRight) : paddingLeft;
         int y = paddingTop;
 
         int rowCount = mButtonNumForRow.size(), childIdx = 0;
@@ -255,10 +259,15 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
                 }
                 int childWidth = child.getMeasuredWidth();
                 int childHeight = child.getMeasuredHeight();
-                child.layout(x, y, x + childWidth, y + childHeight);
-                x += childWidth + spacing;
+                if (mRtl) {
+                    child.layout(x - childWidth, y, x, y + childHeight);
+                    x -= childWidth + spacing;
+                } else {
+                    child.layout(x, y, x + childWidth, y + childHeight);
+                    x += childWidth + spacing;
+                }
             }
-            x = paddingLeft;
+            x = mRtl ? (getWidth() - paddingRight) : paddingLeft;
             y += rowHeight + mAdjustedRowSpacing;
         }
     }
