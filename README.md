@@ -2,13 +2,13 @@
 
 [![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
 
-A group of toggle buttons, supports multiple / single selection.
+A group of toggle buttons, with multiple / single selection support and button customization.
 
 ## Gradle
 
 ```
 dependencies {
-    compile 'com.nex3z:toggle-button-group:0.2.1'
+    compile 'com.nex3z:toggle-button-group:0.2.2'
 }
 ```
 
@@ -30,13 +30,13 @@ Define the `MultiSelectToggleGroup` as follows:
     android:textSize="16sp"
     android:textColor="@color/selector_text"
     android:saveEnabled="true"
-    app:textButtons="@array/weekdays"
-    app:flow="false"
-    app:buttonSpacing="auto"
-    app:animationType="scale"/>
+    app:tbgTextButtons="@array/weekdays"
+    app:tbgFlow="false"
+    app:tbgButtonSpacing="auto"
+    app:tbgAnimationType="scale"/>
 ```
 
-Use `textColor` attribute to set text colors. Use a selector to specify text colors for checked and unchecked state. The `@color/selector_text` are defined as follows:
+Use `tbgTextColor` attribute to set text colors. Use a selector to specify text colors for checked and unchecked state. The `@color/selector_text` are defined as follows:
 
 ```xml
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
@@ -45,7 +45,7 @@ Use `textColor` attribute to set text colors. Use a selector to specify text col
 </selector>
 ```
 
-Use `textButtons` attribute to add buttons with the text from the specified string array. The `@array/weekdays` are defined as follows:
+Use `tbgTextButtons` attribute to add buttons with the text from the specified string array. The `@array/weekdays` are defined as follows:
 
 ```xml
 <resources>
@@ -61,9 +61,9 @@ Use `textButtons` attribute to add buttons with the text from the specified stri
 </resources>
 ```
 
-Use `flow` attribute to specify whether to allow button flow to next row. `false` means that all buttons are restricted in one row.
+Use `tbgFlow` attribute to specify whether to allow button flow to next row. `false` means that all buttons are restricted in one row.
 
-Use `buttonSpacing` attribute to config the horizontal spacing between buttons. `auto` means that the actual spacing is calculated according to the width and the number of the child views in the row, so that the child views are placed evenly.
+Use `tbgButtonSpacing` attribute to config the horizontal spacing between buttons. `auto` means that the actual spacing is calculated according to the width and the number of the child views in the row, so that the child views are placed evenly.
 
 ## SingleSelectToggleGroup
 
@@ -83,9 +83,9 @@ Define the `SingleSelectToggleGroup` as follows:
     android:textSize="16sp"
     android:textColor="@color/selector_text"
     android:saveEnabled="true"
-    app:flow="false"
-    app:buttonSpacing="8dp"
-    app:animationType="scale"/>
+    app:tbgFlow="false"
+    app:tbgButtonSpacing="8dp"
+    app:tbgAnimationType="scale"/>
 ```
 
 You can alwo use `setButtons(List<String> texts)` to add buttons to the group:
@@ -110,20 +110,20 @@ For both `MultiSelectToggleGroup` and `SingleSelectToggleGroup`, `getCheckedPosi
     android:layout_height="wrap_content"
     android:textSize="16sp"
     android:textColor="@color/selector_text"
-    app:buttonHeight="40dp"
-    app:buttonWidth="wrap_content"
-    app:textButtons="@array/dummy_text"
-    app:buttonTextPaddingLeft="16dp"
-    app:buttonTextPaddingRight="16dp"
-    app:checkedBackground="@drawable/round_rect_checked_bg"
-    app:buttonBackground="@drawable/round_rect_button_bg"
-    app:flow="true"
-    app:buttonSpacing="auto"
-    app:rowSpacing="8dp"
-    app:animationType="alpha" />
+    app:tbgButtonHeight="40dp"
+    app:tbgButtonWidth="wrap_content"
+    app:tbgTextButtons="@array/dummy_text"
+    app:tbgButtonTextPaddingLeft="16dp"
+    app:tbgButtonTextPaddingRight="16dp"
+    app:tbgCheckedBackground="@drawable/round_rect_checked_bg"
+    app:tbgButtonBackground="@drawable/round_rect_button_bg"
+    app:tbgFlow="true"
+    app:tbgButtonSpacing="auto"
+    app:tbgRowSpacing="8dp"
+    app:tbgAnimationType="alpha" />
 ```
 
-With `flow` attribute set to `true`, buttons are allowed to flow to next row when there is no enough space in current row. With `buttonSpacing` set to `auto`, buttons are evenly placed in each row. The background and checked state image are provided by `buttonBackground` and `checkedBackground`.
+With `tbgFlow` attribute set to `true`, buttons are allowed to flow to next row when there is no enough space in current row. With `tbgButtonSpacing` set to `auto`, buttons are evenly placed in each row. The background and checked state image are provided by `tbgButtonBackground` and `tbgCheckedBackground`.
 
 For more detail, please check the provided [sample](https://github.com/nex3z/ToggleButtonGroup/tree/master/sample).
 
@@ -160,28 +160,28 @@ multiSelect.setOnCheckedPositionChangeListener(new ToggleButtonGroup.OnCheckedPo
 
 The toggle button group can be customized with the following attributes.
 
-| Attribute                   | Format                                          | Description                                                                                                                                                                                                                                                                                                                                                                                               |
-|-----------------------------|-------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| android:textSize            | dimension                                       | Size of the text.                                                                                                                                                                                                                                                                                                                                                                                         |
-| android:textColor           | reference/color                                 | Text color. May be a reference (such as a selector with text color for checked and unchecked state) or a solid color.                                                                                                                                                                                                                                                                                     |
-| android:saveEnabled         | boolean                                         | Controls whether the saving of this view's state is enabled. The default is false, which disables state saving while recreating.                                                                                                                                                                                                                                                                          |
-| app:textButtons             | reference                                       | The string array resource to find the value for buttons' text                                                                                                                                                                                                                                                                                                                                             |
-| app:checkedTextColor        | color                                           | Color of the text when the button is checked, if you don't want to use `textColor` with selector.                                                                                                                                                                                                                                                                                                         |
-| app:uncheckedTextColor      | color                                           | Color of the text when the button is unchecked, if you don't want to use `textColor`.                                                                                                                                                                                                                                                                                                                     |
-| app:checkedBackground       | reference                                       | Sets a drawable resource as the background image for checked state, which is shown when the button is checked and hidden when unchecked.                                                                                                                                                                                                                                                                  |
-| app:buttonBackground        | reference                                       | Sets a drawable resource as the button background, which is always shown in both checked and unchecked state.                                                                                                                                                                                                                                                                                             |
-| app:animationType           | `none`/`scale`/`alpha`                          | `none` for disabling animation. `scale` / `alpha` for scale / alpha animation.                                                                                                                                                                                                                                                                                                                            |
-| app:animationDuration       | integer                                         | Sets the duration of the animation for toggling button in milliseconds. The default is 150 milliseconds.                                                                                                                                                                                                                                                                                                  |
-| app:buttonWidth             | `match_parent`/<br>`wrap_content`/<br>dimension | The width of the button.                                                                                                                                                                                                                                                                                                                                                                                  |
-| app:buttonHeight            | `match_parent`/<br>`wrap_content`/<br>dimension | The height of the button.                                                                                                                                                                                                                                                                                                                                                                                 |
-| app:buttonSpacing           | `auto`/dimension                                | The horizontal spacing between child views. Either `auto`, or a fixed size. `auto` means that buttons are placed evenly in each row.                                                                                                                                                                                                                                                                      |
-| app:buttonSpacingForLastRow | `auto`/`align`/<br>dimension                    | The horizontal spacing between buttons of the last row. Either `auto`, `align` or a fixed size. `auto` means that buttons are placed evenly in each row. `align` means that the horizontal spacing of the buttons in the last row keeps the same with the spacing used in the row above. If there is only one row, this value is ignored and the spacing will be calculated according to `buttonSpacing`. |
-| app:rowSpacing              | `auto`/dimension                                | The vertical spacing between rows. Either `auto`, or a fixed size. `auto` means that the rows are placed evenly in vertical.                                                                                                                                                                                                                                                                              |
-| app:flow                    | boolean                                         | `true` to allow flow. `false` to restrict all child views in one row.                                                                                                                                                                                                                                                                                                                                     |
-| app:buttonTextPaddingTop    | dimension                                       | The top padding of the text in the button.                                                                                                                                                                                                                                                                                                                                                                |
-| app:buttonTextPaddingBottom | dimension                                       | The bottom padding of the text in the button.                                                                                                                                                                                                                                                                                                                                                             |
-| app:buttonTextPaddingLeft   | dimension                                       | The left padding of the text in the button.                                                                                                                                                                                                                                                                                                                                                               |
-| app:buttonTextPaddingRight  | dimension                                       | The right padding of the text in the button.                                                                                                                                                                                                                                                                                                                                                              |
+| Attribute                      | Format                                          | Description                                                                                                                                                                                                                                                                                                                                                                                               |
+|--------------------------------|-------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| android:textSize               | dimension                                       | Size of the text.                                                                                                                                                                                                                                                                                                                                                                                         |
+| android:textColor              | reference/color                                 | Text color. May be a reference (such as a selector with text color for checked and unchecked state) or a solid color.                                                                                                                                                                                                                                                                                     |
+| android:saveEnabled            | boolean                                         | Controls whether the saving of this view's state is enabled. The default is false, which disables state saving while recreating.                                                                                                                                                                                                                                                                          |
+| app:tbgTextButtons             | reference                                       | The string array resource to find the value for buttons' text                                                                                                                                                                                                                                                                                                                                             |
+| app:tbgCheckedTextColor        | color                                           | Color of the text when the button is checked, if you don't want to use `textColor` with selector.                                                                                                                                                                                                                                                                                                         |
+| app:tbgUncheckedTextColor      | color                                           | Color of the text when the button is unchecked, if you don't want to use `textColor`.                                                                                                                                                                                                                                                                                                                     |
+| app:tbgCheckedBackground       | reference                                       | Sets a drawable resource as the background image for checked state, which is shown when the button is checked and hidden when unchecked.                                                                                                                                                                                                                                                                  |
+| app:tbgButtonBackground        | reference                                       | Sets a drawable resource as the button background, which is always shown in both checked and unchecked state.                                                                                                                                                                                                                                                                                             |
+| app:tbgAnimationType           | `none`/`scale`/`alpha`                          | `none` for disabling animation. `scale` / `alpha` for scale / alpha animation.                                                                                                                                                                                                                                                                                                                            |
+| app:tbgAnimationDuration       | integer                                         | Sets the duration of the animation for toggling button in milliseconds. The default is 150 milliseconds.                                                                                                                                                                                                                                                                                                  |
+| app:tbgButtonWidth             | `match_parent`/<br>`wrap_content`/<br>dimension | The width of the button.                                                                                                                                                                                                                                                                                                                                                                                  |
+| app:tbgButtonHeight            | `match_parent`/<br>`wrap_content`/<br>dimension | The height of the button.                                                                                                                                                                                                                                                                                                                                                                                 |
+| app:tbgButtonSpacing           | `auto`/dimension                                | The horizontal spacing between child views. Either `auto`, or a fixed size. `auto` means that buttons are placed evenly in each row.                                                                                                                                                                                                                                                                      |
+| app:tbgButtonSpacingForLastRow | `auto`/`align`/<br>dimension                    | The horizontal spacing between buttons of the last row. Either `auto`, `align` or a fixed size. `auto` means that buttons are placed evenly in each row. `align` means that the horizontal spacing of the buttons in the last row keeps the same with the spacing used in the row above. If there is only one row, this value is ignored and the spacing will be calculated according to `buttonSpacing`. |
+| app:tbgRowSpacing              | `auto`/dimension                                | The vertical spacing between rows. Either `auto`, or a fixed size. `auto` means that the rows are placed evenly in vertical.                                                                                                                                                                                                                                                                              |
+| app:tbgFlow                    | boolean                                         | `true` to allow flow. `false` to restrict all child views in one row.                                                                                                                                                                                                                                                                                                                                     |
+| app:tbgButtonTextPaddingTop    | dimension                                       | The top padding of the text in the button.                                                                                                                                                                                                                                                                                                                                                                |
+| app:tbgButtonTextPaddingBottom | dimension                                       | The bottom padding of the text in the button.                                                                                                                                                                                                                                                                                                                                                             |
+| app:tbgButtonTextPaddingLeft   | dimension                                       | The left padding of the text in the button.                                                                                                                                                                                                                                                                                                                                                               |
+| app:tbgButtonTextPaddingRight  | dimension                                       | The right padding of the text in the button.                                                                                                                                                                                                                                                                                                                                                              |
 
 ## Licence
 
