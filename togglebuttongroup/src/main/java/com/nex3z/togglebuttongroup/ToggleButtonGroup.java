@@ -221,7 +221,11 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
         measuredHeight += getPaddingTop() + getPaddingBottom();
         int rowNum = mButtonSpacingForRow.size();
         if (mRowSpacing == SPACING_AUTO) {
-            mAdjustedRowSpacing = (heightSize - measuredHeight) / (rowNum - 1);
+            if (rowNum > 1) {
+                mAdjustedRowSpacing = (heightSize - measuredHeight) / (rowNum - 1);
+            } else {
+                mAdjustedRowSpacing = 0;
+            }
             measuredHeight = heightSize;
         } else {
             mAdjustedRowSpacing = mRowSpacing;
