@@ -162,7 +162,10 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
         int measuredHeight = 0, measuredWidth = 0, childCount = getChildCount();
         int rowWidth = 0, maxChildHeightInRow = 0, childNumInRow = 0;
         int rowSize = widthSize - getPaddingLeft() - getPaddingRight();
-        float tmpSpacing = mButtonSpacing == SPACING_AUTO ? 0 : mButtonSpacing;
+        boolean allowFlow = widthMode != MeasureSpec.UNSPECIFIED && mFlow;
+        int buttonSpacing = mButtonSpacing == SPACING_AUTO && widthMode == MeasureSpec.UNSPECIFIED
+                ? 0 : mButtonSpacing;
+        float tmpSpacing = buttonSpacing == SPACING_AUTO ? 0 : buttonSpacing;
 
         for (int i = 0; i < childCount; i++) {
             View child = getChildAt(i);
@@ -173,9 +176,9 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             int childWidth = child.getMeasuredWidth();
             int childHeight = child.getMeasuredHeight();
 
-            if (mFlow && rowWidth + childWidth > rowSize) { // Need flow to next row
+            if (allowFlow && rowWidth + childWidth > rowSize) { // Need flow to next row
                 // Save parameters for current row
-                mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacing, rowSize, rowWidth, childNumInRow));
+                mButtonSpacingForRow.add(getSpacingForRow(buttonSpacing, rowSize, rowWidth, childNumInRow));
                 mButtonNumForRow.add(childNumInRow);
                 mHeightForRow.add(maxChildHeightInRow);
                 measuredHeight += maxChildHeightInRow;
@@ -199,12 +202,12 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             if (mButtonSpacingForRow.size() >= 1) {
                 mButtonSpacingForRow.add(mButtonSpacingForRow.get(mButtonSpacingForRow.size() - 1));
             } else {
-                mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacing, rowSize, rowWidth, childNumInRow));
+                mButtonSpacingForRow.add(getSpacingForRow(buttonSpacing, rowSize, rowWidth, childNumInRow));
             }
         } else if (mButtonSpacingForLastRow != SPACING_UNDEFINED) {
             mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacingForLastRow, rowSize, rowWidth, childNumInRow));
         } else {
-            mButtonSpacingForRow.add(getSpacingForRow(mButtonSpacing, rowSize, rowWidth, childNumInRow));
+            mButtonSpacingForRow.add(getSpacingForRow(buttonSpacing, rowSize, rowWidth, childNumInRow));
         }
 
         mButtonNumForRow.add(childNumInRow);
@@ -212,15 +215,19 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
         measuredHeight += maxChildHeightInRow;
         measuredWidth = max(measuredWidth, rowWidth);
 
-        if (mButtonSpacing == SPACING_AUTO) {
+        if (buttonSpacing == SPACING_AUTO) {
             measuredWidth = widthSize;
+        } else if (widthMode == MeasureSpec.UNSPECIFIED) {
+            measuredWidth = measuredWidth + getPaddingLeft() + getPaddingRight();
         } else {
             measuredWidth = min(measuredWidth + getPaddingLeft() + getPaddingRight(), widthSize);
         }
 
         measuredHeight += getPaddingTop() + getPaddingBottom();
         int rowNum = mButtonSpacingForRow.size();
-        if (mRowSpacing == SPACING_AUTO) {
+        float rowSpacing = mRowSpacing == SPACING_AUTO && heightMode == MeasureSpec.UNSPECIFIED
+                ? 0 : mRowSpacing;
+        if (rowSpacing == SPACING_AUTO) {
             if (rowNum > 1) {
                 mAdjustedRowSpacing = (heightSize - measuredHeight) / (rowNum - 1);
             } else {
@@ -228,19 +235,18 @@ public abstract class ToggleButtonGroup extends ViewGroup implements View.OnClic
             }
             measuredHeight = heightSize;
         } else {
-            mAdjustedRowSpacing = mRowSpacing;
-            measuredHeight = min((int)(measuredHeight + mAdjustedRowSpacing * (rowNum - 1)), heightSize);
+            mAdjustedRowSpacing = rowSpacing;
+            if (heightMode == MeasureSpec.UNSPECIFIED) {
+                measuredHeight = (int)(measuredHeight + mAdjustedRowSpacing * (rowNum - 1));
+            } else {
+                measuredHeight = min(
+                        (int) (measuredHeight + mAdjustedRowSpacing * (rowNum - 1)), heightSize);
+            }
         }
 
-        if (widthMode == MeasureSpec.AT_MOST && heightMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(measuredWidth, measuredHeight);
-        } else if (heightMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(widthSize, measuredHeight);
-        } else if (widthMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(measuredWidth, heightSize);
-        } else {
-            setMeasuredDimension(widthSize, heightSize);
-        }
+        measuredWidth = widthMode == MeasureSpec.EXACTLY ? widthSize : measuredWidth;
+        measuredHeight = heightMode == MeasureSpec.EXACTLY ? heightSize : measuredHeight;
+        setMeasuredDimension(measuredWidth, measuredHeight);
     }
 
     @Override
