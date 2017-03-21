@@ -8,7 +8,7 @@ A group of toggle buttons, with multiple / single selection support and button c
 
 ```
 dependencies {
-    compile 'com.nex3z:toggle-button-group:0.2.2'
+    compile 'com.nex3z:toggle-button-group:0.2.3'
 }
 ```
 
