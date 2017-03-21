@@ -37,8 +37,10 @@ public class MultiSelectToggleGroup extends ToggleButtonGroup {
      */
     public void setCheckedPositions(Set<Integer> checkedPositions) {
         uncheckAll();
-        for (int position : checkedPositions) {
-            setCheckedAt(position, true);
+        if (checkedPositions != null) {
+            for (int position : checkedPositions) {
+                setCheckedAt(position, true);
+            }
         }
     }
 
