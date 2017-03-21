@@ -30,4 +30,11 @@
         android:layout_marginTop="16dp"
         android:text="@string/tag_sample"/>
 
+    <Button
+        android:id="@+id/btn_recyclerview_sample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/recyclerview_sample"/>
+
 </LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"/>
+
+    <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+        android:id="@+id/tg_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/selector_text"
+        app:tbgButtonHeight="40dp"
+        app:tbgButtonWidth="wrap_content"
+        app:tbgTextButtons="@array/dummy_text"
+        app:tbgButtonTextPaddingLeft="16dp"
+        app:tbgButtonTextPaddingRight="16dp"
+        app:tbgCheckedBackground="@drawable/round_rect_checked_bg"
+        app:tbgButtonBackground="@drawable/round_rect_button_bg"
+        app:tbgFlow="true"
+        app:tbgButtonSpacing="auto"
+        app:tbgRowSpacing="8dp"
+        app:tbgAnimationType="alpha"/>
+
+</LinearLayout>

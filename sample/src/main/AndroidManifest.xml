@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.nex3z.togglebuttongroup.sample">
+    package="com.nex3z.togglebuttongroup.sample">
 
     <application
         android:allowBackup="true"
@@ -10,23 +10,22 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MultiSelectSampleActivity"
-            android:label="@string/multi_select_sample_name">
-        </activity>
+            android:label="@string/multi_select_sample_name"/>
         <activity
             android:name=".SingleSelectSampleActivity"
-            android:label="@string/single_select_sample_name">
-        </activity>
+            android:label="@string/single_select_sample_name"/>
         <activity
             android:name=".TagSampleActivity"
-            android:label="@string/tag_sample_name">
-        </activity>
+            android:label="@string/tag_sample_name"/>
+        <activity android:name=".RecyclerViewActivity"
+            android:label="@string/recyclerview_sample_name"/>
     </application>
 
 </manifest>
