@@ -1,11 +1,4 @@
 <resources>
     <string name="app_name">ToggleButtonGroup</string>
-    <string name="multi_select_sample_name">Multi Select Sample</string>
-    <string name="single_select_sample_name">Single Select Sample</string>
-    <string name="tag_sample_name">Tag Sample</string>
-    <string name="recyclerview_sample_name">RecyclerView Sample</string>
-    <string name="multi_select_sample">Multi Select Sample</string>
-    <string name="single_select_sample">Single Select Sample</string>
-    <string name="recyclerview_sample">RecyclerView Sample</string>
-    <string name="tag_sample">Tag Sample</string>
+    <string name="label_sample">Label Sample</string>
 </resources>

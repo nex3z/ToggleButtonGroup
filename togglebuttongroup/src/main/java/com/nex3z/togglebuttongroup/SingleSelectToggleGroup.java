@@ -2,14 +2,21 @@ package com.nex3z.togglebuttongroup;
 
 import android.content.Context;
 import android.util.AttributeSet;
-
-import java.util.List;
+import android.view.View;
+import android.widget.Checkable;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class SingleSelectToggleGroup extends ToggleButtonGroup {
-    private static final String LOG_TAG = MultiSelectToggleGroup.class.getSimpleName();
+    private static final String LOG_TAG = SingleSelectToggleGroup.class.getSimpleName();
+
+    protected OnCheckedChangeListener mOnCheckedChangeListener;
+    private int mCheckedId = View.NO_ID;
+    RadioGroup mRadioGroup;
+    RadioButton mRadioButton;
 
     public SingleSelectToggleGroup(Context context) {
-        this(context, null);
+        super(context);
     }
 
     public SingleSelectToggleGroup(Context context, AttributeSet attrs) {
@@ -17,28 +24,70 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
     }
 
     @Override
-    protected void onButtonClick(int position) {
-        uncheckAll();
-        mButtons.get(position).setChecked(true, isAnimationEnabled());
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        if (mInitialCheckedId != View.NO_ID) {
+            setCheckedStateForView(mInitialCheckedId, true);
+            setCheckedId(mInitialCheckedId);
+        }
+    }
+
+    @Override
+    public void addView(View child, int index, LayoutParams params) {
+        if (child instanceof Checkable) {
+            final Checkable checkable = (Checkable) child;
+            if (checkable.isChecked()) {
+                if (mCheckedId != -1) {
+                    setCheckedStateForView(mCheckedId, false);
+                }
+                if (child.getId() == View.NO_ID) {
+                    child.setId(generateIdForView(child));
+                }
+                setCheckedId(child.getId());
+            }
+        }
+
+        super.addView(child, index, params);
+    }
+
+    @Override
+    protected <T extends View & Checkable> void onChildCheckedChange(T child, boolean isChecked) {
+        if (isChecked) {
+            if (mCheckedId != View.NO_ID && mCheckedId != child.getId()) {
+                setCheckedStateForView(mCheckedId, false);
+            }
+            int id = child.getId();
+            setCheckedId(id);
+        }
+    }
+
+    public void check(int id) {
+        if (id == mCheckedId) {
+            return;
+        }
+        if (mCheckedId != -1) {
+            setCheckedStateForView(mCheckedId, false);
+        }
+        setCheckedStateForView(id, true);
+        setCheckedId(id);
+    }
+
+    public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
+        mOnCheckedChangeListener = listener;
+    }
+
+    private void setCheckedId(int id) {
+        mCheckedId = id;
+        notifyCheckedChange(mCheckedId);
+    }
+
+    private void notifyCheckedChange(int id) {
         if (mOnCheckedChangeListener != null) {
-            mOnCheckedChangeListener.onCheckedChange(position, true);
-        }
-        if (mOnCheckedPositionChangeListener != null) {
-            mOnCheckedPositionChangeListener.onCheckedPositionChange(getCheckedPositions());
+            mOnCheckedChangeListener.onCheckedChanged(this, id);
         }
     }
 
-    @Override
-    public void setButtons(List<String> text) {
-        super.setButtons(text);
-        if (text.size() > 0) {
-            mButtons.get(0).setChecked(true);
-        }
-    }
-
-    @Override
-    public void setCheckedAt(int position, boolean isChecked) {
-        uncheckAll();
-        super.setCheckedAt(position, isChecked);
+    public interface OnCheckedChangeListener {
+        void onCheckedChanged(SingleSelectToggleGroup group, int checkedId);
     }
 }
