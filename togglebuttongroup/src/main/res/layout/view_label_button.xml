@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="80dp"
-    android:layout_height="40dp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/iv_background"
+        android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/desc_toggle_button"
-        android:src="@drawable/ic_circle_48dp"
+        android:src="@drawable/bg_label_checked"
         android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:minHeight="40dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@android:color/black"
-        tools:text="T"/>
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="@drawable/bg_label_unchecked"
+        tools:text="MON"/>
 
 </merge>

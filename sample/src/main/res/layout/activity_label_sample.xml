@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context="com.nex3z.togglebuttongroup.sample.LabelSampleActivity">
+
+    <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+        android:id="@+id/group_weekdays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tbgChildSpacing="auto"
+        app:tbgChildSpacingForLastRow="align"
+        app:tbgRowSpacing="8dp">
+
+        <com.nex3z.togglebuttongroup.button.LabelButton
+            android:id="@+id/lb_sun"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:text="SUN"/>
+
+        <com.nex3z.togglebuttongroup.button.LabelButton
+            android:id="@+id/lb_mon"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:text="MON"/>
+
+        <com.nex3z.togglebuttongroup.button.LabelButton
+            android:id="@+id/lb_tue"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:text="TUE"/>
+
+        <com.nex3z.togglebuttongroup.button.LabelButton
+            android:id="@+id/lb_wed"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:text="WED"/>
+
+        <com.nex3z.togglebuttongroup.button.LabelButton
+            android:id="@+id/lb_thu"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:text="THU"/>
+
+        <com.nex3z.togglebuttongroup.button.LabelButton
+            android:id="@+id/lb_fri"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:text="FRI"/>
+
+        <com.nex3z.togglebuttongroup.button.LabelButton
+            android:id="@+id/lb_sat"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:text="SAT"/>
+
+    </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
+
+</LinearLayout>

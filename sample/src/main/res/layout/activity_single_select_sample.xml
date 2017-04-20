@@ -1,26 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_single_select_sample"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:padding="8dp"
     tools:context="com.nex3z.togglebuttongroup.sample.SingleSelectSampleActivity">
 
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
-        android:id="@+id/single_selection_group"
+        android:id="@+id/group_choices"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/selector_text"
-        android:saveEnabled="true"
-        app:tbgFlow="false"
-        app:tbgButtonSpacing="8dp"
-        app:tbgAnimationType="scale"/>
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
+            android:id="@+id/lb_sun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A"/>
+
+        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
+            android:id="@+id/lb_mon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="B"/>
+
+        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
+            android:id="@+id/lb_tue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="C"/>
+
+        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
+            android:id="@+id/lb_wed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D"/>
+
+    </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+</LinearLayout>
