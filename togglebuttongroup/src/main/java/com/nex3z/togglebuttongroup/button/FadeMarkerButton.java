@@ -5,21 +5,22 @@ import android.util.AttributeSet;
 
 import com.nex3z.togglebuttongroup.R;
 
-public class LabelButton extends MarkerButton implements ToggleButton {
-    private static final String LOG_TAG = LabelButton.class.getSimpleName();
+public class FadeMarkerButton extends MarkerButton {
+    private static final String LOG_TAG = FadeMarkerButton.class.getSimpleName();
 
-    public LabelButton(Context context) {
+    public FadeMarkerButton(Context context) {
         this(context, null);
     }
 
-    public LabelButton(Context context, AttributeSet attrs) {
+    public FadeMarkerButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
     private void init() {
-        mIvBg.setImageResource(R.drawable.bg_label_checked);
-        mTvText.setBackgroundResource(R.drawable.bg_label_unchecked);
+        mIvBg.setImageResource(R.drawable.ic_circle);
+        mTvText.setBackgroundDrawable(null);
+        mRadioStyle = true;
     }
 
     @Override

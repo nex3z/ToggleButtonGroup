@@ -23,4 +23,8 @@
         <attr name="android:text"/>
     </declare-styleable>
 
+    <declare-styleable name="MarkerButton">
+        <attr name="android:text"/>
+    </declare-styleable>
+
 </resources>

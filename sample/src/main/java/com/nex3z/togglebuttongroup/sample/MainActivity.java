@@ -15,6 +15,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        findViewById(R.id.btn_single_select_sample).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SingleSelectSampleActivity.class);
+                startActivity(intent);
+            }
+        });
+
         findViewById(R.id.btn_label_sample).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -5,13 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.nex3z.togglebuttongroup.sample.MainActivity">
+
+    <Button
+        android:id="@+id/btn_single_select_sample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Single Select Sample"/>
 
     <Button
         android:id="@+id/btn_label_sample"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_sample"/>
+        android:text="Label Sample"/>
 
 
 </LinearLayout>

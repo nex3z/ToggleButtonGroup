@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context="com.nex3z.togglebuttongroup.sample.SingleSelectSampleActivity">
+
+    <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+        android:id="@+id/group_choices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
+            android:id="@+id/lb_sun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A"/>
+
+        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
+            android:id="@+id/lb_mon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="B"/>
+
+        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
+            android:id="@+id/lb_tue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="C"/>
+
+        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
+            android:id="@+id/lb_wed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D"/>
+
+    </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+</LinearLayout>

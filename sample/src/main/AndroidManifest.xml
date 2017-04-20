@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".LabelSampleActivity">
         </activity>
+        <activity android:name=".SingleSelectSampleActivity">
+        </activity>
     </application>
 
 </manifest>
