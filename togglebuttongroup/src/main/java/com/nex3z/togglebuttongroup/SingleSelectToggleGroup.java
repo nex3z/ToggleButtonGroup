@@ -4,16 +4,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Checkable;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 public class SingleSelectToggleGroup extends ToggleButtonGroup {
     private static final String LOG_TAG = SingleSelectToggleGroup.class.getSimpleName();
 
     protected OnCheckedChangeListener mOnCheckedChangeListener;
     private int mCheckedId = View.NO_ID;
-    RadioGroup mRadioGroup;
-    RadioButton mRadioButton;
 
     public SingleSelectToggleGroup(Context context) {
         super(context);

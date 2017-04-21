@@ -1,6 +1,7 @@
 package com.nex3z.togglebuttongroup.button;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -11,13 +12,14 @@ import android.widget.TextView;
 
 import com.nex3z.togglebuttongroup.R;
 
-public class MarkerButton extends CompoundToggleButton implements ToggleButton {
+class MarkerButton extends CompoundToggleButton {
     private static final String LOG_TAG = MarkerButton.class.getSimpleName();
+
+    protected static final int[] CHECKED_STATE_SET = { android.R.attr.state_checked };
 
     protected TextView mTvText;
     protected ImageView mIvBg;
-    protected int mCheckedTextColor;
-    protected int mUncheckedTextColor;
+    protected ColorStateList mTextColorStateList;
     protected boolean mRadioStyle;
 
     public MarkerButton(Context context) {
@@ -38,6 +40,14 @@ public class MarkerButton extends CompoundToggleButton implements ToggleButton {
         try {
             CharSequence text = a.getText(R.styleable.MarkerButton_android_text);
             mTvText.setText(text);
+
+            mTextColorStateList = a.getColorStateList(R.styleable.MarkerButton_android_textColor);
+            if (mTextColorStateList == null) {
+                mTextColorStateList = ContextCompat.getColorStateList(context, R.color.selector_marker_text);
+            }
+            mTvText.setTextColor(mTextColorStateList);
+
+            mRadioStyle = a.getBoolean(R.styleable.MarkerButton_tbgRadioStyle, isRadioStyleByDefault());
         } finally {
             a.recycle();
         }
@@ -46,8 +56,6 @@ public class MarkerButton extends CompoundToggleButton implements ToggleButton {
     }
 
     private void init() {
-        mCheckedTextColor = ContextCompat.getColor(getContext(), android.R.color.white);
-        mUncheckedTextColor = ContextCompat.getColor(getContext(), android.R.color.black);
         mTvText.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,5 +71,17 @@ public class MarkerButton extends CompoundToggleButton implements ToggleButton {
             return;
         }
         super.toggle();
+    }
+
+    protected int getDefaultTextColor() {
+        return mTextColorStateList.getDefaultColor();
+    }
+
+    protected int getCheckedTextColor() {
+        return mTextColorStateList.getColorForState(CHECKED_STATE_SET, getDefaultTextColor());
+    }
+
+    protected boolean isRadioStyleByDefault() {
+        return false;
     }
 }
