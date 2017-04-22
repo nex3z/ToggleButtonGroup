@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context="com.nex3z.togglebuttongroup.sample.MultiSelectActivity">
+
+    <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+        android:id="@+id/group_weekdays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tbgChildSpacing="auto">
+
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/sun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S"/>
+
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/mon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="M"/>
+
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/tue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T"/>
+
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/wed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="W"/>
+
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/thu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T"/>
+
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/fri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="F"/>
+
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/sat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S"/>
+
+    </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
+
+</LinearLayout>

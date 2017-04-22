@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context="com.nex3z.togglebuttongroup.sample.LabelSampleActivity">
+    tools:context="com.nex3z.togglebuttongroup.sample.FlowLabelActivity">
 
     <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
         android:id="@+id/group_weekdays"

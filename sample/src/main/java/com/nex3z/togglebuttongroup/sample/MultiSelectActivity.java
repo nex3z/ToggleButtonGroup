@@ -6,13 +6,13 @@ import android.util.Log;
 
 import com.nex3z.togglebuttongroup.MultiSelectToggleGroup;
 
-public class LabelSampleActivity extends AppCompatActivity {
-    private static final String LOG_TAG = LabelSampleActivity.class.getSimpleName();
+public class MultiSelectActivity extends AppCompatActivity {
+    private static final String LOG_TAG = MultiSelectActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_label_sample);
+        setContentView(R.layout.activity_multi_select);
         init();
     }
 

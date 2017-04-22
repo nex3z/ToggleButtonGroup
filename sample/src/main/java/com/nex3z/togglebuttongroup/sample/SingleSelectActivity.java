@@ -6,13 +6,13 @@ import android.util.Log;
 
 import com.nex3z.togglebuttongroup.SingleSelectToggleGroup;
 
-public class SingleSelectSampleActivity extends AppCompatActivity {
-    private static final String LOG_TAG = SingleSelectSampleActivity.class.getSimpleName();
+public class SingleSelectActivity extends AppCompatActivity {
+    private static final String LOG_TAG = SingleSelectActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_select_sample);
+        setContentView(R.layout.activity_single_select);
         init();
     }
 
