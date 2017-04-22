@@ -9,6 +9,12 @@
     tools:context="com.nex3z.togglebuttongroup.sample.MainActivity">
 
     <Button
+        android:id="@+id/btn_multi_select_sample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Multi Select Sample"/>
+
+    <Button
         android:id="@+id/btn_single_select_sample"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +25,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Label Sample"/>
-
 
 </LinearLayout>

@@ -9,8 +9,8 @@
         android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bg_label_checked"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        tools:src="@drawable/bg_label_checked"/>
 
     <TextView
         android:id="@+id/tv_text"
@@ -21,7 +21,7 @@
         android:gravity="center"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:background="@drawable/bg_label_unchecked"
-        tools:text="MON"/>
+        tools:text="MON"
+        tools:background="@drawable/bg_label_unchecked"/>
 
 </merge>

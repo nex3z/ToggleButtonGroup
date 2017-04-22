@@ -19,12 +19,11 @@
         <attr name="tbgCheckedButton" format="reference"/>
     </declare-styleable>
 
-    <declare-styleable name="LabelButton">
-        <attr name="android:text"/>
-    </declare-styleable>
-
     <declare-styleable name="MarkerButton">
         <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="tbgMarkerColor" format="color"/>
+        <attr name="tbgRadioStyle" format="boolean"/>
     </declare-styleable>
 
 </resources>

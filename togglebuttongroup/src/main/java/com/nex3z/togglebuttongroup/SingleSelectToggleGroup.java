@@ -4,16 +4,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Checkable;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
+import com.nex3z.togglebuttongroup.button.MarkerButton;
 
 public class SingleSelectToggleGroup extends ToggleButtonGroup {
     private static final String LOG_TAG = SingleSelectToggleGroup.class.getSimpleName();
 
     protected OnCheckedChangeListener mOnCheckedChangeListener;
     private int mCheckedId = View.NO_ID;
-    RadioGroup mRadioGroup;
-    RadioButton mRadioButton;
 
     public SingleSelectToggleGroup(Context context) {
         super(context);
@@ -45,6 +43,9 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
                 }
                 setCheckedId(child.getId());
             }
+            if (child instanceof MarkerButton) {
+                ((MarkerButton) child).setRadioStyle(true);
+            }
         }
 
         super.addView(child, index, params);
@@ -70,6 +71,14 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
         }
         setCheckedStateForView(id, true);
         setCheckedId(id);
+    }
+
+    public int getCheckedId() {
+        return mCheckedId;
+    }
+
+    public void clearCheck() {
+        check(-1);
     }
 
     public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {

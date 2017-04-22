@@ -15,10 +15,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        findViewById(R.id.btn_multi_select_sample).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MultiSelectActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         findViewById(R.id.btn_single_select_sample).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SingleSelectSampleActivity.class);
+                Intent intent = new Intent(MainActivity.this, SingleSelectActivity.class);
                 startActivity(intent);
             }
         });
@@ -26,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_label_sample).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LabelSampleActivity.class);
+                Intent intent = new Intent(MainActivity.this, FlowLabelActivity.class);
                 startActivity(intent);
             }
         });

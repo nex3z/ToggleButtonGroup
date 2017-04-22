@@ -6,33 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context="com.nex3z.togglebuttongroup.sample.SingleSelectSampleActivity">
+    tools:context="com.nex3z.togglebuttongroup.sample.SingleSelectActivity">
 
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
         android:id="@+id/group_choices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
-            android:id="@+id/lb_sun"
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/choice_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="A"/>
 
-        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
-            android:id="@+id/lb_mon"
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/choice_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="B"/>
 
-        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
-            android:id="@+id/lb_tue"
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/choice_c"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="C"/>
 
-        <com.nex3z.togglebuttongroup.button.FadeMarkerButton
-            android:id="@+id/lb_wed"
+        <com.nex3z.togglebuttongroup.button.CircularToggle
+            android:id="@+id/choice_d"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="D"/>
