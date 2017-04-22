@@ -22,6 +22,7 @@
     <declare-styleable name="MarkerButton">
         <attr name="android:text"/>
         <attr name="android:textColor"/>
+        <attr name="tbgMarkerColor" format="color"/>
         <attr name="tbgRadioStyle" format="boolean"/>
     </declare-styleable>
 

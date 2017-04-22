@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ class MarkerButton extends CompoundToggleButton {
     protected TextView mTvText;
     protected ImageView mIvBg;
     protected ColorStateList mTextColorStateList;
+    protected int mMarkerColor;
     protected boolean mRadioStyle;
 
     public MarkerButton(Context context) {
@@ -46,6 +48,8 @@ class MarkerButton extends CompoundToggleButton {
                 mTextColorStateList = ContextCompat.getColorStateList(context, R.color.selector_marker_text);
             }
             mTvText.setTextColor(mTextColorStateList);
+
+            mMarkerColor = a.getColor(R.styleable.MarkerButton_tbgMarkerColor, ContextCompat.getColor(getContext(), R.color.color_default_marker));
 
             mRadioStyle = a.getBoolean(R.styleable.MarkerButton_tbgRadioStyle, isRadioStyleByDefault());
         } finally {
@@ -83,5 +87,10 @@ class MarkerButton extends CompoundToggleButton {
 
     protected boolean isRadioStyleByDefault() {
         return false;
+    }
+
+    protected float dpToPx(float dp){
+        return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
 }

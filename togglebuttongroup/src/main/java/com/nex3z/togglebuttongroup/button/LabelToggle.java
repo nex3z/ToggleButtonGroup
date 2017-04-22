@@ -3,6 +3,8 @@ package com.nex3z.togglebuttongroup.button;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -29,9 +31,22 @@ public class LabelToggle extends MarkerButton implements ToggleButton {
     }
 
     private void init() {
-        mIvBg.setImageResource(R.drawable.bg_label_checked);
-        mTvText.setBackgroundResource(R.drawable.bg_label_unchecked);
+        initBackground();
         initAnimation();
+    }
+
+    private void initBackground() {
+        GradientDrawable checked = new GradientDrawable();
+        checked.setColor(mMarkerColor);
+        checked.setCornerRadius(dpToPx(25));
+        checked.setStroke(1, mMarkerColor);
+        mIvBg.setImageDrawable(checked);
+
+        GradientDrawable unchecked = new GradientDrawable();
+        unchecked.setColor(ContextCompat.getColor(getContext(), R.color.color_transparent));
+        unchecked.setCornerRadius(dpToPx(25));
+        unchecked.setStroke((int) dpToPx(1), mMarkerColor);
+        mTvText.setBackgroundDrawable(unchecked);
     }
 
     private void initAnimation() {
