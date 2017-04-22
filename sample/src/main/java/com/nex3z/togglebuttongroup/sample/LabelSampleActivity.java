@@ -21,7 +21,7 @@ public class LabelSampleActivity extends AppCompatActivity {
         multi.setOnCheckedChangeListener(new MultiSelectToggleGroup.OnCheckedStateChangeListener() {
             @Override
             public void onCheckedStateChanged(MultiSelectToggleGroup group, int checkedId, boolean isChecked) {
-                Log.v(LOG_TAG, "onCheckedStateChanged(): checkedId = " + checkedId + ", isChecked = " + isChecked);
+                Log.v(LOG_TAG, "onCheckedStateChanged(): group.getCheckedIds() = " + group.getCheckedIds());
             }
         });
     }

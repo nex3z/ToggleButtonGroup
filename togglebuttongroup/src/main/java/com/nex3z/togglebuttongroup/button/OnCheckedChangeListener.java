@@ -1,4 +1,4 @@
-package com.nex3z.togglebuttongroup;
+package com.nex3z.togglebuttongroup.button;
 
 import android.view.View;
 import android.widget.Checkable;

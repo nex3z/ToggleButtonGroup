@@ -5,6 +5,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Checkable;
 
+import com.nex3z.togglebuttongroup.button.ToggleButton;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public class MultiSelectToggleGroup extends ToggleButtonGroup {
     private static final String LOG_TAG = MultiSelectToggleGroup.class.getSimpleName();
 
@@ -33,20 +38,34 @@ public class MultiSelectToggleGroup extends ToggleButtonGroup {
 
     public void check(int id) {
         setCheckedStateForView(id, true);
-        notifyCheckedStateChange(id, true);
     }
 
-    public void uncheck(int id) {
-        setCheckedStateForView(id, false);
-        notifyCheckedStateChange(id, false);
+    public void check(int id, boolean checked) {
+        setCheckedStateForView(id, checked);
+    }
+
+    public void clearCheck() {
+        for (int i = 0; i < getChildCount(); i++) {
+            View child = getChildAt(i);
+            if (child instanceof ToggleButton) {
+                ((ToggleButton) child).setChecked(false);
+            }
+        }
+    }
+
+    public Set<Integer> getCheckedIds() {
+        Set<Integer> ids = new LinkedHashSet<>();
+        for (int i = 0; i < getChildCount(); i++) {
+            View child = getChildAt(i);
+            if (child instanceof ToggleButton && ((ToggleButton) child).isChecked()) {
+                ids.add(child.getId());
+            }
+        }
+        return ids;
     }
 
     public void toggle(int id) {
         toggleCheckedStateForView(id);
-        View target = findViewById(id);
-        if (target instanceof Checkable) {
-            notifyCheckedStateChange(id, ((Checkable) target).isChecked());
-        }
     }
 
     public void setOnCheckedChangeListener(OnCheckedStateChangeListener listener) {

@@ -68,6 +68,14 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
         setCheckedId(id);
     }
 
+    public int getCheckedId() {
+        return mCheckedId;
+    }
+
+    public void clearCheck() {
+        check(-1);
+    }
+
     public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
         mOnCheckedChangeListener = listener;
     }

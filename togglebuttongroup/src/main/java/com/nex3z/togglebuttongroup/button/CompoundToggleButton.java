@@ -5,8 +5,6 @@ import android.support.annotation.CallSuper;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.nex3z.togglebuttongroup.OnCheckedChangeListener;
-
 public abstract class CompoundToggleButton extends FrameLayout implements ToggleButton {
     private static final String LOG_TAG = CompoundToggleButton.class.getSimpleName();
 
