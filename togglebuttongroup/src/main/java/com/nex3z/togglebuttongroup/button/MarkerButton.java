@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.nex3z.togglebuttongroup.R;
 
-class MarkerButton extends CompoundToggleButton {
+public abstract class MarkerButton extends CompoundToggleButton {
     private static final String LOG_TAG = MarkerButton.class.getSimpleName();
 
     protected static final int[] CHECKED_STATE_SET = { android.R.attr.state_checked };
@@ -51,7 +51,7 @@ class MarkerButton extends CompoundToggleButton {
 
             mMarkerColor = a.getColor(R.styleable.MarkerButton_tbgMarkerColor, ContextCompat.getColor(getContext(), R.color.color_default_marker));
 
-            mRadioStyle = a.getBoolean(R.styleable.MarkerButton_tbgRadioStyle, isRadioStyleByDefault());
+            mRadioStyle = a.getBoolean(R.styleable.MarkerButton_tbgRadioStyle, false);
         } finally {
             a.recycle();
         }
@@ -70,11 +70,19 @@ class MarkerButton extends CompoundToggleButton {
 
     @Override
     public void toggle() {
-        // Do not allow toggle to unchecked state
+        // Do not allow toggle to unchecked state when mRadioStyle is true
         if (mRadioStyle && isChecked()) {
             return;
         }
         super.toggle();
+    }
+
+    public boolean isRadioStyle() {
+        return mRadioStyle;
+    }
+
+    public void setRadioStyle(boolean radioStyle) {
+        mRadioStyle = radioStyle;
     }
 
     protected int getDefaultTextColor() {
@@ -83,10 +91,6 @@ class MarkerButton extends CompoundToggleButton {
 
     protected int getCheckedTextColor() {
         return mTextColorStateList.getColorForState(CHECKED_STATE_SET, getDefaultTextColor());
-    }
-
-    protected boolean isRadioStyleByDefault() {
-        return false;
     }
 
     protected float dpToPx(float dp){

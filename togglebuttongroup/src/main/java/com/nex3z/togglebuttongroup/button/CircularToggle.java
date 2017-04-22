@@ -106,8 +106,4 @@ public class CircularToggle extends MarkerButton {
         }
     }
 
-    @Override
-    protected boolean isRadioStyleByDefault() {
-        return true;
-    }
 }

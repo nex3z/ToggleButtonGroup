@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Checkable;
 
+import com.nex3z.togglebuttongroup.button.MarkerButton;
+
 public class SingleSelectToggleGroup extends ToggleButtonGroup {
     private static final String LOG_TAG = SingleSelectToggleGroup.class.getSimpleName();
 
@@ -40,6 +42,9 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
                     child.setId(generateIdForView(child));
                 }
                 setCheckedId(child.getId());
+            }
+            if (child instanceof MarkerButton) {
+                ((MarkerButton) child).setRadioStyle(true);
             }
         }
 
