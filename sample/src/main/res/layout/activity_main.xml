@@ -26,4 +26,10 @@
         android:layout_height="wrap_content"
         android:text="Label Sample"/>
 
+    <Button
+        android:id="@+id/btn_custom_button_sample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Custom Button Sample"/>
+
 </LinearLayout>

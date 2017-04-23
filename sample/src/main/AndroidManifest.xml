@@ -16,9 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FlowLabelActivity"></activity>
-        <activity android:name=".SingleSelectActivity"></activity>
-        <activity android:name=".MultiSelectActivity"></activity>
+        <activity android:name=".FlowLabelActivity" />
+        <activity android:name=".SingleSelectActivity" />
+        <activity android:name=".MultiSelectActivity" />
+        <activity android:name=".CustomButtonActivity" />
     </application>
 
 </manifest>

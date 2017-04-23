@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context="com.nex3z.togglebuttongroup.sample.CustomButtonActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="SingleSelectToggleGroup with RadioButton"/>
+
+    <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+        android:id="@+id/group_single_custom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:tbgChildSpacing="8dp">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:gravity="center"
+            android:button="@null"
+            android:background="@drawable/selector_bg_radio_button"
+            android:textColor="@color/selector_text_radio_button"
+            android:text="lorem"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:gravity="center"
+            android:button="@null"
+            android:background="@drawable/selector_bg_radio_button"
+            android:textColor="@color/selector_text_radio_button"
+            android:text="ipsum"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:gravity="center"
+            android:button="@null"
+            android:background="@drawable/selector_bg_radio_button"
+            android:textColor="@color/selector_text_radio_button"
+            android:text="dolor"/>
+
+    </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="MultiSelectToggleGroup with CustomToggleButton"/>
+
+    <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+        android:id="@+id/group_multi_custom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:tbgChildSpacing="8dp">
+
+        <com.nex3z.togglebuttongroup.sample.CustomToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/selector_bg_radio_button"
+            android:textColor="@color/selector_text_radio_button"
+            android:text="lorem"/>
+
+        <com.nex3z.togglebuttongroup.sample.CustomToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/selector_bg_radio_button"
+            android:textColor="@color/selector_text_radio_button"
+            android:text="ipsum"/>
+
+        <com.nex3z.togglebuttongroup.sample.CustomToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@drawable/selector_bg_radio_button"
+            android:textColor="@color/selector_text_radio_button"
+            android:text="dolor"/>
+
+    </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
+
+</LinearLayout>

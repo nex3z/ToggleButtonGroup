@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.nex3z.togglebuttongroup.MultiSelectToggleGroup;
+import com.nex3z.togglebuttongroup.SingleSelectToggleGroup;
+import com.nex3z.togglebuttongroup.button.LabelToggle;
 
 public class FlowLabelActivity extends AppCompatActivity {
     private static final String LOG_TAG = FlowLabelActivity.class.getSimpleName();
@@ -17,12 +19,20 @@ public class FlowLabelActivity extends AppCompatActivity {
     }
 
     private void init() {
-        MultiSelectToggleGroup multi = (MultiSelectToggleGroup) findViewById(R.id.group_weekdays);
-        multi.setOnCheckedChangeListener(new MultiSelectToggleGroup.OnCheckedStateChangeListener() {
+        SingleSelectToggleGroup singleWeekdays = (SingleSelectToggleGroup) findViewById(R.id.group_weekdays);
+        singleWeekdays.setOnCheckedChangeListener(new SingleSelectToggleGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedStateChanged(MultiSelectToggleGroup group, int checkedId, boolean isChecked) {
-                Log.v(LOG_TAG, "onCheckedStateChanged(): group.getCheckedIds() = " + group.getCheckedIds());
+            public void onCheckedChanged(SingleSelectToggleGroup group, int checkedId) {
+                Log.v(LOG_TAG, "onCheckedChanged(): checkedId = " + checkedId);
             }
         });
+
+        MultiSelectToggleGroup multiDummy = (MultiSelectToggleGroup) findViewById(R.id.group_dummy);
+        String[] dummyText = getResources().getStringArray(R.array.dummy_text);
+        for (String text : dummyText) {
+            LabelToggle toggle = new LabelToggle(this);
+            toggle.setText(text);
+            multiDummy.addView(toggle);
+        }
     }
 }
