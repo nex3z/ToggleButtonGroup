@@ -21,7 +21,7 @@ public abstract class CompoundToggleButton extends FrameLayout implements Toggle
     }
 
     @Override
-    public void setOnCheckedChangeWidgetListener(OnCheckedChangeListener listener) {
+    public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
         mOnCheckedWidgetListener = listener;
     }
 

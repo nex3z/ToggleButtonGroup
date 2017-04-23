@@ -4,6 +4,6 @@ import android.widget.Checkable;
 
 public interface ToggleButton extends Checkable {
 
-    void setOnCheckedChangeWidgetListener(OnCheckedChangeListener listener);
+    void setOnCheckedChangeListener(OnCheckedChangeListener listener);
 
 }
