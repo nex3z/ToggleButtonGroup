@@ -5,10 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="8dp"
     tools:context="com.nex3z.togglebuttongroup.sample.FlowLabelActivity">
 
-    <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+    <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
         android:id="@+id/group_weekdays"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,6 +58,17 @@
             android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:text="SAT"/>
+
+    </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+    <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+        android:id="@+id/group_dummy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:tbgChildSpacing="auto"
+        app:tbgChildSpacingForLastRow="align"
+        app:tbgRowSpacing="8dp">
 
     </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
 

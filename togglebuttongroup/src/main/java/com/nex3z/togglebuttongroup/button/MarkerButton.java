@@ -85,6 +85,14 @@ public abstract class MarkerButton extends CompoundToggleButton {
         mRadioStyle = radioStyle;
     }
 
+    public void setText(CharSequence text) {
+        mTvText.setText(text);
+    }
+
+    public CharSequence getText() {
+        return mTvText.getText();
+    }
+
     protected int getDefaultTextColor() {
         return mTextColorStateList.getDefaultColor();
     }

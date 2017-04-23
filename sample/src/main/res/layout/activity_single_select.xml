@@ -11,7 +11,8 @@
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
         android:id="@+id/group_choices"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:tbgCheckedButton="@+id/choice_a">
 
         <com.nex3z.togglebuttongroup.button.CircularToggle
             android:id="@+id/choice_a"
