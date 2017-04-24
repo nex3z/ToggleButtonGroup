@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <objectAnimator
+        android:valueFrom="0.0"
+        android:valueTo="1.0"
+        android:propertyName="alpha"
+        android:duration="0" />
+
+    <objectAnimator
+        android:valueFrom="0"
+        android:valueTo="180"
+        android:propertyName="rotationY"
+        android:interpolator="@android:interpolator/accelerate_decelerate"
+        android:duration="@integer/flip_animation_duration" />
+
+    <objectAnimator
+        android:valueFrom="1.0"
+        android:valueTo="0.0"
+        android:propertyName="alpha"
+        android:startOffset="@integer/flip_animation_duration_half"
+        android:duration="0" />
+
+</set>

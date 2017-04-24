@@ -13,11 +13,15 @@ public abstract class CompoundToggleButton extends FrameLayout implements Toggle
     private OnCheckedChangeListener mOnCheckedWidgetListener;
 
     public CompoundToggleButton(Context context) {
-        this(context, null);
+        super(context);
     }
 
     public CompoundToggleButton(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    public CompoundToggleButton(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 
     @Override
