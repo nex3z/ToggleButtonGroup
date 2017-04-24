@@ -102,4 +102,42 @@
 
     </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="SingleSelectToggleGroup with CustomCompoundToggleButton"/>
+
+    <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tbgChildSpacing="auto">
+
+        <com.nex3z.togglebuttongroup.sample.CustomCompoundToggleButton
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:tbgFrontImage="@drawable/card_back"
+            app:tbgBackImage="@drawable/card_a"/>
+
+        <com.nex3z.togglebuttongroup.sample.CustomCompoundToggleButton
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:tbgFrontImage="@drawable/card_back"
+            app:tbgBackImage="@drawable/card_2"/>
+
+        <com.nex3z.togglebuttongroup.sample.CustomCompoundToggleButton
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:tbgFrontImage="@drawable/card_back"
+            app:tbgBackImage="@drawable/card_3"/>
+
+        <com.nex3z.togglebuttongroup.sample.CustomCompoundToggleButton
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:tbgFrontImage="@drawable/card_back"
+            app:tbgBackImage="@drawable/card_4"/>
+
+    </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
 </LinearLayout>
