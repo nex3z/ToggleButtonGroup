@@ -3,6 +3,7 @@ package com.nex3z.togglebuttongroup.button;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -91,6 +92,34 @@ public abstract class MarkerButton extends CompoundToggleButton {
 
     public CharSequence getText() {
         return mTvText.getText();
+    }
+
+    public void setTextColor(int color) {
+        mTvText.setTextColor(color);
+    }
+
+    public void setTextColor(ColorStateList colors) {
+        mTvText.setTextColor(colors);
+    }
+
+    public ColorStateList getTextColors() {
+        return mTvText.getTextColors();
+    }
+
+    public void setTextBackground(Drawable drawable) {
+        mTvText.setBackgroundDrawable(drawable);
+    }
+
+    public Drawable getTextBackground() {
+        return mTvText.getBackground();
+    }
+
+    public void setCheckedImageDrawable(Drawable drawable) {
+        mIvBg.setImageDrawable(drawable);
+    }
+
+    public Drawable getCheckedImageDrawable() {
+        return mIvBg.getDrawable();
     }
 
     protected int getDefaultTextColor() {
