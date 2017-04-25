@@ -9,9 +9,11 @@ A container of toggle buttons, supports multiple / single selection and button c
 
 ```
 dependencies {
-    compile 'com.nex3z:toggle-button-group:0.2.3'
+    compile 'com.nex3z:toggle-button-group:1.0.0'
 }
 ```
+
+There has been a lot of changes since the 1.0.0 version, old versions can be found in the [release page](https://github.com/nex3z/ToggleButtonGroup/releases).
 
 
 ## SingleSelectToggleGroup
@@ -139,11 +141,11 @@ multi.setOnCheckedChangeListener(new MultiSelectToggleGroup.OnCheckedStateChange
 
 You can implement custom toggle button in two ways,
 
-- Implement [ToggleButton](https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/button/ToggleButton.java) interface, as [CustomToggleButton](https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/CustomToggleButton.java) in the sample, or
+- Implement [`ToggleButton`](https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/button/ToggleButton.java) interface, as [`CustomToggleButton`](https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/CustomToggleButton.java) in the sample, or
 
-- Extend [CompoundToggleButton](https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/button/CompoundToggleButton.java) class, like [CustomCompoundToggleButton](https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/CustomCompoundToggleButton.java).
+- Extend [`CompoundToggleButton`](https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/button/CompoundToggleButton.java) class, like [`CustomCompoundToggleButton`](https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/CustomCompoundToggleButton.java).
 
-If you choose to implement `ToggleButton`, besides the [Checkable](https://developer.android.com/reference/android/widget/Checkable.html) interface, you also need to implement the `setOnCheckedChangeListener()`, which allows [ToggleButtonGroup](https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/ToggleButtonGroup.java) to listen to changes of any checked states. You need to handle the click event on the button and toggle its checked state properly, as `ToggleButtonGroup` will not toggle the button when it's being clicked.
+If you choose to implement `ToggleButton`, besides the [`Checkable`](https://developer.android.com/reference/android/widget/Checkable.html) interface, you also need to implement the `setOnCheckedChangeListener()`, which allows [`ToggleButtonGroup`](https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/ToggleButtonGroup.java) to listen to changes of any checked states. You need to handle the click event on the button and toggle its checked state properly, as `ToggleButtonGroup` will not toggle the button when it's being clicked.
 
 `CompoundToggleButton` implements `ToggleButton` and notifies `ToggleButtonGroup` of any checked state changes. But you still need to handle the click event on the button, as `CompoundToggleButton` wouldn't know which part of it should trigger the "toggle" operation. Add an `OnClickListener` on the "trigger view" and call `toggle()` is just enough.
 
