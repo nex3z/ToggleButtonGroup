@@ -141,13 +141,21 @@ multi.setOnCheckedChangeListener(new MultiSelectToggleGroup.OnCheckedStateChange
 
 You can implement custom toggle button in two ways,
 
-- Implement [`ToggleButton`](https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/button/ToggleButton.java) interface, as [`CustomToggleButton`](https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/CustomToggleButton.java) in the sample, or
+- Implement [`ToggleButton`][ToggleButton] interface
 
-- Extend [`CompoundToggleButton`](https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/button/CompoundToggleButton.java) class, like [`CustomCompoundToggleButton`](https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/CustomCompoundToggleButton.java).
+If you choose to implement `ToggleButton`, besides the [`Checkable`][Checkable] interface, you also need to implement a `setOnCheckedChangeListener()`, which allows [`ToggleButtonGroup`][ToggleButtonGroup] to listen to the changes of any checked states. You need to handle the click event on the button and toggle its checked state properly, as `ToggleButtonGroup` will not toggle the button when it's being clicked. [`CustomToggleButton`][CustomToggleButton] from the sample is a simple toggle button implementing `ToggleButton`.
 
-If you choose to implement `ToggleButton`, besides the [`Checkable`](https://developer.android.com/reference/android/widget/Checkable.html) interface, you also need to implement the `setOnCheckedChangeListener()`, which allows [`ToggleButtonGroup`](https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/ToggleButtonGroup.java) to listen to changes of any checked states. You need to handle the click event on the button and toggle its checked state properly, as `ToggleButtonGroup` will not toggle the button when it's being clicked.
+- or, extend [`CompoundToggleButton`][CompoundToggleButton] class.
 
-`CompoundToggleButton` implements `ToggleButton` and notifies `ToggleButtonGroup` of any checked state changes. But you still need to handle the click event on the button, as `CompoundToggleButton` wouldn't know which part of it should trigger the "toggle" operation. Add an `OnClickListener` on the "trigger view" and call `toggle()` is just enough.
+`CompoundToggleButton` implements `ToggleButton` and toggles its checked state when being clicked. All you need to do is to design the look and feel for the checked and unchecked state. [`CustomCompoundToggleButton`][CustomCompoundToggleButton] from the sample extends `CompoundToggleButton` and uses a flipping animation for state transition as shown above.
 
-For more detail, please check the [sample](https://github.com/nex3z/ToggleButtonGroup/tree/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample).
+For more detail, please check the [sample].
 
+
+[ToggleButton]: https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/button/ToggleButton.java
+[CustomToggleButton]: https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/CustomToggleButton.java
+[CompoundToggleButton]: https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/button/CompoundToggleButton.java
+[CustomCompoundToggleButton]: https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/CustomCompoundToggleButton.java
+[Checkable]: https://developer.android.com/reference/android/widget/Checkable.html
+[ToggleButtonGroup]: https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/ToggleButtonGroup.java
+[sample]: https://github.com/nex3z/ToggleButtonGroup/tree/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample
