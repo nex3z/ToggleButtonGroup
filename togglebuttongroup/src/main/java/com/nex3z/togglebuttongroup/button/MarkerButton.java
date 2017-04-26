@@ -8,7 +8,6 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,17 +55,6 @@ public abstract class MarkerButton extends CompoundToggleButton {
         } finally {
             a.recycle();
         }
-
-        init();
-    }
-
-    private void init() {
-        mTvText.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggle();
-            }
-        });
     }
 
     @Override

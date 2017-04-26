@@ -14,14 +14,22 @@ public abstract class CompoundToggleButton extends FrameLayout implements Toggle
 
     public CompoundToggleButton(Context context) {
         super(context);
+        setClickable(true);
     }
 
     public CompoundToggleButton(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public CompoundToggleButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setClickable(true);
+    }
+
+    @Override
+    public boolean performClick() {
+        toggle();
+        return super.performClick();
     }
 
     @Override
