@@ -6,6 +6,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="customCompoundButtonStyle">@style/CustomCompoundButton</item>
+    </style>
+
+    <declare-styleable name="CustomCompoundButtonTheme">
+        <attr name="customCompoundButtonStyle" format="reference"/>
+    </declare-styleable>
+
+    <style name="CustomCompoundButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@drawable/selector_bg_radio_button</item>
+        <item name="android:textColor">@color/selector_text_radio_button</item>
+        <item name="android:button">@null</item>
     </style>
 
 </resources>
