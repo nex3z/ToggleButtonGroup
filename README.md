@@ -1,6 +1,6 @@
 # ToggleButtonGroup
 
-[![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
+[![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ToggleButtonGroup-blue.svg?style=flat)](https://android-arsenal.com/details/1/4885)
 
 A container of toggle buttons, supports multiple / single selection and button customization.
 
@@ -139,23 +139,31 @@ multi.setOnCheckedChangeListener(new MultiSelectToggleGroup.OnCheckedStateChange
   <img src="images/cards.gif"/>
 </div>
 
-You can implement custom toggle button in two ways,
+You can implement custom toggle button in three ways,
 
-- Implement [`ToggleButton`][ToggleButton] interface
+- Extend [`CompoundButton`][CompoundButton] class
 
-If you choose to implement `ToggleButton`, besides the [`Checkable`][Checkable] interface, you also need to implement a `setOnCheckedChangeListener()`, which allows [`ToggleButtonGroup`][ToggleButtonGroup] to listen to the changes of any checked states. You need to handle the click event on the button and toggle its checked state properly, as `ToggleButtonGroup` will not toggle the button when it's being clicked. [`CustomToggleButton`][CustomToggleButton] from the sample is a simple toggle button implementing `ToggleButton`.
+`CompoundButton` implements [`Checkable`][Checkable] interface, toggles itself when being clicked and provides listener for `ToggleButtonGroup` to keep track of its checked state. `CompoundButton` is basically a [`Button`][Button] / [`TextView`][TextView]. You can add your custom style and behaviour to the button like [`CustomCompoundButton`][CustomCompoundButton] from the sample.
+
+- or, implement [`ToggleButton`][ToggleButton] interface
+
+If you choose to implement [`ToggleButton`][ToggleButton], besides the [`Checkable`][Checkable] interface, you also need to implement a `setOnCheckedChangeListener()`, which allows [`ToggleButtonGroup`][ToggleButtonGroup] to listen to the changes of any checked states. You need to handle the click event on the button and toggle its checked state properly, as `ToggleButtonGroup` will not toggle the button when it's being clicked. [`CustomToggleButton`][CustomToggleButton] from the sample is a simple toggle button implementing [`ToggleButton`][ToggleButton].
 
 - or, extend [`CompoundToggleButton`][CompoundToggleButton] class.
 
-`CompoundToggleButton` implements `ToggleButton` and toggles its checked state when being clicked. All you need to do is to design the look and feel for the checked and unchecked state. [`CustomCompoundToggleButton`][CustomCompoundToggleButton] from the sample extends `CompoundToggleButton` and uses a flipping animation for state transition as shown above.
+[`CompoundToggleButton`][CompoundToggleButton] implements [`ToggleButton`][ToggleButton] and toggles its checked state when being clicked. All you need to do is to design the look and feel for the checked and unchecked state. [`CustomCompoundToggleButton`][CustomCompoundToggleButton] from the sample extends [`CompoundToggleButton`][CompoundToggleButton] and uses a flipping animation for state transition as shown above.
 
 For more detail, please check the [sample].
 
 
+[CompoundButton]: https://developer.android.com/reference/android/widget/CompoundButton.html
+[Button]: https://developer.android.com/reference/android/widget/Button.html
+[TextView]: https://developer.android.com/reference/android/widget/TextView.html
+[CustomCompoundButton]: https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/button/CustomCompoundButton.java
 [ToggleButton]: https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/button/ToggleButton.java
-[CustomToggleButton]: https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/CustomToggleButton.java
+[CustomToggleButton]: https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/button/CustomToggleButton.java
 [CompoundToggleButton]: https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/button/CompoundToggleButton.java
-[CustomCompoundToggleButton]: https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/CustomCompoundToggleButton.java
+[CustomCompoundToggleButton]: https://github.com/nex3z/ToggleButtonGroup/blob/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample/button/CustomCompoundToggleButton.java
 [Checkable]: https://developer.android.com/reference/android/widget/Checkable.html
 [ToggleButtonGroup]: https://github.com/nex3z/ToggleButtonGroup/blob/master/togglebuttongroup/src/main/java/com/nex3z/togglebuttongroup/ToggleButtonGroup.java
 [sample]: https://github.com/nex3z/ToggleButtonGroup/tree/master/sample/src/main/java/com/nex3z/togglebuttongroup/sample
