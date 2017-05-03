@@ -17,7 +17,6 @@ public class CustomButtonActivity extends AppCompatActivity {
         init();
     }
 
-
     private void init() {
         SingleSelectToggleGroup singleRadioButton =
                 (SingleSelectToggleGroup) findViewById(R.id.group_single_radiobutton);

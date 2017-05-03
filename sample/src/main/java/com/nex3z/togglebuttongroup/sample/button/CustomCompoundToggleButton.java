@@ -1,4 +1,4 @@
-package com.nex3z.togglebuttongroup.sample;
+package com.nex3z.togglebuttongroup.sample.button;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.widget.ImageView;
 
 import com.nex3z.togglebuttongroup.button.CompoundToggleButton;
+import com.nex3z.togglebuttongroup.sample.R;
 
 public class CustomCompoundToggleButton extends CompoundToggleButton {
     private static final String LOG_TAG = CustomCompoundToggleButton.class.getSimpleName();
@@ -78,16 +79,6 @@ public class CustomCompoundToggleButton extends CompoundToggleButton {
             mFlipIn.start();
         }
     }
-
-//    private class OnImageClickListener implements OnClickListener {
-//        @Override
-//        public void onClick(View v) {
-//            if (mPlaying) {
-//                return;
-//            }
-//            toggle();
-//        }
-//    }
 
     private class CheckedAnimationListener implements Animator.AnimatorListener {
         @Override

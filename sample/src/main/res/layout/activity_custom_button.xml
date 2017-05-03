@@ -75,7 +75,7 @@
         android:padding="8dp"
         app:tbgChildSpacing="8dp">
 
-        <com.nex3z.togglebuttongroup.sample.CustomCompoundButton
+        <com.nex3z.togglebuttongroup.sample.button.CustomCompoundButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:paddingTop="8dp"
@@ -84,7 +84,7 @@
             android:paddingRight="16dp"
             android:text="lorem"/>
 
-        <com.nex3z.togglebuttongroup.sample.CustomCompoundButton
+        <com.nex3z.togglebuttongroup.sample.button.CustomCompoundButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:paddingTop="8dp"
@@ -93,7 +93,7 @@
             android:paddingRight="16dp"
             android:text="ipsum"/>
 
-        <com.nex3z.togglebuttongroup.sample.CustomCompoundButton
+        <com.nex3z.togglebuttongroup.sample.button.CustomCompoundButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:paddingTop="8dp"
@@ -118,7 +118,7 @@
         android:padding="8dp"
         app:tbgChildSpacing="8dp">
 
-        <com.nex3z.togglebuttongroup.sample.CustomToggleButton
+        <com.nex3z.togglebuttongroup.sample.button.CustomToggleButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -126,7 +126,7 @@
             android:textColor="@color/selector_text_radio_button"
             android:text="lorem"/>
 
-        <com.nex3z.togglebuttongroup.sample.CustomToggleButton
+        <com.nex3z.togglebuttongroup.sample.button.CustomToggleButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -134,7 +134,7 @@
             android:textColor="@color/selector_text_radio_button"
             android:text="ipsum"/>
 
-        <com.nex3z.togglebuttongroup.sample.CustomToggleButton
+        <com.nex3z.togglebuttongroup.sample.button.CustomToggleButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
@@ -157,25 +157,25 @@
         android:layout_height="wrap_content"
         app:tbgChildSpacing="auto">
 
-        <com.nex3z.togglebuttongroup.sample.CustomCompoundToggleButton
+        <com.nex3z.togglebuttongroup.sample.button.CustomCompoundToggleButton
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             app:tbgFrontImage="@drawable/card_back"
             app:tbgBackImage="@drawable/card_a"/>
 
-        <com.nex3z.togglebuttongroup.sample.CustomCompoundToggleButton
+        <com.nex3z.togglebuttongroup.sample.button.CustomCompoundToggleButton
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             app:tbgFrontImage="@drawable/card_back"
             app:tbgBackImage="@drawable/card_2"/>
 
-        <com.nex3z.togglebuttongroup.sample.CustomCompoundToggleButton
+        <com.nex3z.togglebuttongroup.sample.button.CustomCompoundToggleButton
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             app:tbgFrontImage="@drawable/card_back"
             app:tbgBackImage="@drawable/card_3"/>
 
-        <com.nex3z.togglebuttongroup.sample.CustomCompoundToggleButton
+        <com.nex3z.togglebuttongroup.sample.button.CustomCompoundToggleButton
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             app:tbgFrontImage="@drawable/card_back"

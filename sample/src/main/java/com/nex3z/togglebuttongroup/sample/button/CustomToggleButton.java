@@ -1,4 +1,4 @@
-package com.nex3z.togglebuttongroup.sample;
+package com.nex3z.togglebuttongroup.sample.button;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatButton;

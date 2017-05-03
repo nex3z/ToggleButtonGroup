@@ -1,8 +1,10 @@
-package com.nex3z.togglebuttongroup.sample;
+package com.nex3z.togglebuttongroup.sample.button;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.CompoundButton;
+
+import com.nex3z.togglebuttongroup.sample.R;
 
 public class CustomCompoundButton extends CompoundButton {
 
