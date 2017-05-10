@@ -14,7 +14,7 @@
         android:id="@+id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minHeight="40dp"
+        android:minHeight="36dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:paddingLeft="16dp"
