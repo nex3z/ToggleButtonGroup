@@ -15,6 +15,7 @@ import com.nex3z.togglebuttongroup.R;
 
 public abstract class MarkerButton extends CompoundToggleButton {
     private static final String LOG_TAG = MarkerButton.class.getSimpleName();
+    private static final int DEFAULT_TEXT_SIZE_SP = 14;
 
     protected static final int[] CHECKED_STATE_SET = { android.R.attr.state_checked };
 
@@ -48,6 +49,9 @@ public abstract class MarkerButton extends CompoundToggleButton {
                 mTextColorStateList = ContextCompat.getColorStateList(context, R.color.selector_marker_text);
             }
             mTvText.setTextColor(mTextColorStateList);
+
+            float textSize = a.getDimension(R.styleable.MarkerButton_android_textSize, dpToPx(DEFAULT_TEXT_SIZE_SP));
+            mTvText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
 
             mMarkerColor = a.getColor(R.styleable.MarkerButton_tbgMarkerColor, ContextCompat.getColor(getContext(), R.color.color_default_marker));
 
@@ -92,6 +96,18 @@ public abstract class MarkerButton extends CompoundToggleButton {
 
     public ColorStateList getTextColors() {
         return mTvText.getTextColors();
+    }
+
+    public void setTextSize(float size) {
+        mTvText.setTextSize(size);
+    }
+
+    public void setTextSize(int unit, float size) {
+        mTvText.setTextSize(unit, size);
+    }
+
+    public float getTextSize() {
+        return mTvText.getTextSize();
     }
 
     public void setTextBackground(Drawable drawable) {

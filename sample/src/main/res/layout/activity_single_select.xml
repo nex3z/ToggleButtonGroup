@@ -18,24 +18,28 @@
             android:id="@+id/choice_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             android:text="A"/>
 
         <com.nex3z.togglebuttongroup.button.CircularToggle
             android:id="@+id/choice_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             android:text="B"/>
 
         <com.nex3z.togglebuttongroup.button.CircularToggle
             android:id="@+id/choice_c"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             android:text="C"/>
 
         <com.nex3z.togglebuttongroup.button.CircularToggle
             android:id="@+id/choice_d"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             android:text="D"/>
 
     </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
