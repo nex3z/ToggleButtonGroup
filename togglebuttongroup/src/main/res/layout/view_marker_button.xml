@@ -17,8 +17,6 @@
         android:minHeight="36dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         tools:background="@drawable/bg_label_unchecked"
         tools:text="MON"/>
 

@@ -47,6 +47,9 @@ public class LabelToggle extends MarkerButton implements ToggleButton {
         unchecked.setCornerRadius(dpToPx(25));
         unchecked.setStroke((int) dpToPx(1), mMarkerColor);
         mTvText.setBackgroundDrawable(unchecked);
+
+        int padding = (int) dpToPx(16);
+        mTvText.setPadding(padding, 0, padding, 0);
     }
 
     private void initAnimation() {
