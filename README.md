@@ -9,11 +9,9 @@ A container of toggle buttons, supports multiple / single selection and button c
 
 ```
 dependencies {
-    compile 'com.nex3z:toggle-button-group:1.0.1'
+    compile 'com.nex3z:toggle-button-group:1.0.2'
 }
 ```
-
-There has been a lot of changes since the 1.0.0 version, old versions can be found in the [release page](https://github.com/nex3z/ToggleButtonGroup/releases).
 
 
 ## SingleSelectToggleGroup
