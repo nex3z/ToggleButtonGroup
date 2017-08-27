@@ -43,7 +43,7 @@ public class LabelToggle extends MarkerButton implements ToggleButton {
         mIvBg.setImageDrawable(checked);
 
         GradientDrawable unchecked = new GradientDrawable();
-        unchecked.setColor(ContextCompat.getColor(getContext(), R.color.color_transparent));
+        unchecked.setColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
         unchecked.setCornerRadius(dpToPx(25));
         unchecked.setStroke((int) dpToPx(1), mMarkerColor);
         mTvText.setBackgroundDrawable(unchecked);

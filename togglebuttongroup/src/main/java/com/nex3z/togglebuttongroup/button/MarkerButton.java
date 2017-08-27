@@ -53,7 +53,7 @@ public abstract class MarkerButton extends CompoundToggleButton {
             float textSize = a.getDimension(R.styleable.MarkerButton_android_textSize, dpToPx(DEFAULT_TEXT_SIZE_SP));
             mTvText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
 
-            mMarkerColor = a.getColor(R.styleable.MarkerButton_tbgMarkerColor, ContextCompat.getColor(getContext(), R.color.color_default_marker));
+            mMarkerColor = a.getColor(R.styleable.MarkerButton_tbgMarkerColor, ContextCompat.getColor(getContext(), R.color.tbg_color_default_marker));
 
             mRadioStyle = a.getBoolean(R.styleable.MarkerButton_tbgRadioStyle, false);
         } finally {
