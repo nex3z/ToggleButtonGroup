@@ -70,7 +70,7 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
             setCheckedStateForView(mCheckedId, false);
         }
         setCheckedStateForView(id, true);
-        setCheckedId(id);
+        setCheckedId(id, false);
     }
 
     public int getCheckedId() {
@@ -86,8 +86,14 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
     }
 
     private void setCheckedId(int id) {
+        setCheckedId(id, true);
+    }
+    
+    private void setCheckedId(int id, boolean notify) {
         mCheckedId = id;
-        notifyCheckedChange(mCheckedId);
+        if (notify) {
+            notifyCheckedChange(mCheckedId);
+        }
     }
 
     private void notifyCheckedChange(int id) {
