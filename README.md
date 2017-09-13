@@ -9,7 +9,7 @@ A container of toggle buttons, supports multiple / single selection and button c
 
 ```
 dependencies {
-    compile 'com.nex3z:toggle-button-group:1.0.2'
+    compile 'com.nex3z:toggle-button-group:1.0.3'
 }
 ```
 
