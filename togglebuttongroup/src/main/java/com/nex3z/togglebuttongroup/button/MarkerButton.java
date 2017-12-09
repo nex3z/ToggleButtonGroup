@@ -126,6 +126,17 @@ public abstract class MarkerButton extends CompoundToggleButton {
         return mIvBg.getDrawable();
     }
 
+    public int getMarkerColor() {
+        return mMarkerColor;
+    }
+
+    public void setMarkerColor(int markerColor) {
+        mMarkerColor = markerColor;
+        onMarkerColorChanged();
+    }
+
+    protected abstract void onMarkerColorChanged();
+
     protected int getDefaultTextColor() {
         return mTextColorStateList.getDefaultColor();
     }
