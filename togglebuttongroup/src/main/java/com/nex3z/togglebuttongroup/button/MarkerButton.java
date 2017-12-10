@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -21,7 +22,6 @@ public abstract class MarkerButton extends CompoundToggleButton {
 
     protected TextView mTvText;
     protected ImageView mIvBg;
-    protected ColorStateList mTextColorStateList;
     protected int mMarkerColor;
     protected boolean mRadioStyle;
 
@@ -44,11 +44,11 @@ public abstract class MarkerButton extends CompoundToggleButton {
             CharSequence text = a.getText(R.styleable.MarkerButton_android_text);
             mTvText.setText(text);
 
-            mTextColorStateList = a.getColorStateList(R.styleable.MarkerButton_android_textColor);
-            if (mTextColorStateList == null) {
-                mTextColorStateList = ContextCompat.getColorStateList(context, R.color.selector_marker_text);
+            ColorStateList colors = a.getColorStateList(R.styleable.MarkerButton_android_textColor);
+            if (colors == null) {
+                colors = ContextCompat.getColorStateList(context, R.color.selector_marker_text);
             }
-            mTvText.setTextColor(mTextColorStateList);
+            mTvText.setTextColor(colors);
 
             float textSize = a.getDimension(R.styleable.MarkerButton_android_textSize, dpToPx(DEFAULT_TEXT_SIZE_SP));
             mTvText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
@@ -132,17 +132,14 @@ public abstract class MarkerButton extends CompoundToggleButton {
 
     public void setMarkerColor(int markerColor) {
         mMarkerColor = markerColor;
-        onMarkerColorChanged();
     }
 
-    protected abstract void onMarkerColorChanged();
-
     protected int getDefaultTextColor() {
-        return mTextColorStateList.getDefaultColor();
+        return getTextColors().getDefaultColor();
     }
 
     protected int getCheckedTextColor() {
-        return mTextColorStateList.getColorForState(CHECKED_STATE_SET, getDefaultTextColor());
+        return getTextColors().getColorForState(CHECKED_STATE_SET, getDefaultTextColor());
     }
 
     protected float dpToPx(float dp){

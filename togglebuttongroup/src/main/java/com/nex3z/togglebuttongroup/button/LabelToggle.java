@@ -3,9 +3,11 @@ package com.nex3z.togglebuttongroup.button;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
@@ -31,8 +33,21 @@ public class LabelToggle extends MarkerButton implements ToggleButton {
     }
 
     @Override
-    protected void onMarkerColorChanged() {
+    public void setMarkerColor(int markerColor) {
+        super.setMarkerColor(markerColor);
         initBackground();
+    }
+
+    @Override
+    public void setTextColor(int color) {
+        super.setTextColor(color);
+        initAnimation();
+    }
+
+    @Override
+    public void setTextColor(ColorStateList colors) {
+        super.setTextColor(colors);
+        initAnimation();
     }
 
     private void init() {
@@ -63,8 +78,8 @@ public class LabelToggle extends MarkerButton implements ToggleButton {
     private void initAnimation() {
         final int defaultTextColor = getDefaultTextColor();
         final int checkedTextColor = getCheckedTextColor();
+        Log.v(LOG_TAG, "initAnimation(): defaultTextColor = " + defaultTextColor + ", checkedTextColor = " + checkedTextColor);
 
-        mTextColorStateList.getDefaultColor();
         mTextColorAnimator = ValueAnimator.ofObject(
                 new ArgbEvaluator(), defaultTextColor, checkedTextColor);
         mTextColorAnimator.setDuration(mAnimationDuration);
