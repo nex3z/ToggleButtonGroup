@@ -30,8 +30,14 @@ public class LabelToggle extends MarkerButton implements ToggleButton {
         init();
     }
 
+    @Override
+    protected void onMarkerColorChanged() {
+        initBackground();
+    }
+
     private void init() {
         initBackground();
+        initText();
         initAnimation();
     }
 
@@ -47,7 +53,9 @@ public class LabelToggle extends MarkerButton implements ToggleButton {
         unchecked.setCornerRadius(dpToPx(25));
         unchecked.setStroke((int) dpToPx(1), mMarkerColor);
         mTvText.setBackgroundDrawable(unchecked);
+    }
 
+    private void initText() {
         int padding = (int) dpToPx(16);
         mTvText.setPadding(padding, 0, padding, 0);
     }

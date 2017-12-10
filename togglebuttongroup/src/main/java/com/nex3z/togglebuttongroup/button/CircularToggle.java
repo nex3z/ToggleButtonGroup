@@ -30,9 +30,15 @@ public class CircularToggle extends MarkerButton {
         init();
     }
 
+    @Override
+    protected void onMarkerColorChanged() {
+        initBackground();
+    }
+
     private void init() {
         initBackground();
         initAnimation();
+        initText();
     }
 
     private void initBackground() {
@@ -40,7 +46,9 @@ public class CircularToggle extends MarkerButton {
                 getContext(), R.drawable.bg_circle);
         checked.setColor(mMarkerColor);
         mIvBg.setImageDrawable(checked);
+    }
 
+    private void initText() {
         mTvText.setBackgroundDrawable(null);
     }
 
