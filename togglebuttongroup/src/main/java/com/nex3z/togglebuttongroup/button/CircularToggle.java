@@ -3,6 +3,7 @@ package com.nex3z.togglebuttongroup.button;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -31,8 +32,21 @@ public class CircularToggle extends MarkerButton {
     }
 
     @Override
-    protected void onMarkerColorChanged() {
+    public void setMarkerColor(int markerColor) {
+        super.setMarkerColor(markerColor);
         initBackground();
+    }
+
+    @Override
+    public void setTextColor(int color) {
+        super.setTextColor(color);
+        initAnimation();
+    }
+
+    @Override
+    public void setTextColor(ColorStateList colors) {
+        super.setTextColor(colors);
+        initAnimation();
     }
 
     private void init() {
