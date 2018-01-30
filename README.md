@@ -102,7 +102,7 @@ You can create a group of multi-select toggle buttons with `MultiSelectToggleGro
 </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
 ```
 
-With `tbgFlow` attribute set to `true`, buttons are allowed to flow to next row when there is no enough space in current row. With `tbgButtonSpacing` set to `auto`, buttons are evenly placed in each row.
+With `tbgFlow` attribute set to `true`, buttons are allowed to flow to next row when there is no enough space in current row. With `tbgChildSpacing` set to `auto`, buttons are evenly placed in each row.
 
 
 ## Listeners
