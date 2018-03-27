@@ -6,7 +6,6 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -132,6 +131,10 @@ public abstract class MarkerButton extends CompoundToggleButton {
 
     public void setMarkerColor(int markerColor) {
         mMarkerColor = markerColor;
+    }
+
+    public TextView getTextView() {
+        return mTvText;
     }
 
     protected int getDefaultTextColor() {
