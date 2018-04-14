@@ -45,11 +45,16 @@ public abstract class CompoundToggleButton extends FrameLayout implements Toggle
             if (mBroadcasting) {
                 return;
             }
-            mBroadcasting = true;
-            if (mOnCheckedWidgetListener != null) {
-                mOnCheckedWidgetListener.onCheckedChanged(this, mChecked);
-            }
-            mBroadcasting = false;
+            this.post(new Runnable() {
+                @Override
+                public void run() {
+                    mBroadcasting = true;
+                    if (mOnCheckedWidgetListener != null) {
+                        mOnCheckedWidgetListener.onCheckedChanged(CompoundToggleButton.this, mChecked);
+                    }
+                    mBroadcasting = false;
+                }
+            });
         }
     }
 
