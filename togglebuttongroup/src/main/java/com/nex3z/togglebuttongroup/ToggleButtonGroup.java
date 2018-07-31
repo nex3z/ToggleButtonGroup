@@ -52,6 +52,11 @@ public abstract class ToggleButtonGroup extends FlowLayout {
         mPassThroughListener.mOnHierarchyChangeListener = listener;
     }
 
+    public boolean isChecked(int childId) {
+        View child = findViewById(childId);
+        return child instanceof Checkable && ((Checkable) child).isChecked();
+    }
+
     protected void setCheckedStateForView(int viewId, boolean checked) {
         View target = findViewById(viewId);
         if (target != null && target instanceof Checkable) {
