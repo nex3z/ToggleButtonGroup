@@ -37,15 +37,22 @@ public class MultiSelectToggleGroup extends ToggleButtonGroup {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        if (mInitialCheckedId != View.NO_ID) {
-            setCheckedStateForView(mInitialCheckedId, true);
+        int initialCheckedId = mInitialCheckedId != View.NO_ID ?
+                mInitialCheckedId : mSilentInitialCheckedId;
+        if (initialCheckedId != View.NO_ID) {
+            setCheckedStateForView(initialCheckedId, true);
         }
     }
 
     @Override
     protected <T extends View & Checkable> void onChildCheckedChange(T child, boolean isChecked) {
         checkSelectCount();
-        notifyCheckedStateChange(child.getId(), isChecked);
+
+        if (mSilentInitialCheckedId == child.getId()) {
+            mSilentInitialCheckedId = View.NO_ID;
+        } else {
+            notifyCheckedStateChange(child.getId(), isChecked);
+        }
     }
 
     public void check(int id) {

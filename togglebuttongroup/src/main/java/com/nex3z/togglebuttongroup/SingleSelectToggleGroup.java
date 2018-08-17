@@ -24,9 +24,11 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        if (mInitialCheckedId != View.NO_ID) {
-            setCheckedStateForView(mInitialCheckedId, true);
-            setCheckedId(mInitialCheckedId);
+        int initialCheckedId = mInitialCheckedId != View.NO_ID ?
+                mInitialCheckedId : mSilentInitialCheckedId;
+        if (initialCheckedId != View.NO_ID) {
+            setCheckedStateForView(initialCheckedId, true);
+            setCheckedId(initialCheckedId, false);
         }
     }
 
@@ -58,7 +60,12 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
                 setCheckedStateForView(mCheckedId, false);
             }
             int id = child.getId();
-            setCheckedId(id);
+            if (mSilentInitialCheckedId == id) {
+                mSilentInitialCheckedId = View.NO_ID;
+                setCheckedId(id, false);
+            } else {
+                setCheckedId(id);
+            }
         }
     }
 

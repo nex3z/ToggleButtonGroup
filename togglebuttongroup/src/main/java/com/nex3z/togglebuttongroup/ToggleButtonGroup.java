@@ -16,6 +16,7 @@ public abstract class ToggleButtonGroup extends FlowLayout {
     private static final String LOG_TAG = ToggleButtonGroup.class.getSimpleName();
 
     protected int mInitialCheckedId = View.NO_ID;
+    protected int mSilentInitialCheckedId = View.NO_ID;
     private OnCheckedChangeListener mCheckedStateTracker;
     private CompoundButton.OnCheckedChangeListener mCompoundButtonStateTracker;
     private PassThroughHierarchyChangeListener mPassThroughListener;
@@ -35,6 +36,8 @@ public abstract class ToggleButtonGroup extends FlowLayout {
         try {
             mInitialCheckedId = a.getResourceId(R.styleable.ToggleButtonGroup_tbgCheckedButton,
                     View.NO_ID);
+            mSilentInitialCheckedId = a.getResourceId(
+                    R.styleable.ToggleButtonGroup_android_checkedButton, View.NO_ID);
         } finally {
             a.recycle();
         }

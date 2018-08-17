@@ -16,6 +16,7 @@
     </declare-styleable>
 
     <declare-styleable name="ToggleButtonGroup">
+        <attr name="android:checkedButton"/>
         <attr name="tbgCheckedButton" format="reference"/>
     </declare-styleable>
 
