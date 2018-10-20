@@ -19,7 +19,7 @@ public class FlowLabelActivity extends AppCompatActivity {
     }
 
     private void init() {
-        SingleSelectToggleGroup singleWeekdays = (SingleSelectToggleGroup) findViewById(R.id.group_weekdays);
+        SingleSelectToggleGroup singleWeekdays = findViewById(R.id.group_weekdays);
         singleWeekdays.setOnCheckedChangeListener(new SingleSelectToggleGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SingleSelectToggleGroup group, int checkedId) {
@@ -27,7 +27,7 @@ public class FlowLabelActivity extends AppCompatActivity {
             }
         });
 
-        MultiSelectToggleGroup multiDummy = (MultiSelectToggleGroup) findViewById(R.id.group_dummy);
+        MultiSelectToggleGroup multiDummy = findViewById(R.id.group_dummy);
         String[] dummyText = getResources().getStringArray(R.array.dummy_text);
         for (String text : dummyText) {
             LabelToggle toggle = new LabelToggle(this);

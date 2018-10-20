@@ -17,7 +17,7 @@ public class MultiSelectActivity extends AppCompatActivity {
     }
 
     private void init() {
-        MultiSelectToggleGroup multi = (MultiSelectToggleGroup) findViewById(R.id.group_weekdays);
+        MultiSelectToggleGroup multi = findViewById(R.id.group_weekdays);
         multi.setOnCheckedChangeListener(new MultiSelectToggleGroup.OnCheckedStateChangeListener() {
             @Override
             public void onCheckedStateChanged(MultiSelectToggleGroup group, int checkedId, boolean isChecked) {

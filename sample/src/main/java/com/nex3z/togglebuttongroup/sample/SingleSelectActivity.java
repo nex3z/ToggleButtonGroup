@@ -17,7 +17,7 @@ public class SingleSelectActivity extends AppCompatActivity {
     }
 
     private void init() {
-        SingleSelectToggleGroup single = (SingleSelectToggleGroup) findViewById(R.id.group_choices);
+        SingleSelectToggleGroup single = findViewById(R.id.group_choices);
         single.setOnCheckedChangeListener(new SingleSelectToggleGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SingleSelectToggleGroup group, int checkedId) {

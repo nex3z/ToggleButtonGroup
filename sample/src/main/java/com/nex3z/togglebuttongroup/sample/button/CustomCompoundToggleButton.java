@@ -32,8 +32,8 @@ public class CustomCompoundToggleButton extends CompoundToggleButton {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.view_custom_compound_toggle_button, this, true);
 
-        mIvFront = (ImageView) findViewById(R.id.iv_front);
-        mIvBack = (ImageView) findViewById(R.id.iv_back);
+        mIvFront = findViewById(R.id.iv_front);
+        mIvBack = findViewById(R.id.iv_back);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
                 R.styleable.CustomCompoundToggleButton, 0, 0);

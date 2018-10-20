@@ -18,20 +18,19 @@ public class CustomButtonActivity extends AppCompatActivity {
     }
 
     private void init() {
-        SingleSelectToggleGroup singleRadioButton =
-                (SingleSelectToggleGroup) findViewById(R.id.group_single_radiobutton);
+        SingleSelectToggleGroup singleRadioButton = findViewById(R.id.group_single_radiobutton);
         singleRadioButton.setOnCheckedChangeListener(new SingleSelectListener());
 
         MultiSelectToggleGroup multiCustomCompoundButton =
-                (MultiSelectToggleGroup) findViewById(R.id.group_multi_custom_compoundbutton);
+                findViewById(R.id.group_multi_custom_compoundbutton);
         multiCustomCompoundButton.setOnCheckedChangeListener(new MultiSelectListener());
 
         MultiSelectToggleGroup multiCustomToggleButton =
-                (MultiSelectToggleGroup) findViewById(R.id.group_multi_custom_togglebutton);
+                findViewById(R.id.group_multi_custom_togglebutton);
         multiCustomToggleButton.setOnCheckedChangeListener(new MultiSelectListener());
 
         SingleSelectToggleGroup singleCompoundToggleButton =
-                (SingleSelectToggleGroup) findViewById(R.id.group_single_custom_compoundtogglebutton);
+                findViewById(R.id.group_single_custom_compoundtogglebutton);
         singleCompoundToggleButton.setOnCheckedChangeListener(new SingleSelectListener());
     }
 
