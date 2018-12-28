@@ -1,7 +1,7 @@
 package com.nex3z.togglebuttongroup.button;
 
 import android.content.Context;
-import android.support.annotation.CallSuper;
+import androidx.annotation.CallSuper;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
