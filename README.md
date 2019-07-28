@@ -7,6 +7,16 @@ A container of toggle buttons, supports multiple / single selection and button c
 
 ## Gradle
 
+AndroidX:
+
+```
+dependencies {
+    implementation 'com.nex3z:toggle-button-group:1.2.0'
+}
+```
+
+AppCompact:
+
 ```
 dependencies {
     implementation 'com.nex3z:toggle-button-group:1.1.9'
