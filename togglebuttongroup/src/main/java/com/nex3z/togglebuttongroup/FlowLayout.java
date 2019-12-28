@@ -338,6 +338,23 @@ public class FlowLayout extends ViewGroup {
         requestLayout();
     }
 
+    /**
+     * Sets whether to enable right to left mode.
+     * @param rtl true to enable right to left mode, false to disable it.
+     */
+    public void setRtl(boolean rtl) {
+        mRtl = rtl;
+        requestLayout();
+    }
+
+    /**
+     * Returns whether to use right to left mode.
+     * @return Whether to use right to left mode.
+     */
+    public boolean isRtl() {
+        return mRtl;
+    }
+
     private int max(int a, int b) {
         return a > b ? a : b;
     }
