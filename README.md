@@ -11,7 +11,7 @@ AndroidX:
 
 ```
 dependencies {
-    implementation 'com.nex3z:toggle-button-group:1.2.0'
+    implementation 'com.nex3z:toggle-button-group:1.2.3'
 }
 ```
 
