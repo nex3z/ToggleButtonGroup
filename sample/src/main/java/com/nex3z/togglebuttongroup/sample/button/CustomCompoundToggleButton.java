@@ -57,7 +57,7 @@ public class CustomCompoundToggleButton extends CompoundToggleButton {
 
     @Override
     public boolean performClick() {
-        return !mPlaying && super.performClick();
+        return (!isChecked()) && (!mPlaying) && super.performClick();
     }
 
     @Override
